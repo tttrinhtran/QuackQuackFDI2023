@@ -33,6 +33,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity> <!-- Add the FileProvider for accessing the camera image -->
         <provider
             android:name="androidx.core.content.FileProvider"
