@@ -1,21 +1,24 @@
 package com.example.geocare;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import static android.Manifest.permission.CAMERA;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import static android.Manifest.permission.CAMERA;
+import androidx.core.content.FileProvider;
+
+import android.content.Intent;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,30 +29,53 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-public class ScanActivity extends Activity {
-    TextView resultTextView;
+import java.io.File;
+import java.io.IOException;
+
+public class ScanActivity extends AppCompatActivity {
+
     private static final int CAMERA_REQUEST = 1888;
     private static final int REQUEST_CAMERA_PERMISSION = 123;
-    private ImageView imageView;
-
+    private String  currentPhotoPath;
+    TextView resultTextView;
+    ImageView button, imageView;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-        this.imageView = findViewById(R.id.imageView1);
-        Button photoButton = findViewById(R.id.button1);
-        resultTextView = findViewById(R.id.Result);
-        photoButton.setOnClickListener(new View.OnClickListener() {
+
+        button = findViewById(R.id.button);
+        imageView = findViewById(R.id.imageView);
+        resultTextView = findViewById(R.id.textview);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check camera permission before launching the camera
                 if (checkCameraPermission()) {
-                    startCamera();
-                } else {
+                    String fileName = "photo";
+                    File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                    try {
+                        File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+
+                        currentPhotoPath = imageFile.getAbsolutePath();
+
+                        Uri imageUri = FileProvider.getUriForFile(ScanActivity.this, "com.example.geocare.fileprovider", imageFile);
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+                        startActivityForResult(intent, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
                     requestCameraPermission();
                 }
             }
         });
+
     }
 
     private boolean checkCameraPermission() {
@@ -61,31 +87,39 @@ public class ScanActivity extends Activity {
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA_PERMISSION);
     }
 
+//    @Override
+//    protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+//        ScanActivity.super.onActivityResult(requestCode, resultCode,data);
+//        if (requestCode == 1 && resultCode == RESULT_OK){
+//            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//
+//            imageView.setImageBitmap(bitmap);
+//
+//            InputImage image = InputImage.fromBitmap(bitmap);
+//
+//            recognizeText(image);
+//        }
+//    }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                startCamera();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri imageUri = Uri.fromFile(new File(currentPhotoPath));
+
+            InputImage image = null;
+            try {
+                image = InputImage.fromFilePath(this, imageUri);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }
-    }
 
-    private void startCamera() {
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            //View Taken Photo
-            //imageView.setImageBitmap(bitmap);
-
-            InputImage image = InputImage.fromBitmap(bitmap, 0);
             recognizeText(image);
 
+            imageView.setImageURI(imageUri);
         }
     }
+
 
     private void recognizeText(InputImage image) {
 
@@ -97,7 +131,8 @@ public class ScanActivity extends Activity {
         Task<Text> result =
                 recognizer.process(image)
                         .addOnSuccessListener(new OnSuccessListener<Text>() {
-                            StringBuilder extractedText = new StringBuilder();
+                            //StringBuilder extractedText = new StringBuilder();
+                            String extractedText = new String();
 
                             @Override
                             public void onSuccess(Text visionText) {
@@ -109,17 +144,18 @@ public class ScanActivity extends Activity {
                                     Rect boundingBox = block.getBoundingBox();
                                     Point[] cornerPoints = block.getCornerPoints();
                                     String text = block.getText();
-
-                                    for (Text.Line line : block.getLines()) {
-                                        //extractedText.append(block.getText()).append("\n");
-                                        for (Text.Element element : line.getElements()) {
-                                            extractedText.append(line.getText()).append("\n");
-                                            for (Text.Symbol symbol : element.getSymbols()) {
-                                              //  extractedText.append(element.getText()).append("\n");
-                                            }
-                                        }
-                                    }
+                                    extractedText +=  "\n" + text;
                                 }
+//                                    for (Text.Line line : block.getLines()) {
+//                                        extractedText.append(block.getText()).append("\n");
+//                                        for (Text.Element element : line.getElements()) {
+//                                            //extractedText.append(line.getText()).append("\n");
+//                                            for (Text.Symbol symbol : element.getSymbols()) {
+//                                                  extractedText.append(element.getText()).append("\n");
+//                                            }
+//                                        }
+//                                    }
+//                                }
                                 // [END get_text]
                                 // [END_EXCLUDE]
                                 resultTextView.setText(extractedText.toString());
@@ -170,6 +206,37 @@ public class ScanActivity extends Activity {
         return detector;
     }
 
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String fileName = "photo";
+//                File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//
+//                try {
+//                    File imageFile = File.createTempFile(fileName,".jpg", storageDirectory);
+//
+//                    currentPhotoPath = imageFile.getAbsolutePath();
+//
+//                    Uri imageUri = FileProvider.getUriForFile(ScanActivity.this,"com.example.geocare.fileprovider", imageFile);
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+//
+//                    startActivityForResult(intent,1);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+//
+//    @Override
+//    protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+//        ScanActivity.super.onActivityResult(requestCode, resultCode,data);
+//        if (requestCode == 1 && resultCode == RESULT_OK){
+//            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+//
+//            imageView.setImageBitmap(bitmap);
+//        }
+//    }
+//
 }
-
-
