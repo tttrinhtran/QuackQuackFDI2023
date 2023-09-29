@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "682666417622",
+    "project_id": "quackquack-93459",
+    "storage_bucket": "quackquack-93459.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682666417622:android:860b812bb2bac604ab5877",
+        "android_client_info": {
+          "package_name": "com.example.geocare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjAEhO7uB3UcqB6boUGitlIwbCe2GxZTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
