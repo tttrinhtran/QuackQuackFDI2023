@@ -22,10 +22,13 @@
         android:theme="@style/Theme.GeoCare"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".Home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
+            android:name=".Scan.ScanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Scan.ScanResultActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

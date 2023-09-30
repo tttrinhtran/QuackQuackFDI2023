@@ -1,10 +1,11 @@
-package com.example.geocare;
+package com.example.geocare.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 public class HomeActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.geocare;
+package com.example.geocare.Scan;
 
 import static android.Manifest.permission.CAMERA;
 
@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.geocare.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

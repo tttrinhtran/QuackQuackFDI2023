@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/ScanResultScreen_product_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cocoon_cleansing_oil"
+        android:scaleType="centerCrop"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:contentDescription="@null" />
+
+    <ImageView
+        android:id="@+id/ScanResultScreen_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="22.5dp"
+        android:layout_margin="40dp"
+        android:src="@drawable/back_button" />
+
+    <LinearLayout
+        android:id="@+id/homeActivitySheet"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:id="@+id/ScanResultScreen_line"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/line_home_screen" />
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lato_semibold"
+            android:text="Remover"
+            android:textColor="@color/blue_deep"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_name"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/butler_regular"
+            android:text="Rose Cleansing Oil"
+            android:textColor="@color/blue_deep"
+            android:textSize="36dp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ScanResultScreen_product_brandname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/lato_medium"
+                android:text="Cocoon"
+                android:textColor="@color/blue_deep"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ScanResultScreen_add_button"
+                android:layout_width="95dp"
+                android:layout_height="37dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/blue"
+                android:fontFamily="@font/lato_regular"
+                android:text="Add to shelf"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_advice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Good for you skin type!"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/blue_deep"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Rating"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="15dp"
+            android:textColor="@color/blue_deep" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/four_out_of_five"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Ingredients"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="15dp"
+            android:textColor="@color/blue_deep" />
+
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_ingrdients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="With pure rose oil &amp; vitamin E"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:textColor="@color/blue_description" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Irritant Ingredients"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="15dp"
+            android:textColor="@color/blue_deep" />
+
+        <TextView
+            android:id="@+id/ScanResultScreen_product_irritant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="None"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="13dp"
+            android:textColor="@color/blue_description" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
