@@ -22,7 +22,7 @@
         android:theme="@style/Theme.GeoCare"
         tools:targetApi="31">
         <activity
-            android:name=".Product.ProductAcitivity"
+            android:name=".Product.ProductActivity"
             android:exported="false" />
         <activity
             android:name=".Home.HomeActivity"
