@@ -38,45 +38,37 @@ public class ScanActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     private static final int REQUEST_CAMERA_PERMISSION = 123;
     private String  currentPhotoPath;
+    public String resultText;
     TextView resultTextView;
-    ImageView button, imageView;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 
-        button = findViewById(R.id.button);
         imageView = findViewById(R.id.imageView);
         resultTextView = findViewById(R.id.textview);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check camera permission before launching the camera
-                if (checkCameraPermission()) {
-                    String fileName = "photo";
-                    File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (checkCameraPermission()) {
+            String fileName = "photo";
+            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-                    try {
-                        File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+            try {
+                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
 
-                        currentPhotoPath = imageFile.getAbsolutePath();
+                currentPhotoPath = imageFile.getAbsolutePath();
 
-                        Uri imageUri = FileProvider.getUriForFile(ScanActivity.this, "com.example.geocare.fileprovider", imageFile);
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                Uri imageUri = FileProvider.getUriForFile(ScanActivity.this, "com.example.geocare.fileprovider", imageFile);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
-                        startActivityForResult(intent, 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    requestCameraPermission();
-                }
+                startActivityForResult(intent, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-
+        } else {
+            requestCameraPermission();
+        }
     }
 
     private boolean checkCameraPermission() {
@@ -87,20 +79,6 @@ public class ScanActivity extends AppCompatActivity {
     private void requestCameraPermission() {
         ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA_PERMISSION);
     }
-
-//    @Override
-//    protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-//        ScanActivity.super.onActivityResult(requestCode, resultCode,data);
-//        if (requestCode == 1 && resultCode == RESULT_OK){
-//            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-//
-//            imageView.setImageBitmap(bitmap);
-//
-//            InputImage image = InputImage.fromBitmap(bitmap);
-//
-//            recognizeText(image);
-//        }
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -117,13 +95,17 @@ public class ScanActivity extends AppCompatActivity {
 
             recognizeText(image);
 
-            imageView.setImageURI(imageUri);
+            //imageView.setImageURI(imageUri);
         }
     }
 
+    private void startScanResultActivity(String result) {
+        Intent intent = new Intent(ScanActivity.this, ScanResultActivity.class);
+        intent.putExtra("data", result);
+        startActivity(intent);
+    }
 
     private void recognizeText(InputImage image) {
-
         // [START get_detector_default]
         TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
         // [END get_detector_default]
@@ -132,7 +114,6 @@ public class ScanActivity extends AppCompatActivity {
         Task<Text> result =
                 recognizer.process(image)
                         .addOnSuccessListener(new OnSuccessListener<Text>() {
-                            //StringBuilder extractedText = new StringBuilder();
                             String extractedText = new String();
 
                             @Override
@@ -159,7 +140,9 @@ public class ScanActivity extends AppCompatActivity {
 //                                }
                                 // [END get_text]
                                 // [END_EXCLUDE]
-                                resultTextView.setText(extractedText.toString());
+                                resultText = extractedText.toString();
+                                //resultTextView.setText(resultText);
+                                startScanResultActivity(resultText);
                             }
                         })
                         .addOnFailureListener(
@@ -170,7 +153,6 @@ public class ScanActivity extends AppCompatActivity {
                                         // ...
                                     }
                                 });
-        // [END run_detector]
     }
 
     private void processTextBlock(Text result) {
@@ -206,39 +188,4 @@ public class ScanActivity extends AppCompatActivity {
 
         return detector;
     }
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String fileName = "photo";
-//                File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//
-//                try {
-//                    File imageFile = File.createTempFile(fileName,".jpg", storageDirectory);
-//
-//                    currentPhotoPath = imageFile.getAbsolutePath();
-//
-//                    Uri imageUri = FileProvider.getUriForFile(ScanActivity.this,"com.example.geocare.fileprovider", imageFile);
-//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-//
-//                    startActivityForResult(intent,1);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-//
-//    @Override
-//    protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-//        ScanActivity.super.onActivityResult(requestCode, resultCode,data);
-//        if (requestCode == 1 && resultCode == RESULT_OK){
-//            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-//
-//            imageView.setImageBitmap(bitmap);
-//        }
-//    }
-//
-
 }

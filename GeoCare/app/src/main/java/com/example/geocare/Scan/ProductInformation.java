@@ -1,12 +1,33 @@
 package com.example.geocare.Scan;
 
 public class ProductInformation {
-    public static final String[] brandName = {
-            "cocoon",
-            "herbival"
-    };
+    private String brandName;
+    private String productName;
+    private String productType;
+    private String ingredients;
 
-    public static final String[] productType = {
 
-    };
+    public ProductInformation(String brandName, String productName, String productType, String ingredients ) {
+        this.brandName = brandName;
+        this.productType = productType;
+        this.ingredients = ingredients;
+        this.productName = productName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public String getProductName(){
+        return productName;
+    }
 }
+
