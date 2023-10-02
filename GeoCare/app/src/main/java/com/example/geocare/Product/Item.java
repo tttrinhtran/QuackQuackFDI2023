@@ -11,8 +11,9 @@ public class Item implements Serializable {
     private String ingredients;
     private int imageDetail;
     private String nameDetail;
+    private String uri;
 
-    public Item(String name,String nameDetail, boolean isFavorite, int imageResourceId, String type, String brandname, String ingredients, int imageDetail) {
+    public Item(String name,String nameDetail, boolean isFavorite, int imageResourceId, String type, String brandname, String ingredients, int imageDetail, String uri) {
         this.name = name;
         this.isFavorite = isFavorite;
         this.imageResourceId = imageResourceId;
@@ -21,6 +22,7 @@ public class Item implements Serializable {
         this.ingredients = ingredients;
         this.imageDetail = imageDetail;
         this.nameDetail = nameDetail;
+        this.uri = uri;
     }
 
     // Getter and setter methods for all fields
@@ -77,4 +79,8 @@ public class Item implements Serializable {
     public void setImageResourceId(int imageResourceId) {
         this.imageResourceId = imageResourceId;
     }
+    public  void setFavourite(boolean isFavorite){
+        this.isFavorite = isFavorite;
+    }
+    public  String getUri(){return uri;}
 }

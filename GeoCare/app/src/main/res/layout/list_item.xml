@@ -30,7 +30,7 @@
         android:layout_below="@id/Product_imageView"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/lato_regular"
-        android:textColor="@color/black"
+        android:textColor="@color/blue_deep"
         android:textSize="14dp"/>
 
 </RelativeLayout>

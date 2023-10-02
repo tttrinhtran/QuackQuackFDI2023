@@ -10,14 +10,18 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/Product_search"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         app:queryHint="Search"
         app:iconifiedByDefault="false"
         android:layout_marginTop="10dp"
         android:elevation="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+<!--        app:queryBackground="@null" -->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="60dp"

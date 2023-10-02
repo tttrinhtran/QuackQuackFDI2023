@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/homeActivitySheet"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/rounded"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -164,7 +164,8 @@
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/lato_regular"
             android:textSize="13dp"
-            android:textColor="@color/blue_description" />
+            android:textColor="@color/blue_description"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
