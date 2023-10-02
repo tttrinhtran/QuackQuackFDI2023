@@ -4,35 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Scan.ScanResultActivity">
-
+    tools:context=".Product.ProductDetailActivity">
 
     <ImageView
-        android:id="@+id/ScanResultScreen_product_image"
+        android:id="@+id/ProductDetail_product_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/cocoon_cleansing_oil"
+        android:src="@drawable/cleanser_detail"
         android:scaleType="centerCrop"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:contentDescription="@null" />
 
     <ImageView
-        android:id="@+id/ScanResultScreen_back_button"
+        android:id="@+id/ProductDetail_back_button"
         android:layout_width="wrap_content"
-        android:layout_height="22.5dp"
+        android:layout_height="wrap_content"
         android:layout_margin="40dp"
         android:src="@drawable/back_button" />
 
     <LinearLayout
-        android:id="@+id/homeActivitySheet"
+        android:id="@+id/ProductDetail_homeActivitySheet"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         android:background="@drawable/rounded"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
-            android:id="@+id/ScanResultScreen_line"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -41,23 +40,23 @@
             android:src="@drawable/line_home_screen" />
 
         <TextView
-            android:id="@+id/ScanResultScreen_product_type"
+            android:id="@+id/ProductDetail_product_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lato_semibold"
-            android:text="Remover"
+            android:text="Cleanser"
             android:textColor="@color/blue_deep"
             android:textSize="15dp" />
 
         <TextView
-            android:id="@+id/ScanResultScreen_product_name"
-            android:layout_width="230dp"
+            android:id="@+id/ProductDetail_product_name"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/butler_regular"
-            android:text="Rose Cleansing Oil"
+            android:text="Rosewater Tremella Creamy Jelly Cleanser"
             android:textColor="@color/blue_deep"
             android:textSize="36dp"
             android:textStyle="bold" />
@@ -66,34 +65,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/ScanResultScreen_product_brandname"
+                android:id="@+id/ProductDetail_product_brandname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/lato_medium"
-                android:text="Cocoon"
+                android:text="Herbivore"
                 android:textColor="@color/blue_deep"
                 android:textSize="18dp"
                 android:layout_centerVertical="true"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/ScanResultScreen_add_button"
-                android:layout_width="95dp"
-                android:layout_height="37dp"
+            <ImageView
+                android:id="@+id/ProductDetail_buy_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/buy_button"
+                android:layout_centerHorizontal="true"
+                android:layout_toLeftOf="@+id/ProductDetail_add_button"
+                android:layout_marginRight="20dp"/>
+
+
+            <ImageView
+                android:id="@+id/ProductDetail_add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/add_shelf_button"
+                android:layout_centerHorizontal="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/blue"
-                android:fontFamily="@font/lato_regular"
-                android:text="Add to shelf"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_marginRight="20dp"/>
+
+
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/ScanResultScreen_product_advice"
+            android:id="@+id/ProductDetail_product_advice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Good for you skin type!"
@@ -115,7 +120,7 @@
             android:textColor="@color/blue_deep" />
 
         <ImageView
-            android:id="@+id/ScanResultScreen_product_rating"
+            android:id="@+id/ProductDetail_product_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/four_out_of_five"
@@ -134,11 +139,11 @@
 
 
         <TextView
-            android:id="@+id/ScanResultScreen_product_ingrdients"
+            android:id="@+id/ProductDetail_product_ingrdients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text="With pure rose oil &amp; vitamin E"
+            android:text="Aqua/Water/Eau, Rosa Damascena Flower Water, Decyl Glucoside, Glycerin, Sodium Lauroyl Lactylate, Squalane, Glyceryl Caprylate, Xanthan Gum, Glyceryl Stearate, Tremella Fuciformis Sporocarp Extract, Caprylhydroxamic Acid, Camellia Sinensis Leaf Extract, Aloe Barbadensis Leaf Juice, Citric Acid, Eclipta Prostrata Extract, Sodium Hyaluronate, Melia Azadirachta Leaf Extract, Moringa Oleifera Seed Oil, Cocos Nucifera (Coconut) Fruit Juice, Tapioca Starch"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:fontFamily="@font/lato_regular"
@@ -156,7 +161,7 @@
             android:textColor="@color/blue_deep" />
 
         <TextView
-            android:id="@+id/ScanResultScreen_product_irritant"
+            android:id="@+id/ProductDetail_product_irritant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"

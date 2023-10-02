@@ -17,9 +17,9 @@
         android:id="@+id/Product_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/blue_heart"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/Product_imageView"
-        android:layout_alignParentTop="true"/>
+        android:src="@drawable/blue_heart" />
 
     <TextView
         android:id="@+id/Product_name"
@@ -30,6 +30,7 @@
         android:layout_below="@id/Product_imageView"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/lato_regular"
+        android:textColor="@color/black"
         android:textSize="14dp"/>
 
 </RelativeLayout>

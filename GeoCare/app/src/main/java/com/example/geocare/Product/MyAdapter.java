@@ -1,5 +1,7 @@
 package com.example.geocare.Product;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +10,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import com.example.geocare.R;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<Item> itemList;
+    private Context context; // Add a context variable
 
-    public MyAdapter(List<Item> itemList) {
+    public MyAdapter(Context context, List<Item> itemList) {
+        this.context = context;
         this.itemList = itemList;
     }
 
@@ -28,6 +33,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.itemName.setText(item.getName());
         holder.itemImage.setImageResource(item.getImageResourceId());
+
+        // Set click listeners for both itemImage and itemName
+        holder.itemImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open ProductDetailActivity when image is clicked
+                openProductDetailActivity(item);
+            }
+        });
+
+        holder.itemName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open ProductDetailActivity when name is clicked
+                openProductDetailActivity(item);
+            }
+        });
 
         holder.favoriteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,5 +86,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             itemImage = itemView.findViewById(R.id.Product_imageView);
             itemName = itemView.findViewById(R.id.Product_name);
         }
+    }
+
+    private void openProductDetailActivity(Item item) {
+        Intent intent = new Intent(context, ProductDetailActivity.class);
+        intent.putExtra("item_data", item);
+        context.startActivity(intent);
     }
 }
