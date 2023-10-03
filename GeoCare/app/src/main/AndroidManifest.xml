@@ -28,6 +28,9 @@
             android:name=".Product.ProductDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".Login.LoginScreen"
+            android:exported="false" />
+        <activity
             android:name=".Product.ProductActivity"
             android:exported="false" />
         <activity

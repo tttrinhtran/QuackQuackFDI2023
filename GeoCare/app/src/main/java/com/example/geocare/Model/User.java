@@ -8,7 +8,7 @@ public class User {
     String UserEmail;
     String UserPassword;
 
-    int UserAge;
+    String UserAge;
 
     String UserSkinType;
 
@@ -17,7 +17,7 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String userEmail, String userPassword, int userAge, String userSkinType, ArrayList<String> userSkinCondition) {
+    public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition) {
         UserName = userName;
         UserEmail = userEmail;
         UserPassword = userPassword;
@@ -60,11 +60,11 @@ public class User {
         UserPassword = userPassword;
     }
 
-    public int getUserAge() {
+    public String getUserAge() {
         return UserAge;
     }
 
-    public void setUserAge(int userAge) {
+    public void setUserAge(String userAge) {
         UserAge = userAge;
     }
 

@@ -54,6 +54,8 @@ public class LoginScreen extends AppCompatActivity {
     {
         String userEmail= userEmailEditText.getText().toString();
         String userPassword=userPasswordEditText.getText().toString();
+        User tmp=userFirebaseDatabaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS,userEmail);
+
 
         if(userEmail.isEmpty()||userPassword.isEmpty())
         {
@@ -69,19 +71,23 @@ public class LoginScreen extends AppCompatActivity {
     void checkAccount(String email, String password)
     {
         User tmp=userFirebaseDatabaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS,email);
+        tmp.getUserEmail();
         if(tmp!=null)
         { if(password==tmp.getUserPassword()) {
             Toast.makeText(LoginScreen.this, "Login success", Toast.LENGTH_SHORT).show();
             user = tmp;
+            return;
         }
              else
             {
                 Toast.makeText(LoginScreen.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                return;
             }
         }
         else
         {
             Toast.makeText(LoginScreen.this, "Login fail", Toast.LENGTH_SHORT).show();
+            return;
         }
 
 
