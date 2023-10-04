@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
        itemTest=new ArrayList<>();
 
 
-        Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 }

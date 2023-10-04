@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,270 +7,440 @@
     tools:context=".Home.HomeActivity"
     android:background="@color/light_yellow">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/sunny_json"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="300dp"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/HomeScreenTitleLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingBottom="15dp"
-        android:paddingTop="44dp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/HomeScreenAvatarTitle"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/sunny_json"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="22dp"
-            android:background="@color/light_yellow"
-            app:shapeAppearance="@style/Circular"
-            app:srcCompat="@drawable/blue_heart"
-            android:alpha="0"/>
-
-        <TextView
-            android:id="@+id/HomeScreenTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/HomeScreenAvatarTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="10dp"
-            android:text="Hello Tran!"
-            android:textSize="16sp"
-            android:textColor="@color/blue_deep"
-            android:fontFamily="@font/butler_medium" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/HomeScreenTemperatureLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="150dp"
-        android:layout_marginStart="25dp">
-
-        <TextView
-            android:id="@+id/HomeScreenTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="37"
-            android:fontFamily="@font/lato_medium"
-            android:textSize="80sp"
-            android:textColor="@color/blue_deep"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/HomeScreenTemperature"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="°c"
-            android:fontFamily="@font/lato_medium"
-            android:textSize="30sp"
-            android:textColor="@color/blue_deep"
-            android:layout_marginBottom="10dp"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/HomeScreenWeatherDes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/HomeScreenTemperatureLayout"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="-15dp"
-        android:text="Sunny"
-        android:fontFamily="@font/butler_medium"
-        android:textSize="24sp"
-        android:textColor="@color/blue_deep"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/HomeScreenRealTimeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/HomeScreenWeatherDes"
-        android:layout_marginTop="90dp"
-        android:layout_marginStart="25dp">
-
-        <TextView
-            android:id="@+id/HomeScreenTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="12pm"
-            android:fontFamily="@font/butler_medium"
-            android:textSize="20sp"
-            android:textColor="@color/blue_deep" />
-
-        <TextView
-            android:id="@+id/HomeScreenDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HomeScreenTime"
-            android:text="Jun 11 Friday"
-            android:fontFamily="@font/butler_medium"
-            android:textSize="20sp"
-            android:textColor="@color/blue_deep"/>
-        <ImageView
-            android:id="@+id/HomeScreenDecorLine"
-            android:layout_width="200dp"
-            android:layout_height="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HomeScreenDate"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/blue_line_decor"/>
-
-        <TextView
-            android:id="@+id/HomeScreenCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HomeScreenDecorLine"
-            android:layout_marginTop="7dp"
-            android:text="Ho Chi Minh City"
-            android:fontFamily="@font/lato_semibold"
-            android:textSize="14sp"
-            android:textColor="@color/blue_deep"/>
-
-        <TextView
-            android:id="@+id/HomeScreenDistrct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/HomeScreenCity"
-            android:text="District 1"
-            android:fontFamily="@font/lato_regular"
-            android:textSize="30sp"
-            android:textColor="@color/blue_deep"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/BottomSheet"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_marginStart="300dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/homeActivitySheet"
+            android:id="@+id/HomeScreenTitleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/rounded">
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingBottom="15dp"
+            android:paddingTop="44dp">
 
-            <ImageView
-                android:id="@+id/HomeTitleBottomSheet"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/line_home_screen"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center|top"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/HomeScreenAvatarTitle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="10dp"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="22dp"
+                android:background="@color/light_yellow"
+                app:shapeAppearance="@style/Circular"
+                app:srcCompat="@drawable/blue_heart"
+                android:alpha="0"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/HomeScreenTitleText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border_adapter"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginVertical="20dp"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/HomeTitleBottomSheet"
-                android:paddingTop="10dp"
-                android:paddingHorizontal="20dp">
+                app:layout_constraintStart_toEndOf="@id/HomeScreenAvatarTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="10dp"
+                android:text="Hello Tran!"
+                android:textSize="16sp"
+                android:textColor="@color/blue_deep"
+                android:fontFamily="@font/butler_medium" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:id="@+id/item1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:weightSum="3">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeScreenTemperatureLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="190dp"
+            android:layout_marginStart="25dp">
 
-                    <ImageView
-                        android:id="@+id/SunIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/sun_icon"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"/>
-                    <TextView
-                        android:id="@+id/UVIndex"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="8 / 10"
-                        android:fontFamily="@font/lato_medium"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"
-                        android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/HomeScreenTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_medium"
+                android:text="37"
+                android:textColor="@color/blue_deep"
+                android:textSize="80sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                    <TextView
-                        android:id="@+id/UVText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="UV"
-                        android:fontFamily="@font/lato_medium"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"
-                        android:layout_gravity="center_horizontal"/>
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/HomeScreenTemperature"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="°c"
+                android:fontFamily="@font/lato_medium"
+                android:textSize="30sp"
+                android:textColor="@color/blue_deep"
+                android:layout_marginBottom="10dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/HomeScreenWeatherDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenTemperatureLayout"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="-15dp"
+            android:text="Sunny"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="24sp"
+            android:textColor="@color/blue_deep"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeScreenRealTimeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenWeatherDes"
+            android:layout_marginTop="90dp"
+            android:layout_marginStart="25dp">
+
+            <TextView
+                android:id="@+id/HomeScreenTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="12pm"
+                android:fontFamily="@font/butler_medium"
+                android:textSize="20sp"
+                android:textColor="@color/blue_deep" />
+
+            <TextView
+                android:id="@+id/HomeScreenDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenTime"
+                android:text="Jun 11 Friday"
+                android:fontFamily="@font/butler_medium"
+                android:textSize="20sp"
+                android:textColor="@color/blue_deep"/>
+            <ImageView
+                android:id="@+id/HomeScreenDecorLine"
+                android:layout_width="200dp"
+                android:layout_height="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenDate"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_line_decor"/>
+
+            <TextView
+                android:id="@+id/HomeScreenCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenDecorLine"
+                android:layout_marginTop="7dp"
+                android:text="Ho Chi Minh City"
+                android:fontFamily="@font/lato_semibold"
+                android:textSize="14sp"
+                android:textColor="@color/blue_deep"/>
+
+            <TextView
+                android:id="@+id/HomeScreenDistrct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeScreenCity"
+                android:text="District 1"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="30sp"
+                android:textColor="@color/blue_deep"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:background="@drawable/rounded">
+
+        <ImageView
+            android:id="@+id/HomeTitleBottomSheet"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/line_home_screen"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="10dp"/>
+
+        <RelativeLayout
+            android:id="@+id/IndexFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_home_decor"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="20dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeTitleBottomSheet"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="27dp"
+            android:paddingHorizontal="18dp">
+
+            <LinearLayout
+                android:id="@+id/item1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:layout_alignParentLeft="true">
+
+                <ImageView
+                    android:id="@+id/SunIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/sun_icon"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/UVIndex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="8 / 10"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/UVText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="UV"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/DustIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/dust_icon"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/DustIndex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="57"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/DustText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dust"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/item3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/MoistureIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/moisture_icon"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:id="@+id/MoistureIndex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="60%"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/MoistureText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Moisture"
+                    android:fontFamily="@font/lato_medium"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/CurrentSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/IndexFrame"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="14dp"
+            android:text="Current schedule"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="16sp"
+            android:textColor="@color/blue_deep"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/HomeScreenCurrentScheduleItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="25dp"
+            android:background="@drawable/home_current_schedule_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CurrentSchedule"
+            android:layout_marginTop="13dp"
+            android:layout_marginHorizontal="27dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                app:cardCornerRadius="100dp"
+                android:id="@+id/ItemStatus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardBackgroundColor="@color/blue_deep"
+                android:layout_marginStart="6dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                app:cardCornerRadius="100dp"
+                android:id="@+id/ItemImgHolder"
+                app:layout_constraintTop_toTopOf="@+id/ItemStatus"
+                app:layout_constraintBottom_toBottomOf="@+id/ItemStatus"
+                app:layout_constraintStart_toStartOf="@+id/ItemStatus"
+                app:layout_constraintEnd_toEndOf="@+id/ItemStatus">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ItemImage">
+                </ImageView>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/itemStepName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/lato_semibold"
+                android:text="Remover"
+                android:textColor="@color/blue_deep"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ItemStatus"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.265" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemStepName"
+                app:layout_constraintStart_toEndOf="@id/ItemStatus"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:text="Remove dust and makeup"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="14sp"
+                android:textColor="@color/blue_deep"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/TipsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenCurrentScheduleItem"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="27dp"
+            android:text="Tips"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="16sp"
+            android:textColor="@color/blue_deep"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/HomeScreenTipRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TipsTitle"
+            android:layout_marginVertical="27dp"
+            android:layout_marginTop="8dp"/>
+
+
+
+        <!-- Content here-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
 
-<!--    &lt;!&ndash; Content here&ndash;&gt;-->
-<!--    </FrameLayout>-->
-
-
-
-
-
-
-   </androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/nav_bar"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
