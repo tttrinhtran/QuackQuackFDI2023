@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Product.ProductActivity;
 
 public class MainActivity extends AppCompatActivity {
 

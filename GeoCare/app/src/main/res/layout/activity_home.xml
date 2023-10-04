@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,27 +7,263 @@
     tools:context=".Home.HomeActivity"
     android:background="@color/light_yellow">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:backgroundTint="@color/light_yellow">-->
-<!--    </LinearLayout>-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/sunny_json"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="300dp"/>
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/homeActivitySheet"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"-->
-<!--        android:background="@drawable/rounded">-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeScreenTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="15dp"
+        android:paddingTop="44dp">
 
-<!--    <ImageView-->
-<!--        android:layout_width="70dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/line_home_screen"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        android:layout_gravity="center|top"-->
-<!--        />-->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/HomeScreenAvatarTitle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="22dp"
+            android:background="@color/light_yellow"
+            app:shapeAppearance="@style/Circular"
+            app:srcCompat="@drawable/blue_heart"
+            android:alpha="0"/>
+
+        <TextView
+            android:id="@+id/HomeScreenTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/HomeScreenAvatarTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"
+            android:text="Hello Tran!"
+            android:textSize="16sp"
+            android:textColor="@color/blue_deep"
+            android:fontFamily="@font/butler_medium" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeScreenTemperatureLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="25dp">
+
+        <TextView
+            android:id="@+id/HomeScreenTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="37"
+            android:fontFamily="@font/lato_medium"
+            android:textSize="80sp"
+            android:textColor="@color/blue_deep"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/HomeScreenTemperature"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="°c"
+            android:fontFamily="@font/lato_medium"
+            android:textSize="30sp"
+            android:textColor="@color/blue_deep"
+            android:layout_marginBottom="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/HomeScreenWeatherDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HomeScreenTemperatureLayout"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="-15dp"
+        android:text="Sunny"
+        android:fontFamily="@font/butler_medium"
+        android:textSize="24sp"
+        android:textColor="@color/blue_deep"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeScreenRealTimeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HomeScreenWeatherDes"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="25dp">
+
+        <TextView
+            android:id="@+id/HomeScreenTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="12pm"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="20sp"
+            android:textColor="@color/blue_deep" />
+
+        <TextView
+            android:id="@+id/HomeScreenDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenTime"
+            android:text="Jun 11 Friday"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="20sp"
+            android:textColor="@color/blue_deep"/>
+        <ImageView
+            android:id="@+id/HomeScreenDecorLine"
+            android:layout_width="200dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenDate"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/blue_line_decor"/>
+
+        <TextView
+            android:id="@+id/HomeScreenCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenDecorLine"
+            android:layout_marginTop="7dp"
+            android:text="Ho Chi Minh City"
+            android:fontFamily="@font/lato_semibold"
+            android:textSize="14sp"
+            android:textColor="@color/blue_deep"/>
+
+        <TextView
+            android:id="@+id/HomeScreenDistrct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/HomeScreenCity"
+            android:text="District 1"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="30sp"
+            android:textColor="@color/blue_deep"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/BottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/homeActivitySheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/rounded">
+
+            <ImageView
+                android:id="@+id/HomeTitleBottomSheet"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line_home_screen"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center|top"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_adapter"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginVertical="20dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/HomeTitleBottomSheet"
+                android:paddingTop="10dp"
+                android:paddingHorizontal="20dp">
+
+                <LinearLayout
+                    android:id="@+id/item1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/SunIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sun_icon"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"/>
+                    <TextView
+                        android:id="@+id/UVIndex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="8 / 10"
+                        android:fontFamily="@font/lato_medium"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/UVText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="UV"
+                        android:fontFamily="@font/lato_medium"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
 
 <!--    &lt;!&ndash; Content here&ndash;&gt;-->
 <!--    </FrameLayout>-->
@@ -35,4 +271,6 @@
 
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>

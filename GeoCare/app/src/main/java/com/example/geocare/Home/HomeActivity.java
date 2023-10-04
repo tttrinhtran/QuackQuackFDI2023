@@ -1,11 +1,14 @@
 package com.example.geocare.Home;
 
+import static android.view.WindowManager.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,11 +16,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,16 +43,48 @@ import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
-
+    LottieAnimationView lottieAnimationView;
+    TextView title;
+    ShapeableImageView heart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        fetch_UI();
+        init_UI();
 
-//        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeActivitySheet));
-//        bottomSheetBehavior.setPeekHeight(250);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Make the TextView visible and animate it
+                title.animate()
+                        .alpha(1f).translationY(0);
+                heart.animate()
+                        .alpha(1f).translationY(0);
+
+            }
+        }, 3000);
+
+
+        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeActivitySheet));
+        bottomSheetBehavior.setPeekHeight(600);
 //        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
+    }
+
+    private void init_UI() {
+        lottieAnimationView.animate().setDuration(3000);
+        title.setTranslationY(100); title.setAlpha(0);
+        heart.setTranslationY(100); // deprecate
+    }
+
+    private void fetch_UI() {
+        lottieAnimationView = findViewById(R.id.lottie);
+        title = findViewById(R.id.HomeScreenTitleText);
+        heart = findViewById(R.id.HomeScreenAvatarTitle);
     }
 
     public static class WeatherInfomation extends AppCompatActivity implements LocationListener {
@@ -243,4 +282,5 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
+
 }
