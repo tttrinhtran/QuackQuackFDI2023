@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_baby">
+
+        <TextView
+            android:id="@+id/Schedule_current_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunday 27, Dec"
+            android:fontFamily="@font/butler_regular"
+            android:textSize="20dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/blue_deep"
+            android:layout_marginLeft="20dp" />
+
+        <LinearLayout
+            android:id="@+id/Schedule_layout_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="13dp"
+            android:layout_below="@+id/Schedule_current_date">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Schedule_recycler_view_for_day"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/leftleaf"
+            android:layout_below="@id/Schedule_layout_date"
+            android:layout_marginLeft="-7dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rightleaf"
+            android:layout_below="@id/Schedule_layout_date"
+            android:layout_marginRight="-7dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today's progress"
+            android:fontFamily="@font/butler_regular"
+            android:textColor="@color/blue_deep"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:textSize="17dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/Schedule_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:fontFamily="@font/butler_regular"
+            android:textColor="@color/blue_deep"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:textSize="17dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/linearProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:trackThickness="15dp"
+        app:trackCornerRadius="40dp"
+        app:trackColor="@color/blue"
+        app:indicatorColor="@color/blue_deep"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/Schedule_routine_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Night routine"
+        android:fontFamily="@font/butler_regular"
+        android:textSize="17dp"
+        android:textColor="@color/blue_deep"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"/>
+
+
+    <Button
+        android:id="@+id/donebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:textColor="@color/black"
+        android:textSize="30dp" />
+
+
+</LinearLayout>

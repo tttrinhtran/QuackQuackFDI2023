@@ -47,6 +47,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
         else
             bottomSheetBehavior.setPeekHeight(670);
+
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         image.setImageResource(item.getImageDetailResourceIdByInt(this));
