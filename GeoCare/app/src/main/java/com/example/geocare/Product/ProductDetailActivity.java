@@ -49,7 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             bottomSheetBehavior.setPeekHeight(670);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-        image.setImageResource(item.getImageDetail());
+        image.setImageResource(item.getImageDetailResourceIdByInt(this));
         product_type.setText(item.getType());
         product_name.setText(item.getNameDetail());
         product_brandname.setText(item.getBrandname());

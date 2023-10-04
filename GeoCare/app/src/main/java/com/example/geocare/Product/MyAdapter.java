@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Item item = itemList.get(position);
 
         holder.itemName.setText(item.getName());
-        holder.itemImage.setImageResource(item.getImageResourceId());
+        holder.itemImage.setImageResource(item.getImageResourceIdByInt(context));
 
         // Set click listeners for both itemImage and itemName
         holder.itemImage.setOnClickListener(new View.OnClickListener() {
