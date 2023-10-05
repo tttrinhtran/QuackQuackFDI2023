@@ -224,6 +224,15 @@
         android:textSize="20dp"
         android:layout_marginLeft="20dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Profile_shelf_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -236,4 +245,8 @@
         android:textSize="20dp"
         android:layout_marginLeft="20dp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Profile_wishlisted_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
