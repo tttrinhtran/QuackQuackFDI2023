@@ -15,6 +15,8 @@ import com.example.geocare.Model.RoutineModel;
 import com.example.geocare.Product.Item;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
+import com.example.geocare.Survey.SurveyActivity;
+import com.example.geocare.Survey.SurveyActivity2;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+        Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
         startActivity(intent);
     }
 }
