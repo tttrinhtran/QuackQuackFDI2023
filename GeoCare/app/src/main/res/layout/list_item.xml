@@ -10,8 +10,8 @@
         android:id="@+id/Product_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/exfoliating" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/eyecream" />
 
     <ImageView
         android:id="@+id/Product_favourite"

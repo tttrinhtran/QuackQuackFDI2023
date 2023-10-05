@@ -185,7 +185,6 @@
             android:textSize="13dp"
             android:textColor="@color/blue_description"
             android:layout_marginBottom="10dp"/>
-
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
