@@ -7,16 +7,15 @@ public class User {
     String UserName;
     String UserEmail;
     String UserPassword;
-
     String UserAge;
-
     String UserSkinType;
-
     ArrayList<String> UserSkinCondition;
+
+    ArrayList<String> UserSelf;
+    ArrayList<String>UserFavorite;
 
     public User() {
     }
-
     public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition) {
         UserName = userName;
         UserEmail = userEmail;
