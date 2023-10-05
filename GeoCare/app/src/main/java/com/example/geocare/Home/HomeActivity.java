@@ -147,7 +147,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
 
     private void getWeatherDetails(double latitude, double longitude) {
 
-        String tempUrl1 = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=dcfabdd5c7fc896819d09133733b7eea";
+        String tempUrl1 = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=current" +  "&appid=cda3653189073bccea02deb614b1b762";
+      //  https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=current&appid=cda3653189073bccea02deb614b1b762
         String tempUrl2 = "https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=dcfabdd5c7fc896819d09133733b7eea";
 
 
