@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -42,6 +43,8 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeActivity extends AppCompatActivity implements LocationListener{
     LottieAnimationView lottieAnimationView;
@@ -191,14 +194,35 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
                             .append("\n\n");
 
                     responseListener1Completed = true;
+
                     // Check if both requests are completed
-                    if (secondRequestCompleted) {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+                    executorService.execute(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            while (!secondRequestCompleted){}
+
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    humidityText.setText(String.valueOf(humidity));
+                                    temperatureText.setText(String.valueOf(temp));
+                                }
+                            });
+                        }
+                    });
+/*                    if (secondRequestCompleted) {
                         // Set the text of tvResult with the combined result
                         //weatherInfo.setText(combinedResult.toString());
                         humidityText.setText(String.valueOf(humidity));
                         temperatureText.setText(String.valueOf(temp));
 
-                    }
+                    }*/
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -244,13 +268,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
 
 
         // Create the second request and add it to the request queue
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, tempUrl2, responseListener2, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Handle errors for the second request
-            }
-        });
-        requestQueue.add(stringRequest2);
+
 
         // Create the first request and add it to the request queue
         StringRequest stringRequest1 = new StringRequest(Request.Method.GET, tempUrl1, responseListener1, new Response.ErrorListener() {
@@ -260,6 +278,14 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
             }
         });
         requestQueue.add(stringRequest1);
+
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, tempUrl2, responseListener2, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle errors for the second request
+            }
+        });
+        requestQueue.add(stringRequest2);
 
     }
 
