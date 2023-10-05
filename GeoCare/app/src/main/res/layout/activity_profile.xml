@@ -161,4 +161,50 @@
                 android:layout_marginLeft="15dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_baby"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/Profile_skin_condition_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/skin_condition_icon"/>
+
+            <TextView
+                android:id="@+id/skin_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/butler_medium"
+                android:textColor="@color/blue_deep"
+                android:textSize="16dp"
+                android:text="Skin condition"
+                android:layout_toRightOf="@id/Profile_skin_condition_icon"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/Profile_user_skin_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/blue_deep"
+                android:textSize="16dp"
+                android:text="None"
+                android:layout_toRightOf="@id/Profile_skin_condition_icon"
+                android:layout_below="@id/skin_condition"
+                android:layout_marginLeft="15dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
