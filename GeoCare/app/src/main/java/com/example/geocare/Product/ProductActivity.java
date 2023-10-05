@@ -80,6 +80,8 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
+
+
     // Method to filter data based on the search query
     private void filterData(String query) {
         List<Item> filteredItemList = new ArrayList<>();

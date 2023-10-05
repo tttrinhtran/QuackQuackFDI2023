@@ -1,6 +1,7 @@
 package com.example.geocare;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_PRODUCT;
+import static com.example.geocare.Constants.KEY_COLLECTION_ROUTINE;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,16 +20,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<RoutineModel> itemTest;
-    FirebaseDatabaseController firebaseDatabaseController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firebaseDatabaseController=new FirebaseDatabaseController<>(RoutineModel.class);
 
-       itemTest=new ArrayList<>();
+
+
 
 
         Intent intent = new Intent(MainActivity.this, ProductActivity.class);

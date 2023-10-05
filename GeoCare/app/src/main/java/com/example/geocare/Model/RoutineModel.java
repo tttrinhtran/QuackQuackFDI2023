@@ -3,7 +3,6 @@ package com.example.geocare.Model;
 public class RoutineModel {
 
     String RoutineName;
-
     String RoutineId;
     String RoutineProductucUse;
     String RoutineSmallDes;
