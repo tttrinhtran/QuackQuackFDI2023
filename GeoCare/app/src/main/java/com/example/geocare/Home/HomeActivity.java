@@ -165,33 +165,47 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
             public void onResponse(String response) {
                 try {
                     // ... (your JSON parsing code for the first request)
+//                    JSONObject jsonResponse = new JSONObject(response);
+//                    JSONArray jsonArray = jsonResponse.getJSONArray("weather");
+//                    JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
+//                    String description = jsonObjectWeather.getString("description");
+//                    JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
+//                    double temp = jsonObjectMain.getDouble("temp") - 273.15;
+//                    double feelsLike = jsonObjectMain.getDouble("feels_like") - 273.15;
+//                    float pressure = jsonObjectMain.getInt("pressure");
+//                    int humidity = jsonObjectMain.getInt("humidity");
+//                    JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
+//                    String wind = jsonObjectWind.getString("speed");
+//                    JSONObject jsonObjectClouds = jsonResponse.getJSONObject("clouds");
+//                    String clouds = jsonObjectClouds.getString("all");
+//                    JSONObject jsonObjectSys = jsonResponse.getJSONObject("sys");
+//                    String countryName = jsonObjectSys.getString("country");
+//                    String cityName = jsonResponse.getString("name");
+
                     JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("weather");
-                    JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
-                    String description = jsonObjectWeather.getString("description");
-                    JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
-                    double temp = jsonObjectMain.getDouble("temp") - 273.15;
-                    double feelsLike = jsonObjectMain.getDouble("feels_like") - 273.15;
-                    float pressure = jsonObjectMain.getInt("pressure");
-                    int humidity = jsonObjectMain.getInt("humidity");
-                    JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
-                    String wind = jsonObjectWind.getString("speed");
-                    JSONObject jsonObjectClouds = jsonResponse.getJSONObject("clouds");
-                    String clouds = jsonObjectClouds.getString("all");
-                    JSONObject jsonObjectSys = jsonResponse.getJSONObject("sys");
-                    String countryName = jsonObjectSys.getString("country");
-                    String cityName = jsonResponse.getString("name");
+                    JSONArray jsonArray = jsonResponse.getJSONArray("hourly");
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    // UV, Humidity, Temperature
+                    double uvi = jsonObject.getDouble("uvi");
+                    double humidity = jsonObject.getDouble("humidity");
+                    double temp = jsonObject.getDouble("temp") - 273.15;
+                    // Description
+                    JSONArray jsonArray1 = jsonObject.getJSONArray("weather");
+                    JSONObject jsonObject1 = jsonArray1.getJSONObject(0);
+                    String description = jsonObject1.getString("description");
+
+
 
                     // Append the result of the first request to the combinedResult
-                    combinedResult.append("Current weather of ").append(cityName).append(" (").append(countryName).append(")")
-                            .append("\n Temp: ").append(df.format(temp)).append(" °C")
-                            .append("\n Feels Like: ").append(df.format(feelsLike)).append(" °C")
-                            .append("\n Humidity: ").append(humidity).append("%")
-                            .append("\n Description: ").append(description)
-                            .append("\n Wind Speed: ").append(wind).append("m/s (meters per second)")
-                            .append("\n Cloudiness: ").append(clouds).append("%")
-                            .append("\n Pressure: ").append(pressure).append(" hPa")
-                            .append("\n\n");
+//                    combinedResult.append("Current weather of ").append(cityName).append(" (").append(countryName).append(")")
+//                            .append("\n Temp: ").append(df.format(temp)).append(" °C")
+//                            .append("\n Feels Like: ").append(df.format(feelsLike)).append(" °C")
+//                            .append("\n Humidity: ").append(humidity).append("%")
+//                            .append("\n Description: ").append(description)
+//                            .append("\n Wind Speed: ").append(wind).append("m/s (meters per second)")
+//                            .append("\n Cloudiness: ").append(clouds).append("%")
+//                            .append("\n Pressure: ").append(pressure).append(" hPa")
+//                            .append("\n\n");
 
                     responseListener1Completed = true;
 
@@ -242,9 +256,9 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
                     double pm25 = jsonObject1.getDouble("pm2_5");
                     double pm10 = jsonObject1.getDouble("pm10");
 
-                    combinedResult.append("Additional weather info: ")
-                            .append("\n PM2_5: ").append(df.format(pm25))
-                            .append("\n PM10: ").append(df.format(pm10));
+//                    combinedResult.append("Additional weather info: ")
+//                            .append("\n PM2_5: ").append(df.format(pm25))
+//                            .append("\n PM10: ").append(df.format(pm10));
 
 
 
