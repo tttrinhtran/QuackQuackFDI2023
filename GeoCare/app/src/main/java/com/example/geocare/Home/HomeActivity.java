@@ -106,6 +106,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         heart.setTranslationY(100); // deprecate
     }
 
+
     private void fetch_UI() {
         lottieAnimationView = findViewById(R.id.lottie);
         title = findViewById(R.id.HomeScreenTitleText);
