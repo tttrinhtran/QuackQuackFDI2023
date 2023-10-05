@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile.ProfileActivity"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/theme_profile" />
+
+        <ImageView
+            android:id="@+id/Profile_setting_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/setting_icon"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"/>
+
+        <View
+            android:id="@+id/Profile_space"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Profile_space">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/Profile_avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20dp"
+                android:alpha="0"
+                app:shapeAppearance="@style/Circular"
+                android:background="@color/blue_deep"/>
+
+            <TextView
+                android:id="@+id/Profile_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/butler_regular"
+                android:textColor="@color/blue_deep"
+                android:textSize="24dp"
+                android:text="Nguyen Duyen"
+                android:layout_below="@id/Profile_avatar"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <ImageView
+                android:id="@+id/Profile_address_icon"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/address_icon"
+                android:layout_below="@id/Profile_user_name"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/Profile_user_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_light"
+                android:textColor="@color/blue_deep"
+                android:textSize="12dp"
+                android:layout_marginLeft="3dp"
+                android:text="Ho Chi Minh City, Vietnam"
+                android:layout_below="@+id/Profile_user_name"
+                android:layout_toRightOf="@+id/Profile_address_icon"/>
+
+            <TextView
+                android:id="@+id/Profile_user_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_light"
+                android:textColor="@color/blue_deep"
+                android:textSize="12dp"
+                android:layout_marginLeft="3dp"
+                android:text="22 years old"
+                android:layout_below="@+id/Profile_user_address"
+                android:layout_toRightOf="@+id/Profile_address_icon"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/butler_regular"
+        android:textColor="@color/blue_deep"
+        android:text="Skin profile"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue_baby"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/Profile_skin_type_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/skin_type_icon"/>
+
+            <TextView
+                android:id="@+id/skin_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/butler_medium"
+                android:textColor="@color/blue_deep"
+                android:textSize="16dp"
+                android:text="Skin type"
+                android:layout_toRightOf="@id/Profile_skin_type_icon"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/Profile_user_skin_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/blue_deep"
+                android:textSize="16dp"
+                android:text="Oily skin"
+                android:layout_toRightOf="@id/Profile_skin_type_icon"
+                android:layout_below="@id/skin_type"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/Profile_user_skin_type_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/blue_deep"
+                android:textSize="16dp"
+                android:text="Visible and enlarged looking pores"
+                android:layout_toRightOf="@id/Profile_skin_type_icon"
+                android:layout_below="@id/Profile_user_skin_type"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
