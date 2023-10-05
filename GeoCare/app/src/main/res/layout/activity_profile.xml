@@ -116,49 +116,51 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_marginLeft="10dp">
 
             <ImageView
                 android:id="@+id/Profile_skin_type_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="70dp"
                 android:src="@drawable/skin_type_icon"/>
 
-            <TextView
-                android:id="@+id/skin_type"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/butler_medium"
-                android:textColor="@color/blue_deep"
-                android:textSize="16dp"
-                android:text="Skin type"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
                 android:layout_toRightOf="@id/Profile_skin_type_icon"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="20dp">
 
-            <TextView
-                android:id="@+id/Profile_user_skin_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_regular"
-                android:textColor="@color/blue_deep"
-                android:textSize="16dp"
-                android:text="Oily skin"
-                android:layout_toRightOf="@id/Profile_skin_type_icon"
-                android:layout_below="@id/skin_type"
-                android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/skin_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/butler_medium"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="16dp"
+                    android:text="Skin type" />
 
-            <TextView
-                android:id="@+id/Profile_user_skin_type_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_regular"
-                android:textColor="@color/blue_deep"
-                android:textSize="16dp"
-                android:text="Visible and enlarged looking pores"
-                android:layout_toRightOf="@id/Profile_skin_type_icon"
-                android:layout_below="@id/Profile_user_skin_type"
-                android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/Profile_user_skin_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="16dp"
+                    android:text="Oily skin"
+                    android:layout_marginTop="3dp" />
+
+                <TextView
+                    android:id="@+id/Profile_user_skin_type_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="16dp"
+                    android:text="Visible and enlarged looking pores" />
+            </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -174,37 +176,64 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <ImageView
                 android:id="@+id/Profile_skin_condition_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/skin_condition_icon"/>
+                android:src="@drawable/skin_condition_icon"
+                android:layout_marginLeft="3dp"/>
 
-            <TextView
-                android:id="@+id/skin_condition"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/butler_medium"
-                android:textColor="@color/blue_deep"
-                android:textSize="16dp"
-                android:text="Skin condition"
+                android:orientation="vertical"
                 android:layout_toRightOf="@id/Profile_skin_condition_icon"
-                android:layout_marginLeft="15dp"/>
+                android:layout_marginLeft="13dp"
+                android:layout_centerVertical="true">
+                <TextView
+                    android:id="@+id/skin_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/butler_medium"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="16dp"
+                    android:text="Skin condition" />
 
-            <TextView
-                android:id="@+id/Profile_user_skin_condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_regular"
-                android:textColor="@color/blue_deep"
-                android:textSize="16dp"
-                android:text="None"
-                android:layout_toRightOf="@id/Profile_skin_condition_icon"
-                android:layout_below="@id/skin_condition"
-                android:layout_marginLeft="15dp"/>
-
+                <TextView
+                    android:id="@+id/Profile_user_skin_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="16dp"
+                    android:text="None "/>
+            </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/butler_regular"
+        android:textColor="@color/blue_deep"
+        android:text="Your shelf"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/butler_regular"
+        android:textColor="@color/blue_deep"
+        android:text="Wishlisted"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"/>
+
 </LinearLayout>
