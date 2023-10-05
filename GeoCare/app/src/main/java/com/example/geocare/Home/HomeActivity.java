@@ -60,6 +60,7 @@ public class HomeActivity extends AppCompatActivity {
 //
         fetch_UI();
         init_UI();
+
 //
 //
 //
