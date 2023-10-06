@@ -1,5 +1,6 @@
 package com.example.geocare.Scan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -87,14 +88,14 @@ public class ScanResultActivity extends AppCompatActivity {
             }
 
             if (ListIrritant == null) {
-                product_irritants.setText("None");
-                product_advise.setText("Good for your skin type");
-            }
-            else {
-                product_irritants.setText(ListIrritant);
-                product_advise.setText("Be careful!");
+                ListIrritant = "None";
             }
 
+            Intent intent = new Intent(ScanResultActivity.this, NotFoundActivity.class);
+            intent.putExtra("Irritant", ListIrritant);
+            startActivity(intent);
+
+            finish();
         }
     }
 
