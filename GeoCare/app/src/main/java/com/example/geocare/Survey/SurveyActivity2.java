@@ -34,7 +34,6 @@ public class SurveyActivity2 extends AppCompatActivity {
                 finish();
             }
         });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +116,7 @@ public class SurveyActivity2 extends AppCompatActivity {
     }
 
     private void setUpState() {
-        opt1.setImageResource(R.drawable.wrinkless);
+        opt1.setImageResource(R.drawable.wrinkles);
         opt2.setImageResource(R.drawable.acne);
         opt3.setImageResource(R.drawable.dryness);
         opt4.setImageResource(R.drawable.redness);
@@ -154,7 +153,7 @@ public class SurveyActivity2 extends AppCompatActivity {
 
     void changeState1(){
         if (isImage1) {
-            opt1.setImageResource(R.drawable.wrinkless);
+            opt1.setImageResource(R.drawable.wrinkles);
         } else {
             opt1.setImageResource(R.drawable.wrinkles_option);
 

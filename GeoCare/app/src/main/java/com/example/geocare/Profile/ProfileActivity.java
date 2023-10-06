@@ -1,36 +1,23 @@
 package com.example.geocare.Profile;
 
-import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.content.SharedPreferences;
-
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-
-import com.example.geocare.Database.SharedPreferenceManager;
-import com.example.geocare.Model.User;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geocare.Home.HomeActivity;
 import com.example.geocare.Product.ProductActivity;
-
 import com.example.geocare.R;
 import com.example.geocare.Scan.ScanActivity;
 import com.example.geocare.Schedule.ScheduleActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    SharedPreferenceManager sharedPreferenceManager;
-    User user;
-
     // For NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
+    private ImageView setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +26,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         fetch_UI();
         navBar();
+
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, Settings.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void fetch_UI() {
@@ -47,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
         scanIcon = findViewById(R.id.NaviBarScanIcon);
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
+        setting = findViewById(R.id.Profile_setting_icon);
     }
 
     private void navBar() {
@@ -81,12 +77,5 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    void getUserData()
-    {
-        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
-        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
-
     }
 }

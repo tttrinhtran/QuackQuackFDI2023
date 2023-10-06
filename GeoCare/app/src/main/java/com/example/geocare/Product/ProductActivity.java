@@ -2,19 +2,20 @@ package com.example.geocare.Product;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_PRODUCT;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Home.HomeActivity;
@@ -24,10 +25,7 @@ import com.example.geocare.Scan.ScanActivity;
 import com.example.geocare.Schedule.ScheduleActivity;
 
 import java.util.ArrayList;
-import java.util.List;import androidx.appcompat.widget.SearchView;
-import android.text.TextUtils;
-import android.widget.ImageView;
-
+import java.util.List;
 public class ProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
@@ -36,7 +34,7 @@ public class ProductActivity extends AppCompatActivity {
 
     // for Navbar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
-
+    Context context;
     FirebaseDatabaseController itemFirebaseDatabaseController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +44,16 @@ public class ProductActivity extends AppCompatActivity {
 
         searchView = (SearchView) findViewById(R.id.Product_search);
 
+
         //search UI set up
         EditText searchEditText = (EditText) searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         Typeface customTypeface = ResourcesCompat.getFont(this, R.font.lato_semibold);
         searchEditText.setTypeface(customTypeface);
         searchEditText.setTextColor(getResources().getColor(R.color.blue_deep));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blue_deep));
+
         getData();
+
         fetch_UI(); navBar();
 
         recyclerView = findViewById(R.id.Product_recyclerView);

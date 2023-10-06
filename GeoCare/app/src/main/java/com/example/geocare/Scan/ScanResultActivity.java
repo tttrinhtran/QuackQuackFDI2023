@@ -1,17 +1,12 @@
 package com.example.geocare.Scan;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.graphics.Matrix;
-
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -46,7 +41,11 @@ public class ScanResultActivity extends AppCompatActivity {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         receivedString = getIntent().getStringExtra("data");
+
+
         process(receivedString);
+
+        finish();
     }
 
     private void process(String receivedString) {
@@ -93,7 +92,7 @@ public class ScanResultActivity extends AppCompatActivity {
             }
             else {
                 product_irritants.setText(ListIrritant);
-                product_advise.setText("Contain irritant ingredients, be careful!");
+                product_advise.setText("Be careful!");
             }
 
         }
@@ -117,7 +116,7 @@ public class ScanResultActivity extends AppCompatActivity {
         }
         else {
             product_irritants.setText(ListIrritant);
-            product_advise.setText("Contain irritant ingredients, be careful!");
+            product_advise.setText("Be careful!");
         }
     }
 }

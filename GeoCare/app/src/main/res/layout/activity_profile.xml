@@ -22,9 +22,12 @@
             android:id="@+id/Profile_setting_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/setting_icon"
             android:layout_alignParentRight="true"
-            android:layout_margin="20dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/setting_icon" />
 
         <View
             android:id="@+id/Profile_space"
@@ -107,7 +110,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="95dp"
         android:backgroundTint="@color/blue_baby"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -121,15 +124,18 @@
 
             <ImageView
                 android:id="@+id/Profile_skin_type_icon"
-                android:layout_width="45dp"
-                android:layout_height="70dp"
-                android:src="@drawable/skin_type_icon"/>
+                android:layout_width="42dp"
+                android:layout_height="62dp"
+                android:src="@drawable/skin_type_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/Profile_skin_type_icon"
                 android:layout_marginLeft="20dp">
 
@@ -140,7 +146,7 @@
                     android:fontFamily="@font/butler_medium"
                     android:textColor="@color/blue_deep"
                     android:textSize="16dp"
-                    android:text="Skin type" />
+                    android:text="Skin type"/>
 
                 <TextView
                     android:id="@+id/Profile_user_skin_type"
@@ -149,8 +155,7 @@
                     android:fontFamily="@font/lato_regular"
                     android:textColor="@color/blue_deep"
                     android:textSize="16dp"
-                    android:text="Oily skin"
-                    android:layout_marginTop="3dp" />
+                    android:text="Oily skin" />
 
                 <TextView
                     android:id="@+id/Profile_user_skin_type_description"
@@ -158,8 +163,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_regular"
                     android:textColor="@color/blue_deep"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:text="Visible and enlarged looking pores" />
+
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -175,15 +181,16 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="95dp"
             android:padding="15dp">
 
             <ImageView
                 android:id="@+id/Profile_skin_condition_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/skin_condition_icon"
-                android:layout_marginLeft="3dp"/>
+                android:layout_marginLeft="3dp"
+                android:layout_centerVertical="true"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -228,10 +235,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Profile_shelf_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <TextView

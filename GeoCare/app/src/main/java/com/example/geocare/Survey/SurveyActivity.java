@@ -1,17 +1,13 @@
 package com.example.geocare.Survey;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import com.example.geocare.R;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.content.Intent;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.geocare.R;
 
 public class SurveyActivity extends AppCompatActivity {
     private ImageView opt1, opt2, opt3, opt4;
@@ -51,7 +47,6 @@ public class SurveyActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SurveyActivity.this, SurveyActivity2.class);
                     startActivity(intent);
-
                 }
             }
         });
@@ -117,7 +112,7 @@ public class SurveyActivity extends AppCompatActivity {
         opt1.setImageResource(R.drawable.normal_skin);
         opt2.setImageResource(R.drawable.oily_skin);
         opt3.setImageResource(R.drawable.sensitive_skin);
-        opt4.setImageResource(R.drawable.normal_skin);
+        opt4.setImageResource(R.drawable.dry_skin);
     }
 
     void changeState1(){
@@ -150,9 +145,9 @@ public class SurveyActivity extends AppCompatActivity {
 
     void changeState4(){
         if (isImage4) {
-            opt4.setImageResource(R.drawable.normal_skin);
+            opt4.setImageResource(R.drawable.dry_skin);
         } else {
-            opt4.setImageResource(R.drawable.normal_skin_option);
+            opt4.setImageResource(R.drawable.dry_skin_option);
         }
         isImage4 = !isImage4;
     }
