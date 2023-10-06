@@ -92,7 +92,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     public void openProductLink(Item item) {
         // Define the URL of the product you want to link to
         String productUrl = item.getUri();
-
         // Create an Intent to open a web browser
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(productUrl));
         startActivity(browserIntent);

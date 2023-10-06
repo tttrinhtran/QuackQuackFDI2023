@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
+import com.example.geocare.Model.User;
 import com.example.geocare.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -16,9 +18,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Item> itemList;
     private Context context; // Add a context variable
 
-    public MyAdapter(Context context, List<Item> itemList) {
+    private User user;
+
+    public MyAdapter(Context context, List<Item> itemList, User user) {
         this.context = context;
         this.itemList = itemList;
+        this.user=user;
     }
     public void setItems(List<Item> items) {
         itemList = items;
@@ -55,9 +60,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.favoriteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 item.setFavorite(!item.isFavorite());
                 updateFavoriteIcon(holder.favoriteIcon, item.isFavorite());
+                user.addToUserFavorite(item.getNameDetail());
             }
         });
 
@@ -95,4 +102,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         intent.putExtra("item_data", item);
         context.startActivity(intent);
     }
+
 }

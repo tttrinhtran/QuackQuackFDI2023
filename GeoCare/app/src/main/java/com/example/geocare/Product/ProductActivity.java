@@ -25,7 +25,10 @@ import com.example.geocare.Scan.ScanActivity;
 import com.example.geocare.Schedule.ScheduleActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;import androidx.appcompat.widget.SearchView;
+import android.text.TextUtils;
+import android.widget.ImageView;
+
 public class ProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
@@ -35,13 +38,15 @@ public class ProductActivity extends AppCompatActivity {
     // for Navbar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
     Context context;
+User user;
     FirebaseDatabaseController itemFirebaseDatabaseController;
+    FirebaseDatabaseController userFirebase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         itemFirebaseDatabaseController=new FirebaseDatabaseController<>(Item.class);
-
+       userFirebase=new FirebaseDatabaseController<>(User.class);
         searchView = (SearchView) findViewById(R.id.Product_search);
 
 
@@ -51,16 +56,14 @@ public class ProductActivity extends AppCompatActivity {
         searchEditText.setTypeface(customTypeface);
         searchEditText.setTextColor(getResources().getColor(R.color.blue_deep));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blue_deep));
-
         getData();
-
         fetch_UI(); navBar();
 
         recyclerView = findViewById(R.id.Product_recyclerView);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
 
-        adapter = new MyAdapter(ProductActivity.this, itemList);
+        adapter = new MyAdapter(ProductActivity.this, itemList, user);
         recyclerView.setAdapter(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -78,10 +81,14 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userFirebase.updateDocumentField(KEY_COLLECTION_USERS,user.getUserEmail(),"userFavorite",user.getUserFavorite());
 
+    }
 
-
-    private void getData()
+    void getData()
     {
         ArrayList<String>ItemName;
         ItemName=itemFirebaseDatabaseController.retrieveAllDocumentsIDOfaCollection(KEY_COLLECTION_PRODUCT);
@@ -92,6 +99,21 @@ public class ProductActivity extends AppCompatActivity {
                 itemList=new ArrayList<>();
             }
             itemList.add((Item) itemFirebaseDatabaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_PRODUCT,ItemName.get(i)));
+        }
+
+        FirebaseDatabaseController userFirebase=new FirebaseDatabaseController<>(User.class);
+        user= (User) userFirebase.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS,"tran@gmail.com");
+        checkFavorite();
+    }
+    void checkFavorite()
+    {
+        for(int i=0; i<itemList.size(); i++)
+        {
+
+            if(user.getUserFavorite().contains(itemList.get(i).getNameDetail()))
+            {
+                itemList.get(i).setFavorite(true);
+            }
         }
     }
 
