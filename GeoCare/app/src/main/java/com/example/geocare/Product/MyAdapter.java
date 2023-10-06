@@ -62,9 +62,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
 
             public void onClick(View v) {
+
+                if(item.isFavorite()==false)
+                {
+                    user.addToUserFavorite(item.getNameDetail());
+                }
+                else
+                {
+
+                        user.removeUserFavorite(item.getNameDetail());
+
+                }
                 item.setFavorite(!item.isFavorite());
                 updateFavoriteIcon(holder.favoriteIcon, item.isFavorite());
-                user.addToUserFavorite(item.getNameDetail());
+
             }
         });
 

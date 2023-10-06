@@ -34,6 +34,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         back_button = findViewById(R.id.ProductDetail_back_button);
         favourite_button = findViewById(R.id.ProductDetail_favourite_button);
 
+
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
 
         Item item = (Item) getIntent().getSerializableExtra("item_data");
@@ -55,6 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         product_name.setText(item.getNameDetail());
         product_brandname.setText(item.getBrandname());
         product_ingrdients.setText(item.getIngredients());
+        updateFavoriteIconForDetail(favourite_button,item.isFavorite());
 
 
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean temp = item.isFavorite();
+
                 updateFavoriteIconForDetail(favourite_button,!temp);
                 item.setFavourite(!temp);
             }
@@ -88,6 +91,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             favoriteIcon.setImageResource(R.drawable.blue_heart);
         }
     }
+
 
     public void openProductLink(Item item) {
         // Define the URL of the product you want to link to

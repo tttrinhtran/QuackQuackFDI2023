@@ -136,7 +136,7 @@ public class User implements Serializable {
         return id;
     }
 
-    private boolean checkFavoriteProduct(String name)
+    public boolean checkFavoriteProduct(String name)
     {
         if(this.UserFavorite.contains(name))
         {
@@ -154,6 +154,10 @@ public class User implements Serializable {
 
        }
        this.UserFavorite.add(name);
+    }
+    public  void removeUserFavorite(String name)
+    {
+        this.UserFavorite.remove(name);
     }
 
 

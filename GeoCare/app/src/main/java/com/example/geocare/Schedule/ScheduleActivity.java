@@ -1,5 +1,8 @@
 package com.example.geocare.Schedule;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_ROUTINE;
+import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Model.RoutineModel;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
@@ -33,6 +38,7 @@ public class ScheduleActivity extends AppCompatActivity {
     TextView date, percent;
     int current = 0;
     RecyclerView recyclerView;
+    ArrayList<RoutineModel>routineModelArrayList;
 
     //for NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
@@ -41,8 +47,6 @@ public class ScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-
-
         recyclerView = findViewById(R.id.Schedule_recycler_view_for_day);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
         date = findViewById(R.id.Schedule_current_date);
@@ -141,6 +145,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         return daysList;
     }
+
 
     private void fetch_UI() {
         homeIcon = findViewById(R.id.NaviBarHomeIcon);
