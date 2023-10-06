@@ -25,6 +25,9 @@
         android:theme="@style/Theme.GeoCare"
         tools:targetApi="31">
         <activity
+            android:name=".Home.SplashHome"
+            android:exported="false" />
+        <activity
             android:name=".Survey.SurveyActivity2"
             android:exported="false" />
         <activity

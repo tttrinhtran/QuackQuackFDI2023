@@ -1,7 +1,5 @@
 package com.example.geocare.Home;
 
-import static android.view.WindowManager.*;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -21,7 +19,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +30,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.geocare.Product.Item;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
@@ -42,11 +38,9 @@ import com.example.geocare.Schedule.ScheduleActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,46 +48,48 @@ import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class HomeActivity extends AppCompatActivity implements LocationListener{
+public class HomeActivity extends AppCompatActivity implements LocationListener {
     // for UI
     private LottieAnimationView lottieAnimationView;
     private TextView title;
     private ShapeableImageView heart; // avatar
     private ConstraintLayout bottomSheet;
     private TextView city;
-    private TextView district; private ImageView decorLine;
-    private  TextView temperatureText, temperatureText1;
-    private  TextView weatherDes;
+    private TextView district;
+    private ImageView decorLine;
+    private TextView temperatureText, temperatureText1;
+    private TextView weatherDes;
     private TextView humidityText;
     private TextView pm25Text;
     private TextView UVText;
     private TextView timeText;
     private TextView dateText;
-
+    JSONObject weatherObject;
+    JSONObject airQualityObject;
 
     // For NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
 
-
-   private LocationManager locationManager;
-    DecimalFormat df = new DecimalFormat("#.##");
+    private LocationManager locationManager;
+    private Weather weatherInfo;
     private boolean responseListener1Completed = false;
     private boolean secondRequestCompleted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         Locale.setDefault(new Locale("en"));
-//
+
         fetch_UI();
         init_UI();
 
         if (ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(HomeActivity.this,new String[]{
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
-            },100);
+            }, 100);
         }
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeBottomSheet));
@@ -103,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         navBar();
         getLocation();
         getCurrentTime();
+        //setData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -141,13 +138,18 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
                         UVText.animate()
                                 .alpha(1f).translationY(0);
                     }
-                }, 1000);
+                }, 2000);
             }
         }, 3000);
-
     }
 
-
+    private void setData() {
+        temperatureText.setText(String.valueOf(weatherInfo.getTemperature()));
+        weatherDes.setText(weatherInfo.getDescription());
+        UVText.setText(String.valueOf(weatherInfo.getUvi()));
+        pm25Text.setText(String.valueOf(weatherInfo.getUvi()));
+        humidityText.setText(String.valueOf(weatherInfo.getHumidity()));
+    }
 
     private void getCurrentTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd EEEE", Locale.US);
@@ -158,34 +160,44 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
 
         timeText.setText(currentTime.toLowerCase());
         dateText.setText(currentDate);
-
     }
 
     private void init_UI() {
         lottieAnimationView.animate().setDuration(3000);
-        title.setTranslationY(100); title.setAlpha(0);
+        title.setTranslationY(100);
+        title.setAlpha(0);
         heart.setTranslationY(100); // deprecate
-        temperatureText.setTranslationY(100); temperatureText.setAlpha(0);
-        temperatureText1.setTranslationY(100); temperatureText1.setAlpha(0);
-        humidityText.setTranslationY(100); humidityText.setAlpha(0);
-        pm25Text.setTranslationY(100); pm25Text.setAlpha(0);
-        UVText.setTranslationY(100); UVText.setAlpha(0);
-        city.setTranslationY(100); city.setAlpha(0);
-        district.setTranslationY(100); district.setAlpha(0);
+        temperatureText.setTranslationY(100);
+        temperatureText.setAlpha(0);
+        temperatureText1.setTranslationY(100);
+        temperatureText1.setAlpha(0);
+        humidityText.setTranslationY(100);
+        humidityText.setAlpha(0);
+        pm25Text.setTranslationY(100);
+        pm25Text.setAlpha(0);
+        UVText.setTranslationY(100);
+        UVText.setAlpha(0);
+        city.setTranslationY(100);
+        city.setAlpha(0);
+        district.setTranslationY(100);
+        district.setAlpha(0);
         decorLine.setTranslationY(100); // deprecate
-        weatherDes.setTranslationY(100); weatherDes.setAlpha(0);
-        timeText.setTranslationY(100); timeText.setAlpha(0);
-        dateText.setTranslationY(100); dateText.setAlpha(0);
+        weatherDes.setTranslationY(100);
+        weatherDes.setAlpha(0);
+        timeText.setTranslationY(100);
+        timeText.setAlpha(0);
+        dateText.setTranslationY(100);
+        dateText.setAlpha(0);
         bottomSheet.setTranslationY(100);
     }
-
 
     private void fetch_UI() {
         lottieAnimationView = findViewById(R.id.lottie);
         title = findViewById(R.id.HomeScreenTitleText);
         heart = findViewById(R.id.HomeScreenAvatarTitle);
         bottomSheet = findViewById(R.id.homeBottomSheet);
-        temperatureText = findViewById(R.id.HomeScreenTemperature); temperatureText1 = findViewById(R.id.HomeScreenTemperature1);
+        temperatureText = findViewById(R.id.HomeScreenTemperature);
+        temperatureText1 = findViewById(R.id.HomeScreenTemperature1);
         humidityText = findViewById(R.id.MoistureIndex);
         pm25Text = findViewById(R.id.DustIndex);
         UVText = findViewById(R.id.UVIndex);
@@ -196,7 +208,6 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         dateText = findViewById(R.id.HomeScreenDate);
         decorLine = findViewById(R.id.HomeScreenDecorLine);
         bottomSheet = findViewById(R.id.homeBottomSheet);
-
 
         // NavBar
         homeIcon = findViewById(R.id.NaviBarHomeIcon);
@@ -211,26 +222,21 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
             locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, HomeActivity.this, null);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,5, HomeActivity.this);
-            //locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, HomeActivity.this, null);
-
-        }catch (Exception e){
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, HomeActivity.this);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
         try {
-//            Locale.setDefault(new Locale("en", "VN"));
-//            Locale new_locale = Locale.getDefault();
-           // Locale locale = new Locale("en");
             Locale englishLocale = new Locale("en", "US");
             Geocoder geocoder = new Geocoder(HomeActivity.this, englishLocale);
 
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
             String address = addresses.get(0).getAddressLine(0);
             String d = addresses.get(0).getSubAdminArea();
             if ("Quận 1".equals(d)) {
@@ -246,130 +252,97 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
             } else{
                 city.setText(c);
             }
+            // Now, retrieve the JSON data
+            getWeatherData(location.getLatitude(), location.getLongitude());
 
-            //textViewLocation.setText(address);
-            getWeatherDetails(location.getLatitude(), location.getLongitude());
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    private void getWeatherDetails(double latitude, double longitude) {
-
-        String tempUrl1 = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=current" +  "&appid=cda3653189073bccea02deb614b1b762";
-      //  https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&exclude=current&appid=cda3653189073bccea02deb614b1b762
+    private void getWeatherData(double latitude, double longitude) {
+        String tempUrl1 = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=current" + "&appid=cda3653189073bccea02deb614b1b762";
         String tempUrl2 = "https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=dcfabdd5c7fc896819d09133733b7eea";
 
-
-        // Create a RequestQueue
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        // Define a method to handle the response from the first request
+
         Response.Listener<String> responseListener1 = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("hourly");
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    // UV, Humidity, Temperature
-                    double uvi = jsonObject.getDouble("uvi");
-                    double humidity = jsonObject.getDouble("humidity");
-                    double temp = jsonObject.getDouble("temp") - 273.15;
-                    int t = (int) temp;
-                    // Description
-                    JSONArray jsonArray1 = jsonObject.getJSONArray("weather");
-                    JSONObject jsonObject1 = jsonArray1.getJSONObject(0);
-                    String description = jsonObject1.getString("description");
-
+                    weatherObject = new JSONObject(response);
                     responseListener1Completed = true;
 
-                    // Check if both requests are completed
+//                    weatherInfo = new Weather(jsonResponse, airQualityJsonObject);
+
+                    // Update UI with weather info
+//                    humidityText.setText(String.valueOf(weatherInfo.getHumidity()) + "%");
+//                    temperatureText.setText(String.valueOf(weatherInfo.getTemperature()));
+//                    UVText.setText(String.valueOf(weatherInfo.getUvi()) + "/10");
+//                    String del = Character.toUpperCase(weatherInfo.getDescription().charAt(0)) + weatherInfo.getDescription().substring(1);
+//                    weatherDes.setText(del);
+//                    pm25Text.setText(String.valueOf(weatherInfo.getPm25()));
+
                     Handler handler = new Handler(Looper.getMainLooper());
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
-
                     executorService.execute(new Runnable() {
-
                         @Override
                         public void run() {
-
                             while (!secondRequestCompleted){}
-
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    humidityText.setText(String.valueOf(humidity) + "%");
-                                    temperatureText.setText(String.valueOf(t));
-                                    UVText.setText(String.valueOf(uvi) + "/10");
-                                    String del = Character.toUpperCase(description.charAt(0)) + description.substring(1);
-                                    weatherDes.setText(del);
+                                    try {
+                                        weatherInfo = new Weather(weatherObject, airQualityObject);
+                                        setData();
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
                                 }
                             });
                         }
                     });
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        // Define a method to handle the response from the second request
         Response.Listener<String> responseListener2 = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("list");
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    JSONObject jsonObject1 = jsonObject.getJSONObject("components");
-                    double pm25 = jsonObject1.getDouble("pm2_5");
-                    double pm10 = jsonObject1.getDouble("pm10");
-
-                    // Mark the second request as completed
+                try{
+                    airQualityObject = new JSONObject(response);
                     secondRequestCompleted = true;
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
 
                     executorService.execute(new Runnable() {
-
                         @Override
                         public void run() {
 
                             while (!responseListener1Completed){}
-
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    pm25Text.setText(String.valueOf(pm25));
+                                    try {
+                                        weatherInfo = new Weather(weatherObject, airQualityObject);
+                                        setData();
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
                                 }
                             });
                         }
                     });
-
-                    // Check if both requests are completed
-//                    if (responseListener1Completed) {
-//                        // Set the text of tvResult with the combined result
-//                        //weatherInfo.setText(combinedResult.toString());
-//                        pm25Text.setText(String.valueOf(pm25));
-//                    }
-
-
-                } catch (JSONException e) {
+                }catch (JSONException e ){
                     e.printStackTrace();
                 }
             }
         };
 
-
-
-        // Create the second request and add it to the request queue
-
-
-        // Create the first request and add it to the request queue
         StringRequest stringRequest1 = new StringRequest(Request.Method.GET, tempUrl1, responseListener1, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -385,22 +358,19 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
             }
         });
         requestQueue.add(stringRequest2);
-
+        // ... Rest of your code
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
 
     private void navBar() {
@@ -436,8 +406,5 @@ public class HomeActivity extends AppCompatActivity implements LocationListener{
                 startActivity(i);
             }
         });
-
     }
-
 }
-

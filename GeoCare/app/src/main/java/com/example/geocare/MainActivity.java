@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Home.SplashHome;
 import com.example.geocare.Model.RoutineModel;
 import com.example.geocare.Product.Item;
 import com.example.geocare.Product.ProductActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(MainActivity.this, ScanActivity.class);
+        Intent intent = new Intent(MainActivity.this, SplashHome.class);
         startActivity(intent);
     }
 }
