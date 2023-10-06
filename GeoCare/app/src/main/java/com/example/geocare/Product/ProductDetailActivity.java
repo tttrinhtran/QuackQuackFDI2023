@@ -39,7 +39,7 @@ User user;
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
 
         Item item = (Item) getIntent().getSerializableExtra("item_data");
-        user= (User) getIntent().getSerializableExtra("user_data")
+        user= (User) getIntent().getSerializableExtra("user_data");
 
         String temp = item.getNameDetail();
         if (temp.length() >= 50){
