@@ -3,12 +3,13 @@ package com.example.geocare.Schedule;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,13 +31,14 @@ import java.util.Locale;
 
 public class ScheduleActivity extends AppCompatActivity {
     private ProgressBar progressBar;
-    private Button completeStepButton;
     TextView date, percent, routine_day;
-    int current = 0;
-    RecyclerView recyclerView;
+    int numberSteps = 0;
+    RecyclerView recyclerView, recyclerViewRoutine;
 
     //for NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
+    ItemAdapter adapter;
+    private List<ProductItem> productList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +50,43 @@ public class ScheduleActivity extends AppCompatActivity {
         CurrentDaySet();
         DaySchedule();
 
-        completeStepButton.setOnClickListener(new View.OnClickListener() {
+        recyclerViewRoutine = findViewById(R.id.Schedule_recyclerview_forRoutine);
+        recyclerViewRoutine.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ItemAdapter(productList);
+        recyclerViewRoutine.setAdapter(adapter);
+
+
+        setUpproductList();
+
+        // Implement swipe-to-delete using ItemTouchHelper
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
+        ) {
             @Override
-            public void onClick(View v) {
-                ProgressBar(7);  //nay thi truyen vao so luong sp ban dau la duoc
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
             }
-        });
 
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                // Handle item deletion here
+                ProgressBar(numberSteps);
+                int position = viewHolder.getAdapterPosition();
+                adapter.removeItem(position);
+            }
+        };
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerViewRoutine);
     }
 
+    private void setUpproductList() {
+        if (true){
+            productList.addAll(Type.productList_OilySunny);
+            numberSteps = productList.size();
+        }
+    }
 
 
     void ProgressBar(float maxProduct){
@@ -155,7 +184,6 @@ public class ScheduleActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
         date = findViewById(R.id.Schedule_current_date);
         progressBar = findViewById(R.id.linearProgressIndicator);
-        completeStepButton = findViewById(R.id.donebutton);
         percent = findViewById(R.id.Schedule_percent);
         routine_day = findViewById(R.id.Schedule_routine_day);
     }
