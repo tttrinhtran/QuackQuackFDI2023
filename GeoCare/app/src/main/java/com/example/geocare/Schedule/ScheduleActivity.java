@@ -20,6 +20,7 @@ import com.example.geocare.Scan.ScanActivity;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.time.temporal.WeekFields;
@@ -30,7 +31,7 @@ import java.util.Locale;
 public class ScheduleActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button completeStepButton;
-    TextView date, percent;
+    TextView date, percent, routine_day;
     int current = 0;
     RecyclerView recyclerView;
 
@@ -41,14 +42,6 @@ public class ScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-
-
-        recyclerView = findViewById(R.id.Schedule_recycler_view_for_day);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
-        date = findViewById(R.id.Schedule_current_date);
-        progressBar = findViewById(R.id.linearProgressIndicator);
-        completeStepButton = findViewById(R.id.donebutton); //thay bang swipe cho nay ne
-        percent = findViewById(R.id.Schedule_percent);
 
 
         fetch_UI(); navBar();
@@ -130,6 +123,16 @@ public class ScheduleActivity extends AppCompatActivity {
         List<DayOfWeek> daysList = getCurrentWeek();
         DaysAdapter adapter = new DaysAdapter(daysList);
         recyclerView.setAdapter(adapter);
+
+
+        LocalTime currentTime = LocalTime.now();
+        int currentHour = currentTime.getHour();
+
+        if (currentHour <= 17 && currentHour >= 3){
+            routine_day.setText("Morning routine");
+        }
+        else
+            routine_day.setText("Night routine");
     }
 
     private List<DayOfWeek> getCurrentWeek() {
@@ -148,6 +151,13 @@ public class ScheduleActivity extends AppCompatActivity {
         scanIcon = findViewById(R.id.NaviBarScanIcon);
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
+        recyclerView = findViewById(R.id.Schedule_recycler_view_for_day);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
+        date = findViewById(R.id.Schedule_current_date);
+        progressBar = findViewById(R.id.linearProgressIndicator);
+        completeStepButton = findViewById(R.id.donebutton);
+        percent = findViewById(R.id.Schedule_percent);
+        routine_day = findViewById(R.id.Schedule_routine_day);
     }
 
     private void navBar() {

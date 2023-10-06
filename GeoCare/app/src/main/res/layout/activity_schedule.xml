@@ -61,17 +61,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today's progress"
-            android:fontFamily="@font/butler_regular"
-            android:textColor="@color/blue_deep"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
-            android:textSize="17dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/butler_regular"
+            android:text="Today's progress"
+            android:textColor="@color/blue_deep"
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/Schedule_percent"
