@@ -37,6 +37,9 @@
             android:name=".Register.SignUpScreen"
             android:exported="false" />
         <activity
+            android:name=".Home.SplashHome2"
+            android:exported="false" />
+        <activity
             android:name=".Home.SplashHome"
             android:exported="false" />
         <activity

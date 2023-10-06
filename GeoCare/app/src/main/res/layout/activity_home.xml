@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home.HomeActivity"
-    android:background="@color/light_yellow">
+    android:id="@+id/HomeScreen"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingBottom="15dp"
-            android:paddingTop="44dp">
+            android:paddingTop="50dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/HomeScreenAvatarTitle"
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="190dp"
+            android:layout_marginTop="170dp"
             android:layout_marginStart="25dp">
 
             <TextView
@@ -84,12 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/HomeScreenTemperature"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/HomeScreenTemperature"
                 android:text="°c"
                 android:fontFamily="@font/lato_medium"
                 android:textSize="30sp"
                 android:textColor="@color/blue_deep"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="15dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,7 +113,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/HomeScreenWeatherDes"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="60dp"
             android:layout_marginStart="25dp">
 
             <TextView
@@ -179,6 +180,7 @@
         android:layout_height="600dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:background="@drawable/rounded"
+        android:paddingHorizontal="20dp"
         android:alpha="0">
 
         <ImageView
@@ -198,7 +200,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border_home_decor"
-            android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="20dp"
             android:orientation="horizontal"
             android:weightSum="3"
@@ -207,8 +208,6 @@
             app:layout_constraintTop_toBottomOf="@id/HomeTitleBottomSheet"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginEnd="27dp"
             android:paddingHorizontal="18dp">
 
             <LinearLayout
@@ -245,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="UV"
-                    android:fontFamily="@font/lato_medium"
+                    android:fontFamily="@font/lato_regular"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="@color/black"
@@ -286,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Dust"
-                    android:fontFamily="@font/lato_medium"
+                    android:fontFamily="@font/lato_regular"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="@color/black"
@@ -326,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Moisture"
-                    android:fontFamily="@font/lato_medium"
+                    android:fontFamily="@font/lato_regular"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="@color/black"
@@ -341,7 +340,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/IndexFrame"
-            android:layout_marginStart="27dp"
             android:layout_marginTop="14dp"
             android:text="Current schedule"
             android:fontFamily="@font/butler_medium"
@@ -357,8 +355,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/CurrentSchedule"
-            android:layout_marginTop="13dp"
-            android:layout_marginHorizontal="27dp">
+            android:layout_marginTop="13dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="85dp"
@@ -421,7 +418,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/HomeScreenCurrentScheduleItem"
             android:layout_marginTop="24dp"
-            android:layout_marginStart="27dp"
             android:text="Tips"
             android:fontFamily="@font/butler_medium"
             android:textSize="16sp"
@@ -433,7 +429,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TipsTitle"
-            android:layout_marginVertical="27dp"
             android:layout_marginTop="8dp"/>
 
 

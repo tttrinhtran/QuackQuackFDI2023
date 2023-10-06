@@ -168,10 +168,10 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="@drawable/top_bottom_grey"
-        app:layout_constraintBottom_toTopOf="@+id/HomeScreenNaviBar"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="7dp"-->
+<!--        android:background="@drawable/top_bottom_grey"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/HomeScreenNaviBar"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

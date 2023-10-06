@@ -4,20 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.SplashHome">
+    android:id="@+id/HomeSplashScreen"
+    tools:context=".Home.SplashHome"
+    android:background="@color/light_yellow">
 
-    <LinearLayout
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/sunny_json"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="110dp"
+        android:layout_marginStart="300dp" />
+    <TextView
+        android:id="@+id/SplashUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="120dp"
+        android:text="Hello Tran"
+        android:fontFamily="@font/butler_medium"
+        android:textSize="50sp"
+        android:textColor="@color/blue_deep"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/SplashLocationLayout"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SplashUser"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="20dp">
+
+        <TextView
+            android:id="@+id/SplashLocation1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Today is"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="36sp"
+            android:textColor="@color/blue_deep"/>
+
+        <TextView
+            android:id="@+id/SplashDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SplashLocation1"
+            android:text="Sunny"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="36sp"
+            android:textColor="@color/blue_deep"/>
+
+        <TextView
+            android:id="@+id/SpashDistrict"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SplashDescription"
+            android:text="in District 3"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="36sp"
+            android:textColor="@color/blue_deep"/>
+        <TextView
+            android:id="@+id/SplashCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SpashDistrict"
+            android:text="Ho Chi Minh City"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="36sp"
+            android:textColor="@color/blue_deep"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/SplashTemperatureLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SplashLocationLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/SplashTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="37"
+            android:fontFamily="@font/butler_medium"
+            android:textSize="80sp"
+            android:textColor="@color/blue_deep"/>
+
+        <TextView
+            android:id="@+id/SplashTemperature1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/SplashTemperature"
+            app:layout_constraintBottom_toBottomOf="@id/SplashTemperature"
+            android:text="°c"
+            android:fontFamily="@font/lato_medium"
+            android:textSize="30sp"
+            android:textColor="@color/blue_deep"
+            android:layout_marginBottom="15dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/SplashSupport"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/sunny"
-            android:scaleType="centerCrop"/>
-    </LinearLayout>
+        />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
