@@ -2,6 +2,7 @@ package com.example.geocare.Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -30,6 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.geocare.Model.User;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
@@ -50,6 +52,8 @@ import java.util.concurrent.Executors;
 
 public class HomeActivity extends AppCompatActivity implements LocationListener {
     // for UI
+    // private User user;
+    private CoordinatorLayout homeScreenLayout;
     private LottieAnimationView lottieAnimationView;
     private TextView title;
     private ShapeableImageView heart; // avatar
@@ -92,13 +96,16 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
             }, 100);
         }
 
+
+
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeBottomSheet));
-        bottomSheetBehavior.setPeekHeight(700);
+        bottomSheetBehavior.setPeekHeight(750);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         navBar();
         getLocation();
-        getCurrentTime();
+
+        //getCurrentTime();
         //setData();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -127,40 +134,48 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                 bottomSheet.animate()
                         .alpha(1f).translationY(0);
 
-                // for bottomSheet components
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        humidityText.animate()
-                                .alpha(1f).translationY(0);
-                        pm25Text.animate()
-                                .alpha(1f).translationY(0);
-                        UVText.animate()
-                                .alpha(1f).translationY(0);
-                    }
-                }, 2000);
+                humidityText.animate()
+                        .alpha(1f).translationY(0);
+                pm25Text.animate()
+                        .alpha(1f).translationY(0);
+                UVText.animate()
+                        .alpha(1f).translationY(0);
+
             }
-        }, 3000);
+        }, 3500);
     }
 
     private void setData() {
         temperatureText.setText(String.valueOf(weatherInfo.getTemperature()));
         weatherDes.setText(weatherInfo.getDescription());
         UVText.setText(String.valueOf(weatherInfo.getUvi()));
-        pm25Text.setText(String.valueOf(weatherInfo.getUvi()));
+        pm25Text.setText(String.valueOf(weatherInfo.getPm25()));
         humidityText.setText(String.valueOf(weatherInfo.getHumidity()));
     }
 
-    private void getCurrentTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd EEEE", Locale.US);
+    private boolean getCurrentTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mma", Locale.US);
 
-        String currentDate = dateFormat.format(new Date());
+        // Get the current time in hours and minutes
         String currentTime = timeFormat.format(new Date());
+        String[] timeParts = currentTime.split(":");
+        int currentHour = Integer.parseInt(timeParts[0]);
+        int currentMinute = Integer.parseInt(timeParts[1].substring(0, 2)); // Remove "am" or "pm"
 
+        // Check if the current time is between 6 AM and 6 PM
+        boolean check = (currentHour >= 6 && currentHour < 18);
+
+        // Update UI elements with the current time
         timeText.setText(currentTime.toLowerCase());
+
+        // Construct the date and update the dateText if needed
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd EEEE", Locale.US);
+        String currentDate = dateFormat.format(new Date());
         dateText.setText(currentDate);
+
+        return check;
     }
+
 
     private void init_UI() {
         lottieAnimationView.animate().setDuration(3000);
@@ -189,6 +204,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         dateText.setTranslationY(100);
         dateText.setAlpha(0);
         bottomSheet.setTranslationY(100);
+        //setUpWeatherLayout();
     }
 
     private void fetch_UI() {
@@ -215,6 +231,9 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         scanIcon = findViewById(R.id.NaviBarScanIcon);
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
+
+        // layout Weather
+        homeScreenLayout = findViewById(R.id.HomeScreen);
     }
 
     @SuppressLint("MissingPermission")
@@ -222,7 +241,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         try {
             locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
             locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, HomeActivity.this, null);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, HomeActivity.this);
+            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, HomeActivity.this, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -243,7 +262,10 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                 district.setText("District 1");
             } else if ("Quận 5".equals(d)) {
                 district.setText("District 5");
-            } else{
+            } else if("Quận 10".equals(d)){
+                district.setText("District 10");
+            }
+            else{
                 district.setText(d);
             }
             String c = addresses.get(0).getAdminArea();
@@ -296,6 +318,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                                     try {
                                         weatherInfo = new Weather(weatherObject, airQualityObject);
                                         setData();
+                                        setUpWeatherLayout();
                                     } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -330,6 +353,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                                     try {
                                         weatherInfo = new Weather(weatherObject, airQualityObject);
                                         setData();
+                                        setUpWeatherLayout();
                                     } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -407,4 +431,37 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
+
+    private int chooseLayout() {
+        int res = 0, checkWeather = 0;
+        boolean checkDay = getCurrentTime();
+        String des = weatherInfo.getDescription();
+
+        if (des.contains("rain")) {
+            checkWeather = 1;
+        } else if (des.contains("cloud")) {
+            checkWeather = 2;
+        } else {
+            checkWeather = 3;
+        }
+
+        if(checkWeather != 3){
+            res = checkWeather + 2;
+        } else{
+            if(checkDay == true){ // day
+                res = 1;
+            } else{
+                res = 2;
+            }
+        }
+        return res;
+    }
+
+    private void setUpWeatherLayout(){
+        int pick = chooseLayout();
+        if(pick == 3){
+            homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.light_yellow));
+        }
+    }
+
 }
