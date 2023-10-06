@@ -25,6 +25,12 @@
         android:theme="@style/Theme.GeoCare"
         tools:targetApi="31">
         <activity
+            android:name=".Profile.Settings"
+            android:exported="false" />
+        <activity
+            android:name=".Scan.ScanResultNoInforActivity"
+            android:exported="false" />
+        <activity
             android:name=".Register.PersonalInformation"
             android:exported="false" />
         <activity

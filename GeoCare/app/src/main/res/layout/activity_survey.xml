@@ -162,6 +162,5 @@
             android:src="@drawable/next_button"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"/>
-
     </RelativeLayout>
 </LinearLayout>

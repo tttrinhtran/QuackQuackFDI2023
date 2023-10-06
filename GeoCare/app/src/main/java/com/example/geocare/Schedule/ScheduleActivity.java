@@ -1,24 +1,22 @@
 package com.example.geocare.Schedule;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geocare.Home.HomeActivity;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
 import com.example.geocare.Scan.ScanActivity;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -97,14 +95,14 @@ public class ScheduleActivity extends AppCompatActivity {
         DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
 
         // Get the name of the day (full name)
-        String currentDayName = currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault());
+        String currentDayName = currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.US);
 
         // Get the day of the month
         int currentDayOfMonth = currentDate.getDayOfMonth();
 
         // Get the name of the month (abbreviated name)
         Month currentMonth = currentDate.getMonth();
-        String currentMonthAbbreviated = currentMonth.getDisplayName(TextStyle.SHORT, Locale.getDefault());
+        String currentMonthAbbreviated = currentMonth.getDisplayName(TextStyle.SHORT, Locale.US);
 
         // Combine the components to create the desired format
         String formattedDate = currentDayName + " " + currentDayOfMonth + ", " + currentMonthAbbreviated;

@@ -9,6 +9,8 @@ public class IrritantList {
             "Diethylene glycol (except if it is present as unavoidable trace limit of 0.1% in finished product)",
             "Azelaic acid",
             "Bimatoprost",
+            "Paraben",
+            "Benzen",
             "Silver Nitrate",
             "N-5-Chlorobenzoxazol-2-ylacetamide",
             "2-Acetoxyethyltrimethylammonium hydroxide (acetylcholine) and its salts",
