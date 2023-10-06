@@ -46,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 // Open ProductDetailActivity when image is clicked
-                openProductDetailActivity(item);
+                openProductDetailActivity(item,user);
             }
         });
 
@@ -54,7 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 // Open ProductDetailActivity when name is clicked
-                openProductDetailActivity(item);
+                openProductDetailActivity(item,user);
             }
         });
 
@@ -108,9 +108,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    private void openProductDetailActivity(Item item) {
+    private void openProductDetailActivity(Item item, User user) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra("item_data", item);
+        intent.putExtra("user_data", user);
         context.startActivity(intent);
     }
 

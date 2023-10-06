@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -17,7 +18,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView image;
     TextView product_type, product_name, product_brandname, product_ingrdients;
-
+User user;
     ImageView add_button, buy_button, back_button, favourite_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
 
         Item item = (Item) getIntent().getSerializableExtra("item_data");
+        user= (User) getIntent().getSerializableExtra("user_data")
 
         String temp = item.getNameDetail();
         if (temp.length() >= 50){
@@ -70,7 +72,16 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean temp = item.isFavorite();
+                if(item.isFavorite()==false)
+                {
+                    user.addToUserFavorite(item.getNameDetail());
+                }
+                else
+                {
 
+                    user.removeUserFavorite(item.getNameDetail());
+
+                }
                 updateFavoriteIconForDetail(favourite_button,!temp);
                 item.setFavourite(!temp);
             }
