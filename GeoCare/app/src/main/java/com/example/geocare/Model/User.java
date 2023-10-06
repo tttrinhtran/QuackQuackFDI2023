@@ -8,6 +8,41 @@ import java.util.ArrayList;
 public class User implements Serializable {
 
     String UserName;
+
+    public void setUserSkinCondition(ArrayList<String> userSkinCondition) {
+        UserSkinCondition = userSkinCondition;
+    }
+
+    public ArrayList<String> getUserSelf() {
+        return UserSelf;
+    }
+
+    public void setUserSelf(ArrayList<String> userSelf) {
+        UserSelf = userSelf;
+    }
+
+    public ArrayList<String> getUserFavorite() {
+
+        if(this.UserFavorite==null)
+        {
+            this.UserFavorite=new ArrayList<>();
+        }
+        return UserFavorite;
+    }
+
+    public void setUserFavorite(ArrayList<String> userFavorite) {
+
+        UserFavorite = userFavorite;
+    }
+
+    public String getAva() {
+        return ava;
+    }
+
+    public void setAva(String ava) {
+        this.ava = ava;
+    }
+
     String UserEmail;
     String UserPassword;
     String UserAge;
@@ -101,7 +136,7 @@ public class User implements Serializable {
         return id;
     }
 
-    private boolean checkFavoriteProduct(String name)
+    public boolean checkFavoriteProduct(String name)
     {
         if(this.UserFavorite.contains(name))
         {
@@ -119,6 +154,10 @@ public class User implements Serializable {
 
        }
        this.UserFavorite.add(name);
+    }
+    public  void removeUserFavorite(String name)
+    {
+        this.UserFavorite.remove(name);
     }
 
 

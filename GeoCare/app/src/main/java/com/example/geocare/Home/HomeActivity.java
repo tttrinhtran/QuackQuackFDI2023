@@ -44,6 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -459,9 +461,40 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
     private void setUpWeatherLayout(){
         int pick = chooseLayout();
-        if(pick == 3){
-            homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.light_yellow));
-        }
+
+        List<Integer> colors = new ArrayList<>();
+
+        // Add elements to the list
+        colors.add(R.color.light_yellow);
+        colors.add(R.color.blue_deep);
+        colors.add(R.color.blue_rain);
+        colors.add(R.color.blue_snow);
+
+        List<Integer> colorText = new ArrayList<>();
+
+        // Add elements to the list
+        colorText.add(R.color.blue_deep);
+        colorText.add(R.color.blue_baby);
+        colorText.add(R.color.white);
+        colorText.add(R.color.blue_deep);
+
+        homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));
+
+
+        // text
+        temperatureText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        temperatureText1.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        city.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        district.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        weatherDes.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        timeText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        dateText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+        decorLine.setBackgroundColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+
+
+//        if(pick == 3){
+//            homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.light_yellow));
+//        }
     }
 
 }

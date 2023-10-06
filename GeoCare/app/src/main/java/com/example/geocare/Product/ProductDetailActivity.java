@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -17,7 +18,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView image;
     TextView product_type, product_name, product_brandname, product_ingrdients;
-
+User user;
     ImageView add_button, buy_button, back_button, favourite_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         back_button = findViewById(R.id.ProductDetail_back_button);
         favourite_button = findViewById(R.id.ProductDetail_favourite_button);
 
+
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
 
         Item item = (Item) getIntent().getSerializableExtra("item_data");
+        user= (User) getIntent().getSerializableExtra("user_data")
 
         String temp = item.getNameDetail();
         if (temp.length() >= 50){
@@ -55,6 +58,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         product_name.setText(item.getNameDetail());
         product_brandname.setText(item.getBrandname());
         product_ingrdients.setText(item.getIngredients());
+        updateFavoriteIconForDetail(favourite_button,item.isFavorite());
 
 
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +72,16 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean temp = item.isFavorite();
+                if(item.isFavorite()==false)
+                {
+                    user.addToUserFavorite(item.getNameDetail());
+                }
+                else
+                {
+
+                    user.removeUserFavorite(item.getNameDetail());
+
+                }
                 updateFavoriteIconForDetail(favourite_button,!temp);
                 item.setFavourite(!temp);
             }
@@ -89,10 +103,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     }
 
+
     public void openProductLink(Item item) {
         // Define the URL of the product you want to link to
         String productUrl = item.getUri();
-
         // Create an Intent to open a web browser
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(productUrl));
         startActivity(browserIntent);

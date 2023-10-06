@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
+import com.example.geocare.Model.User;
 import com.example.geocare.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -16,9 +18,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Item> itemList;
     private Context context; // Add a context variable
 
-    public MyAdapter(Context context, List<Item> itemList) {
+    private User user;
+
+    public MyAdapter(Context context, List<Item> itemList, User user) {
         this.context = context;
         this.itemList = itemList;
+        this.user=user;
     }
     public void setItems(List<Item> items) {
         itemList = items;
@@ -41,7 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 // Open ProductDetailActivity when image is clicked
-                openProductDetailActivity(item);
+                openProductDetailActivity(item,user);
             }
         });
 
@@ -49,15 +54,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 // Open ProductDetailActivity when name is clicked
-                openProductDetailActivity(item);
+                openProductDetailActivity(item,user);
             }
         });
 
         holder.favoriteIcon.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
+
+                if(item.isFavorite()==false)
+                {
+                    user.addToUserFavorite(item.getNameDetail());
+                }
+                else
+                {
+
+                        user.removeUserFavorite(item.getNameDetail());
+
+                }
                 item.setFavorite(!item.isFavorite());
                 updateFavoriteIcon(holder.favoriteIcon, item.isFavorite());
+
             }
         });
 
@@ -90,9 +108,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    private void openProductDetailActivity(Item item) {
+    private void openProductDetailActivity(Item item, User user) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra("item_data", item);
+        intent.putExtra("user_data", user);
         context.startActivity(intent);
     }
+
 }
