@@ -12,11 +12,15 @@ import android.os.Bundle;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Home.SplashHome;
 import com.example.geocare.Model.RoutineModel;
 import com.example.geocare.Model.User;
 import com.example.geocare.Product.Item;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
+import com.example.geocare.Scan.ScanActivity;
+import com.example.geocare.Survey.SurveyActivity;
+import com.example.geocare.Survey.SurveyActivity2;
 
 import java.util.ArrayList;
 
@@ -31,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+
+        Intent intent = new Intent(MainActivity.this, SplashHome.class);
+
         startActivity(intent);
     }
 }

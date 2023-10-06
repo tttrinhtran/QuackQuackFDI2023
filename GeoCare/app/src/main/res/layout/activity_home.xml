@@ -80,6 +80,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
+                android:id="@+id/HomeScreenTemperature1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@id/HomeScreenTemperature"
@@ -88,13 +89,13 @@
                 android:fontFamily="@font/lato_medium"
                 android:textSize="30sp"
                 android:textColor="@color/blue_deep"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/HomeScreenWeatherDes"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/HomeScreenTemperatureLayout"
@@ -142,7 +143,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/HomeScreenDate"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/blue_line_decor"/>
+                android:background="@drawable/blue_line_decor"
+                android:alpha="0"/>
 
             <TextView
                 android:id="@+id/HomeScreenCity"
@@ -176,7 +178,8 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:background="@drawable/rounded">
+        android:background="@drawable/rounded"
+        android:alpha="0">
 
         <ImageView
             android:id="@+id/HomeTitleBottomSheet"

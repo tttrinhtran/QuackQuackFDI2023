@@ -2,12 +2,18 @@ package com.example.geocare.Schedule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Product.ProductActivity;
+import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
+import com.example.geocare.Scan.ScanActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +35,10 @@ public class ScheduleActivity extends AppCompatActivity {
     TextView date, percent;
     int current = 0;
     RecyclerView recyclerView;
+
+    //for NavBar
+    private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +53,7 @@ public class ScheduleActivity extends AppCompatActivity {
         percent = findViewById(R.id.Schedule_percent);
 
 
+        fetch_UI(); navBar();
         CurrentDaySet();
         DaySchedule();
 
@@ -55,6 +66,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
     }
+
+
 
     void ProgressBar(float maxProduct){
         float per = 1/maxProduct;
@@ -130,4 +143,49 @@ public class ScheduleActivity extends AppCompatActivity {
 
         return daysList;
     }
+
+    private void fetch_UI() {
+        homeIcon = findViewById(R.id.NaviBarHomeIcon);
+        producIcon = findViewById(R.id.NaviBarProductIcon);
+        scanIcon = findViewById(R.id.NaviBarScanIcon);
+        scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
+        profileIcon = findViewById(R.id.NaviBarProfileIcon);
+    }
+
+    private void navBar() {
+        scheduleIcon.setImageResource(R.drawable.schedule_icon_filled);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScheduleActivity.this, HomeActivity.class);
+                startActivity(i);
+            }
+        });
+
+        producIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScheduleActivity.this, ProductActivity.class);
+                startActivity(i);
+            }
+        });
+
+        scanIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScheduleActivity.this, ScanActivity.class);
+                startActivity(i);
+            }
+        });
+
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScheduleActivity.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+
 }

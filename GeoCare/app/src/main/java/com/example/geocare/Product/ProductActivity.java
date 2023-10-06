@@ -8,24 +8,34 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
+import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
+import com.example.geocare.Scan.ScanActivity;
+import com.example.geocare.Schedule.ScheduleActivity;
 
 import java.util.ArrayList;
 import java.util.List;import androidx.appcompat.widget.SearchView;
 import android.text.TextUtils;
+import android.widget.ImageView;
 
 public class ProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private List<Item> itemList; // Replace 'Item' with your data model
     SearchView searchView;
+
+    // for Navbar
+    private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
 
     FirebaseDatabaseController itemFirebaseDatabaseController;
     @Override
@@ -43,6 +53,7 @@ public class ProductActivity extends AppCompatActivity {
         searchEditText.setTextColor(getResources().getColor(R.color.blue_deep));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blue_deep));
         getData();
+        fetch_UI(); navBar();
 
         recyclerView = findViewById(R.id.Product_recyclerView);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -65,6 +76,9 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     private void getData()
     {
@@ -96,5 +110,48 @@ public class ProductActivity extends AppCompatActivity {
         // Update the RecyclerView with filtered data
         adapter.setItems(filteredItemList);
         adapter.notifyDataSetChanged();
+    }
+
+    private void fetch_UI() {
+        homeIcon = findViewById(R.id.NaviBarHomeIcon);
+        producIcon = findViewById(R.id.NaviBarProductIcon);
+        scanIcon = findViewById(R.id.NaviBarScanIcon);
+        scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
+        profileIcon = findViewById(R.id.NaviBarProfileIcon);
+    }
+
+    private void navBar() {
+        producIcon.setImageResource(R.drawable.product_icon_filled);
+        homeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductActivity.this, HomeActivity.class);
+                startActivity(i);
+            }
+        });
+
+        scanIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductActivity.this, ScanActivity.class);
+                startActivity(i);
+            }
+        });
+
+        scheduleIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductActivity.this, ScheduleActivity.class);
+                startActivity(i);
+            }
+        });
+
+        profileIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductActivity.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

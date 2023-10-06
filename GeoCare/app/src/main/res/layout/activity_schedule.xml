@@ -118,5 +118,7 @@
         android:textColor="@color/black"
         android:textSize="30dp" />
 
+    <include layout="@layout/nav_bar"/>
+
 
 </LinearLayout>

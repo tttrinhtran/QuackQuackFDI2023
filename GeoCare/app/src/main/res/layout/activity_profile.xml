@@ -248,5 +248,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Profile_wishlisted_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/nav_bar"/>
 </LinearLayout>
