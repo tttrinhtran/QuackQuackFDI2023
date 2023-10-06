@@ -30,8 +30,6 @@ public class Item implements Serializable {
         this.uri = uri;
     }
 
-    // Getter and setter methods for all fields
-
     // Implementing Serializable
     public void setBrandname(String brandname) {
         this.brandname = brandname;

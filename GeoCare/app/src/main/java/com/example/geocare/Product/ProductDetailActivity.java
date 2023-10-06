@@ -1,14 +1,13 @@
 package com.example.geocare.Product;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
@@ -18,7 +17,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView image;
     TextView product_type, product_name, product_brandname, product_ingrdients;
-User user;
+    User user;
     ImageView add_button, buy_button, back_button, favourite_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

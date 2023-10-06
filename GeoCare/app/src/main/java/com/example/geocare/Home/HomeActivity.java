@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                         .alpha(1f).translationY(0);
 
             }
-        }, 3500);
+        }, 2000);
     }
 
     private void setData() {
@@ -180,7 +180,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
 
     private void init_UI() {
-        lottieAnimationView.animate().setDuration(3000);
+        lottieAnimationView.animate().setDuration(5000);
         title.setTranslationY(100);
         title.setAlpha(0);
         heart.setTranslationY(100); // deprecate
