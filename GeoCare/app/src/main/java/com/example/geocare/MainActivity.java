@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Intent intent = new Intent(MainActivity.this, ProductActivity.class);
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
 
         startActivity(intent);
     }
