@@ -25,6 +25,12 @@
         android:theme="@style/Theme.GeoCare"
         tools:targetApi="31">
         <activity
+            android:name=".Register.surveySkinCon"
+            android:exported="false" />
+        <activity
+            android:name=".Register.SurveySkinType"
+            android:exported="false" />
+        <activity
             android:name=".Scan.NotFoundActivity"
             android:exported="false" />
         <activity

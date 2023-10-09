@@ -36,6 +36,12 @@ public class SignUpScreen extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_screen);
         firebaseDatabaseController=new FirebaseDatabaseController<>(User.class);
         loadUI();
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkInput();
+            }
+        });
     }
     void loadUI()
     {
@@ -67,7 +73,7 @@ public class SignUpScreen extends AppCompatActivity {
         }
         else
         {
-            if(userPassword!=userConfirmPass)
+            if(!userPassword.equals(userConfirmPass))
             {
                 Toast.makeText(SignUpScreen.this, "The confirm password is not match.", Toast.LENGTH_SHORT).show();
                 return;
@@ -77,6 +83,7 @@ public class SignUpScreen extends AppCompatActivity {
                 user=new User();
                 user.setUserEmail(userEmail);
                 user.setUserPassword(userPassword);
+                nextPage();
             }
 
 
@@ -86,14 +93,10 @@ public class SignUpScreen extends AppCompatActivity {
 
     void nextPage()
     {
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
                 sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
                 Intent i=new Intent(SignUpScreen.this,PersonalInformation.class);
                 startActivity(i);
-            }
-        });
 
     }
 }

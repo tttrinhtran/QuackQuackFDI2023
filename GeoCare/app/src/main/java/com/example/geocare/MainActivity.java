@@ -9,6 +9,7 @@ import com.example.geocare.Home.HomeActivity;
 import com.example.geocare.Home.SplashHome;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
+import com.example.geocare.Register.SignUpScreen;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Intent intent = new Intent(MainActivity.this, SplashHome.class);
+
+        Intent intent = new Intent(MainActivity.this, SignUpScreen.class);
+
 
         startActivity(intent);
     }
