@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Weather {
+import java.io.Serializable;
+
+public class Weather implements Serializable {
     private double humidity;
     private int temperature;
     private double uvi;

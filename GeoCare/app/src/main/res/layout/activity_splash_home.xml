@@ -5,22 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/HomeSplashScreen"
-    tools:context=".Home.SplashHome"
-    android:background="@color/light_yellow">
+    tools:context=".Home.SplashHome">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieSplash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/sunny_json"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="110dp"
-        android:layout_marginStart="300dp" />
+
     <TextView
-        android:id="@+id/SplashUser"
+        android:id="@+id/SplashTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,12 +21,14 @@
         android:textSize="50sp"
         android:textColor="@color/blue_deep"/>
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/SplashLocationLayout"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SplashUser"
+        app:layout_constraintTop_toBottomOf="@id/SplashTitle"
         android:layout_marginTop="45dp"
         android:layout_marginStart="20dp">
 
@@ -75,7 +66,7 @@
             android:textColor="@color/blue_deep"/>
         <TextView
             android:id="@+id/SplashCity"
-            android:layout_width="wrap_content"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SpashDistrict"
@@ -101,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="37"
-            android:fontFamily="@font/butler_medium"
+            android:fontFamily="@font/lato_medium"
             android:textSize="80sp"
             android:textColor="@color/blue_deep"/>
 
@@ -118,6 +109,17 @@
             android:layout_marginBottom="15dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/sunny_json"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="110dp"
+        android:layout_marginStart="300dp" />
     <View
         android:id="@+id/SplashSupport"
         android:layout_width="match_parent"

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +71,10 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     private TextView UVText;
     private TextView timeText;
     private TextView dateText;
+    private String districtIntent;
+    private String cityIntent;
+    private BottomSheetBehavior<View> bottomSheetBehavior;
+    Intent i;
     JSONObject weatherObject;
     JSONObject airQualityObject;
 
@@ -88,27 +93,16 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         Locale.setDefault(new Locale("en"));
 
+        getData();
         fetch_UI();
         init_UI();
 
-        if (ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, 100);
-        }
-
-
-
-        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeBottomSheet));
-        bottomSheetBehavior.setPeekHeight(750);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         navBar();
-        getLocation();
+        getCurrentTime();
+        setData();
+        setUpWeatherLayout();
 
-        //getCurrentTime();
-        //setData();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -142,10 +136,26 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                         .alpha(1f).translationY(0);
                 UVText.animate()
                         .alpha(1f).translationY(0);
+                lottieAnimationView.playAnimation();
 
             }
         }, 2000);
     }
+
+    private void getData() {
+        i = getIntent();
+        weatherInfo = (Weather) i.getSerializableExtra("WEATHER_OBJECT");
+        districtIntent = (String) i.getStringExtra("DISTRICT");
+        cityIntent = (String) i.getStringExtra("CITY");
+    }
+
+    private void fetchDataInBackground() {
+        if (weatherObject != null && airQualityObject != null) {
+            setData();
+            setUpWeatherLayout();
+        }
+    }
+
 
     private void setData() {
         temperatureText.setText(String.valueOf(weatherInfo.getTemperature()));
@@ -153,6 +163,23 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         UVText.setText(String.valueOf(weatherInfo.getUvi()));
         pm25Text.setText(String.valueOf(weatherInfo.getPm25()));
         humidityText.setText(String.valueOf(weatherInfo.getHumidity()));
+
+        if ("Quận 1".equals(districtIntent)) {
+            district.setText("District 1");
+        } else if ("Quận 5".equals(districtIntent)) {
+            district.setText("District 5");
+        } else if("Quận 10".equals(districtIntent)){
+            district.setText("District 10");
+        }
+        else{
+            district.setText(districtIntent);
+        }
+        if("Thành phố Hồ Chí Minh".equals(cityIntent)){
+            city.setText("Ho Chi Minh City");
+        } else{
+            city.setText(cityIntent);
+        }
+
     }
 
     private boolean getCurrentTime() {
@@ -180,6 +207,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
 
     private void init_UI() {
+        bottomSheetBehavior.setPeekHeight(750);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         lottieAnimationView.animate().setDuration(5000);
         title.setTranslationY(100);
         title.setAlpha(0);
@@ -210,6 +239,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void fetch_UI() {
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeBottomSheet));
         lottieAnimationView = findViewById(R.id.lottie);
         title = findViewById(R.id.HomeScreenTitleText);
         heart = findViewById(R.id.HomeScreenAvatarTitle);
@@ -319,8 +349,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                                 public void run() {
                                     try {
                                         weatherInfo = new Weather(weatherObject, airQualityObject);
-                                        setData();
-                                        setUpWeatherLayout();
+//                                        setData();
+//                                        setUpWeatherLayout();
                                     } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -354,8 +384,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                                 public void run() {
                                     try {
                                         weatherInfo = new Weather(weatherObject, airQualityObject);
-                                        setData();
-                                        setUpWeatherLayout();
+//                                        setData();
+//                                        setUpWeatherLayout();
                                     } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -460,7 +490,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void setUpWeatherLayout(){
-        int pick = chooseLayout();
+        //int pick = chooseLayout();
+        int pick = 4;
 
         List<Integer> colors = new ArrayList<>();
 
@@ -476,12 +507,12 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         colorText.add(R.color.blue_deep);
         colorText.add(R.color.blue_baby);
         colorText.add(R.color.white);
-        colorText.add(R.color.blue_deep);
+        colorText.add(R.color.white);
 
         homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));
 
-
         // text
+        title.setTextColor(ContextCompat.getColor(this, colorText.get(pick-1)));
         temperatureText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         temperatureText1.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         city.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
@@ -490,6 +521,34 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         timeText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         dateText.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         decorLine.setBackgroundColor(ContextCompat.getColor(this,colorText.get(pick-1)));
+
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) lottieAnimationView.getLayoutParams();
+
+        lottieAnimationView.setAnimation(R.raw.sunny_json);
+        params.setMarginStart(300);
+        params.topMargin = 0;
+
+        if (pick == 1) {
+            lottieAnimationView.setAnimation(R.raw.sunny_json);
+            params.setMarginStart(850);
+            params.topMargin = 0;
+        } else if (pick == 2) {
+            lottieAnimationView.setAnimation(R.raw.night_json);
+            params.setMarginStart(600);
+            params.topMargin = 50;
+        } else if (pick == 3) {
+            lottieAnimationView.setAnimation(R.raw.rain_json);
+            params.setMarginStart(450);
+            params.topMargin = 170;
+        } else if (pick == 4) {
+            lottieAnimationView.setAnimation(R.raw.cloud_json);
+            params.setMarginStart(750);
+            params.topMargin = 115;
+        }
+
+// Apply the modified layout parameters
+        lottieAnimationView.setLayoutParams(params);
+
 
 
 //        if(pick == 3){
