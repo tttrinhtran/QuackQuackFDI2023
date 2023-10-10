@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geocare.Home.HomeActivity;
 import com.example.geocare.Home.SplashHome;
+import com.example.geocare.Login.LoginScreen;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.Register.SignUpScreen;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(MainActivity.this, SignUpScreen.class);
+        Intent intent = new Intent(MainActivity.this, LoginScreen.class);
 
 
         startActivity(intent);

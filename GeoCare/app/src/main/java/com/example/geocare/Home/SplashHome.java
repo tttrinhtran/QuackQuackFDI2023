@@ -1,5 +1,7 @@
 package com.example.geocare.Home;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -35,6 +37,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.geocare.Database.SharedPreferenceManager;
+import com.example.geocare.Model.User;
 import com.example.geocare.R;
 
 import org.json.JSONException;
@@ -55,6 +59,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     private LocationManager locationManager;
     private TextView title;
     private TextView title1;
+    private TextView title2;
     private TextView description;
     private TextView temperature; private  TextView temperature1;
     private TextView district;
@@ -66,6 +71,9 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     private boolean secondRequestCompleted = false;
     private String d;
     private String c;
+    private int pick;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +81,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         setContentView(R.layout.activity_splash_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         Locale.setDefault(new Locale("en"));
-
+        getUser();
 
         if (ContextCompat.checkSelfPermission(SplashHome.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -85,7 +93,45 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         getLocation();
         fetch_UI();
         init_UI();
-        updateUI();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                title.animate()
+                        .alpha(1f).translationX(0);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lottieAnimationView.playAnimation();
+                    }
+                }, 800);
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        title1.animate()
+                                .alpha(1f).translationX(0);
+                        title2.animate()
+                                .alpha(1f).translationX(0);
+                        description.animate()
+                                .alpha(1f).translationX(0);
+                        district.animate()
+                                .alpha(1f).translationX(0);
+                        city.animate()
+                                .alpha(1f).translationX(0);
+                        temperature.animate()
+                                .alpha(1f).translationX(0);
+                        temperature1.animate()
+                                .alpha(1f).translationX(0);
+                    }
+                }, 2500);
+
+            }
+        }, 1200);
+//        updateUI();
 
         supportView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +140,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
                 i.putExtra("WEATHER_OBJECT", weatherInfo);
                 i.putExtra("CITY", c);
                 i.putExtra("DISTRICT", d);
+                i.putExtra("PICK", pick);
                 startActivity(i);
             }
         });
@@ -250,25 +297,16 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
 
     private void init_UI() {
         lottieAnimationView.animate().setDuration(5000);
-        // Create a ScaleAnimation for blooming
-        ScaleAnimation scaleAnimation = new ScaleAnimation(
-                0.5f, 1.0f, 0.5f, 1.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
-        );
+        title.setTranslationX(-100); title.setAlpha(0);
+        title1.setTranslationX(-100); title1.setAlpha(0);
+        title2.setTranslationX(-100); title2.setAlpha(0);
+        description.setTranslationX(-100); description.setAlpha(0);
+        district.setTranslationX(-100); district.setAlpha(0);
+        city.setTranslationX(-100); city.setAlpha(0);
+        temperature.setTranslationX(-100); temperature.setAlpha(0);
+        temperature1.setTranslationX(-100); temperature1.setAlpha(0);
+        title.setText("Hello "+user.getUserName());
 
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.7f, 1.0f);
-
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(scaleAnimation);
-        animationSet.addAnimation(alphaAnimation);
-
-        animationSet.setDuration(1300); // 1 second
-
-        animationSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-        title.setVisibility(View.VISIBLE);
-        title.startAnimation(animationSet);
     }
 
     private void fetch_UI() {
@@ -277,6 +315,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         supportView = findViewById(R.id.SplashSupport);
         title = findViewById(R.id.SplashTitle);
         title1 = findViewById(R.id.SplashLocation1);
+        title2 = findViewById(R.id.SplashTitle2);
         description = findViewById(R.id.SplashDescription);
         district = findViewById(R.id.SpashDistrict);
         city = findViewById(R.id.SplashCity);
@@ -336,8 +375,8 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     }
 
     private void setUpWeatherLayout(){
-        //int pick = chooseLayout();
-        int pick = 4;
+         pick = chooseLayout();
+        // int pick = 1;
 
         List<Integer> colors = new ArrayList<>();
 
@@ -353,13 +392,14 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         colorText.add(R.color.blue_deep);
         colorText.add(R.color.blue_baby);
         colorText.add(R.color.white);
-        colorText.add(R.color.white);
+        colorText.add(R.color.blue_deep);
 
         splashScreenLayout.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));
 
         // text
         title.setTextColor(ContextCompat.getColor(this, colorText.get(pick-1)));
         title1.setTextColor(ContextCompat.getColor(this, colorText.get(pick-1)));
+        title2.setTextColor(ContextCompat.getColor(this, colorText.get(pick-1)));
         temperature.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         temperature1.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
         city.setTextColor(ContextCompat.getColor(this,colorText.get(pick-1)));
@@ -371,22 +411,27 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         if (pick == 1) {
             lottieAnimationView.setAnimation(R.raw.sunny_json);
             params.setMarginStart(850);
-            params.topMargin = 0;
+            params.topMargin = 300;
         } else if (pick == 2) {
             lottieAnimationView.setAnimation(R.raw.night_json);
             params.setMarginStart(600);
-            params.topMargin = 50;
+            params.topMargin = 350;
         } else if (pick == 3) {
             lottieAnimationView.setAnimation(R.raw.rain_json);
             params.setMarginStart(450);
-            params.topMargin = 170;
+            params.topMargin = 500;
         } else if (pick == 4) {
             lottieAnimationView.setAnimation(R.raw.cloud_json);
             params.setMarginStart(750);
-            params.topMargin = 115;
+            params.topMargin = 350;
         }
 
         lottieAnimationView.setLayoutParams(params);
 
+    }
+    void getUser()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
+        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
 }

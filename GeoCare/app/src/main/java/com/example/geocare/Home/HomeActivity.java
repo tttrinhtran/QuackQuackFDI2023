@@ -1,5 +1,7 @@
 package com.example.geocare.Home;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -32,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
@@ -85,6 +88,9 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     private Weather weatherInfo;
     private boolean responseListener1Completed = false;
     private boolean secondRequestCompleted = false;
+    private int pick;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +100,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         Locale.setDefault(new Locale("en"));
 
         getData();
+        getUser();
         fetch_UI();
         init_UI();
 
@@ -106,37 +113,45 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Make the TextView visible and animate it
-                title.animate()
-                        .alpha(1f).translationY(0);
-                heart.animate()
-                        .alpha(1f).translationY(0);
-                temperatureText.animate()
-                        .alpha(1f).translationY(0);
-                temperatureText1.animate()
-                        .alpha(1f).translationY(0);
-                city.animate()
-                        .alpha(1f).translationY(0);
-                district.animate()
-                        .alpha(1f).translationY(0);
-                decorLine.animate()
-                        .alpha(1f).translationY(0);
-                weatherDes.animate()
-                        .alpha(1f).translationY(0);
-                timeText.animate()
-                        .alpha(1f).translationY(0);
-                dateText.animate()
-                        .alpha(1f).translationY(0);
-                bottomSheet.animate()
-                        .alpha(1f).translationY(0);
-
-                humidityText.animate()
-                        .alpha(1f).translationY(0);
-                pm25Text.animate()
-                        .alpha(1f).translationY(0);
-                UVText.animate()
-                        .alpha(1f).translationY(0);
                 lottieAnimationView.playAnimation();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Make the TextView visible and animate it
+                        title.animate()
+                                .alpha(1f).translationY(0);
+                        heart.animate()
+                                .alpha(1f).translationY(0);
+                        temperatureText.animate()
+                                .alpha(1f).translationY(0);
+                        temperatureText1.animate()
+                                .alpha(1f).translationY(0);
+                        city.animate()
+                                .alpha(1f).translationY(0);
+                        district.animate()
+                                .alpha(1f).translationY(0);
+                        decorLine.animate()
+                                .alpha(1f).translationY(0);
+                        weatherDes.animate()
+                                .alpha(1f).translationY(0);
+                        timeText.animate()
+                                .alpha(1f).translationY(0);
+                        dateText.animate()
+                                .alpha(1f).translationY(0);
+                        bottomSheet.animate()
+                                .alpha(1f).translationY(0);
+
+                        humidityText.animate()
+                                .alpha(1f).translationY(0);
+                        pm25Text.animate()
+                                .alpha(1f).translationY(0);
+                        UVText.animate()
+                                .alpha(1f).translationY(0);
+                    }
+                }, 1000);
+
+
+
 
             }
         }, 2000);
@@ -147,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         weatherInfo = (Weather) i.getSerializableExtra("WEATHER_OBJECT");
         districtIntent = (String) i.getStringExtra("DISTRICT");
         cityIntent = (String) i.getStringExtra("CITY");
+        pick = (int) i.getIntExtra("PICK", 0);
     }
 
     private void fetchDataInBackground() {
@@ -209,7 +225,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     private void init_UI() {
         bottomSheetBehavior.setPeekHeight(750);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        lottieAnimationView.animate().setDuration(5000);
+        lottieAnimationView.animate().setDuration(4000);
         title.setTranslationY(100);
         title.setAlpha(0);
         heart.setTranslationY(100); // deprecate
@@ -327,16 +343,6 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                 try {
                     weatherObject = new JSONObject(response);
                     responseListener1Completed = true;
-
-//                    weatherInfo = new Weather(jsonResponse, airQualityJsonObject);
-
-                    // Update UI with weather info
-//                    humidityText.setText(String.valueOf(weatherInfo.getHumidity()) + "%");
-//                    temperatureText.setText(String.valueOf(weatherInfo.getTemperature()));
-//                    UVText.setText(String.valueOf(weatherInfo.getUvi()) + "/10");
-//                    String del = Character.toUpperCase(weatherInfo.getDescription().charAt(0)) + weatherInfo.getDescription().substring(1);
-//                    weatherDes.setText(del);
-//                    pm25Text.setText(String.valueOf(weatherInfo.getPm25()));
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -491,7 +497,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
     private void setUpWeatherLayout(){
         //int pick = chooseLayout();
-        int pick = 4;
+        //int pick = 4;
 
         List<Integer> colors = new ArrayList<>();
 
@@ -554,6 +560,11 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 //        if(pick == 3){
 //            homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.light_yellow));
 //        }
+    }
+    void getUser()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
+        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
 
 }

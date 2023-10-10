@@ -47,12 +47,12 @@
         android:fontFamily="@font/lato_regular"
         android:textSize="12sp">
     </TextView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf=""
-        ></TextView>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf=""-->
+<!--        ></TextView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

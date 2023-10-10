@@ -17,6 +17,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="120dp"
         android:text="Hello Tran"
+        android:elevation="5dp"
         android:fontFamily="@font/butler_medium"
         android:textSize="50sp"
         android:textColor="@color/blue_deep"/>
@@ -36,6 +37,7 @@
             android:id="@+id/SplashLocation1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Today is"
@@ -47,6 +49,7 @@
             android:id="@+id/SplashDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SplashLocation1"
             android:text="Sunny"
@@ -58,6 +61,7 @@
             android:id="@+id/SpashDistrict"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SplashDescription"
             android:text="in District 3"
@@ -69,6 +73,7 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
+            android:elevation="5dp"
             app:layout_constraintTop_toBottomOf="@id/SpashDistrict"
             android:text="Ho Chi Minh City"
             android:fontFamily="@font/butler_medium"
@@ -76,19 +81,34 @@
             android:textColor="@color/blue_deep"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/SplashTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SplashLocationLayout"
+        app:layout_constraintBottom_toTopOf="@id/SplashTemperatureLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Temperature"
+        android:textSize="30sp"
+        android:textColor="@color/blue_deep"
+        android:fontFamily="@font/lato_medium"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/SplashTemperatureLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SplashLocationLayout"
+        app:layout_constraintTop_toBottomOf="@id/SplashTitle2"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="-10dp">
 
         <TextView
             android:id="@+id/SplashTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="37"
@@ -100,6 +120,7 @@
             android:id="@+id/SplashTemperature1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="5dp"
             app:layout_constraintStart_toEndOf="@id/SplashTemperature"
             app:layout_constraintBottom_toBottomOf="@id/SplashTemperature"
             android:text="°c"
@@ -113,21 +134,14 @@
         android:id="@+id/lottieSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/sunny_json"
+        android:elevation="-5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="110dp"
-        android:layout_marginStart="300dp" />
+        app:layout_constraintTop_toTopOf="parent" />
     <View
         android:id="@+id/SplashSupport"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

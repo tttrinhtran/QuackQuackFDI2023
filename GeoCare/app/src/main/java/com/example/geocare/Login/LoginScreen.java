@@ -7,6 +7,7 @@ import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
+import com.example.geocare.Database.SharedPreferenceManager;
+import com.example.geocare.Home.SplashHome;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,6 +79,9 @@ public class LoginScreen extends AppCompatActivity {
         { if(password.equals(tmp.getUserPassword())) {
             Toast.makeText(LoginScreen.this, "Login success", Toast.LENGTH_SHORT).show();
             user = tmp;
+            saveUser();
+            Intent intent=new Intent(LoginScreen.this, SplashHome.class);
+            startActivity(intent);
             return;
         }
              else
@@ -105,6 +111,12 @@ public class LoginScreen extends AppCompatActivity {
 
 
 
+
+    }
+    void saveUser()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
 
     }
 
