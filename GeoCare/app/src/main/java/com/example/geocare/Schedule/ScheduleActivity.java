@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -154,26 +155,62 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
     private void DaySchedule() {
-//        LocalDate currentDate = LocalDate.now();
-//
-//        // Get the week number of the current date
-//        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-//        int currentWeekNumber = currentDate.get(weekFields.weekOfWeekBasedYear());
-//
-//        // Get the start date (Sunday) of the current week
-//        LocalDate startOfWeek = currentDate.with(weekFields.dayOfWeek(), 1);
-//
-//        // Get the end date (Saturday) of the current week
-//        LocalDate endOfWeek = currentDate.with(weekFields.dayOfWeek(), 7);
-//
-//        int startDayOfWeekValue = startOfWeek.getDayOfWeek().getValue();
-//        int endDatOfWeekValue = endOfWeek.getDayOfWeek().getValue();
 
-        List<DayOfWeek> daysList = new ArrayList<>(Arrays.asList(DayOfWeek.values()));
+        LocalDate currentDate = LocalDate.now();
+        int currentDayOfMonth = currentDate.getDayOfMonth();
 
-        DaysAdapter adapter = new DaysAdapter(daysList);
-        recyclerView.setAdapter(adapter);
+        // Get the week number of the current date
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
+        // Monday
+        LocalDate currentFetchDay = currentDate.with(weekFields.dayOfWeek(), 2 );
+        ((TextView)findViewById(R.id.NumberDate1)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate1)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate1)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Tuesday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate2)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate2)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate2)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Wednesday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate3)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate3)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate3)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Thursday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate4)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate4)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate4)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Friday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate5)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate5)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate5)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Saturday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate6)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate6)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate6)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
+        // Sunday
+        currentFetchDay = currentFetchDay.plusDays(1);
+        ((TextView)findViewById(R.id.NumberDate7)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
+        if( currentFetchDay.isEqual(currentDate) ) {
+            ((TextView)findViewById(R.id.NumberDate7)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+            ((TextView)findViewById(R.id.TitleDate7)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
+        }
 
         LocalTime currentTime = LocalTime.now();
         int currentHour = currentTime.getHour();
@@ -188,8 +225,7 @@ public class ScheduleActivity extends AppCompatActivity {
         scanIcon = findViewById(R.id.NaviBarScanIcon);
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
-        recyclerView = findViewById(R.id.Schedule_recycler_view_for_day);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
+        // recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
         date = findViewById(R.id.Schedule_current_date);
         progressBar = findViewById(R.id.linearProgressIndicator);
         percent = findViewById(R.id.Schedule_percent);

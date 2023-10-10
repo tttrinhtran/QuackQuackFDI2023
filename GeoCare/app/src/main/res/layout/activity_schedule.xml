@@ -82,7 +82,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="T"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
@@ -111,7 +111,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="W"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
@@ -140,7 +140,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="T"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
@@ -169,7 +169,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="F"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
@@ -198,7 +198,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="S"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
@@ -227,7 +227,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="M"
+                    android:text="S"
                     android:fontFamily="@font/lato_medium"
                     android:textColor="@color/blue"
                     android:textSize="10sp"/>
