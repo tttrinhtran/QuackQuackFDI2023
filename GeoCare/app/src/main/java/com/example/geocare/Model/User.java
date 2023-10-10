@@ -18,13 +18,16 @@ public class User implements Serializable {
     ArrayList<String> UserSkinCondition;
     ArrayList<String> UserSelf;
     ArrayList<String>UserFavorite;
-    ArrayList<ProductItem> UserProductList;
+    ArrayList<ProductItem> UserProductList = new ArrayList<>();
+    String UserCurrentDay; // The day of the last routine
+    int UserDayOrNight = 0; // 0 for Day and 1 for Night
+    int UserNumberDone = 0;
     String ava;
 
     public User() {
     }
 
-    public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition, ArrayList<String> userSelf, ArrayList<String> userFavorite, ArrayList<ProductItem> userProductList, String ava) {
+    public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition, ArrayList<String> userSelf, ArrayList<String> userFavorite, ArrayList<ProductItem> userProductList, String userCurrentDay, int userDayOrNight, int userNumberDone, String ava) {
         UserName = userName;
         UserEmail = userEmail;
         UserPassword = userPassword;
@@ -34,6 +37,9 @@ public class User implements Serializable {
         UserSelf = userSelf;
         UserFavorite = userFavorite;
         UserProductList = userProductList;
+        UserCurrentDay = userCurrentDay;
+        UserDayOrNight = userDayOrNight;
+        UserNumberDone = userNumberDone;
         this.ava = ava;
     }
 
@@ -48,7 +54,9 @@ public class User implements Serializable {
                 ", UserSkinCondition=" + UserSkinCondition +
                 ", UserSelf=" + UserSelf +
                 ", UserFavorite=" + UserFavorite +
-                ", UserProductList=" + UserProductList +
+                ", UserCurrentDay='" + UserCurrentDay + '\'' +
+                ", UserDayOrNight='" + UserDayOrNight + '\'' +
+                ", UserNumberDone='" + UserNumberDone + '\'' +
                 ", ava='" + ava + '\'' +
                 '}';
     }
@@ -101,12 +109,36 @@ public class User implements Serializable {
         UserProductList = userProductList;
     }
 
+    public String getUserCurrentDay() {
+        return UserCurrentDay;
+    }
+
+    public int getUserDayOrNight() {
+        return UserDayOrNight;
+    }
+
+    public void setUserCurrentDay(String userCurrentDay) {
+        UserCurrentDay = userCurrentDay;
+    }
+
+    public void setUserDayOrNight(int userDayOrNight) {
+        UserDayOrNight = userDayOrNight;
+    }
+
     public ArrayList<String> getUserSkinCondition() {
         return UserSkinCondition;
     }
 
     public void setUserSkinCondiction(ArrayList<String> userSkinCondiction) {
         UserSkinCondition = userSkinCondiction;
+    }
+
+    public int getUserNumberDone() {
+        return UserNumberDone;
+    }
+
+    public void setUserNumberDone(int userNumberDone) {
+        UserNumberDone = userNumberDone;
     }
 
     public int getImageDetailResourceIdByInt(Context context)

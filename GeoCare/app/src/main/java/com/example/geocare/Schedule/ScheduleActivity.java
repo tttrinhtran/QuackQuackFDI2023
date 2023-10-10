@@ -27,6 +27,8 @@ import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
 import com.example.geocare.Scan.ScanActivity;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -61,6 +63,12 @@ public class ScheduleActivity extends AppCompatActivity {
         setUpScreen();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveUser();
+    }
+
     // Implement swipe-to-delete using ItemTouchHelper
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
             0,
@@ -82,7 +90,8 @@ public class ScheduleActivity extends AppCompatActivity {
             }
             else {
                 adapter.removeItem(position);
-                ProgressBar(numberSteps);
+                ProgressBar( numberSteps, 1 );
+                currentUser.setUserNumberDone(currentUser.getUserNumberDone() + 1);
             }
 
         }
@@ -122,21 +131,22 @@ public class ScheduleActivity extends AppCompatActivity {
 
         // Number of step
         numberSteps = productList.size();
+
     }
 
 
-    void ProgressBar(float maxProduct){
-        float per = 1/maxProduct;
+    void ProgressBar( float maxProduct, int number ){
+        float per = 1 / maxProduct;
         int currentProgress = progressBar.getProgress();
         int maxProgress = progressBar.getMax();
         int incrementAmount = (int) (per * maxProgress); // 10% increment
-        int newProgress = Math.min(currentProgress + incrementAmount, maxProgress);
+        int newProgress = Math.min( currentProgress + incrementAmount * number, maxProgress );
         String currentPercent = Integer.toString(newProgress);
         currentPercent += "%";
 
         // Update the progress bard
         //rounded if not divisible
-        if ((100-currentProgress > per*100) && (100-currentProgress < per*100*2)){
+        if ( ( 100 - currentProgress > per * 100 ) && ( 100 - currentProgress < per * 100 * 2 ) ) {
             progressBar.setProgress(100);
             percent.setText("100%");
         }
@@ -281,5 +291,15 @@ public class ScheduleActivity extends AppCompatActivity {
         });
     }
 
+    private void saveUser()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(currentUser,KEY_COLLECTION_USERS);
 
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = database.collection(KEY_COLLECTION_USERS).document(currentUser.getUserEmail());
+        documentReference.update(
+                "UserNumberDone", currentUser.getUserNumberDone()
+        );
+    }
 }
