@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
+import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Home.HomeActivity;
 import com.example.geocare.Model.User;
 import com.example.geocare.Profile.ProfileActivity;
@@ -43,6 +44,8 @@ public class ProductActivity extends AppCompatActivity {
 User user;
     FirebaseDatabaseController itemFirebaseDatabaseController;
     FirebaseDatabaseController userFirebase;
+
+    SharedPreferenceManager sharedPreferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +61,13 @@ User user;
         searchEditText.setTypeface(customTypeface);
         searchEditText.setTextColor(getResources().getColor(R.color.blue_deep));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blue_deep));
+
+        getUser();
         getData();
         fetch_UI(); navBar();
 
         recyclerView = findViewById(R.id.Product_recyclerView);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-
 
         adapter = new MyAdapter(ProductActivity.this, itemList, user);
         recyclerView.setAdapter(adapter);
@@ -86,7 +90,7 @@ User user;
     @Override
     protected void onPause() {
         super.onPause();
-        userFirebase.updateDocumentField(KEY_COLLECTION_USERS,user.getUserEmail(),"userFavorite",user.getUserFavorite());
+   saveUser();
 
     }
 
@@ -140,6 +144,16 @@ User user;
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
     }
+    void getUser()
+    {
+         sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
+        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+    }
+    void saveUser()
+    {
+        sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
+    }
 
     private void navBar() {
         producIcon.setImageResource(R.drawable.product_icon_filled);
@@ -175,4 +189,5 @@ User user;
             }
         });
     }
+
 }
