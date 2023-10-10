@@ -1,128 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ScheduleLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_baby">
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/schedule_decor"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/Schedule_current_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:text="Sunday 27, Dec"
             android:fontFamily="@font/butler_regular"
-            android:textSize="20dp"
-            android:layout_marginTop="40dp"
-            android:textColor="@color/blue_deep"
-            android:layout_marginLeft="20dp" />
+            android:textSize="20sp"
+            android:textColor="@color/blue_deep"/>
 
         <LinearLayout
-            android:id="@+id/Schedule_layout_date"
+            android:id="@+id/DateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="13dp"
-            android:layout_below="@+id/Schedule_current_date">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Schedule_current_date"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="25dp"
+            android:weightSum="7">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Schedule_recycler_view_for_day"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutMonday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate1"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate2"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate3"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate4"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate5"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate6"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TitleDate7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="M"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/NumberDate7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/TitleDate7"
+                    android:text="21"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/leftleaf"
-            android:layout_below="@id/Schedule_layout_date"
-            android:layout_marginLeft="-7dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginStart="-7dp"
+            />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/rightleaf"
-            android:layout_below="@id/Schedule_layout_date"
-            android:layout_marginRight="-7dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginEnd="-8dp"/>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/butler_regular"
-            android:text="Today's progress"
-            android:textColor="@color/blue_deep"
-            android:textSize="17dp" />
-
-        <TextView
-            android:id="@+id/Schedule_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0%"
-            android:fontFamily="@font/butler_regular"
-            android:textColor="@color/blue_deep"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:textSize="13dp"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
-
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/linearProgressIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:trackThickness="15dp"
-        app:trackCornerRadius="40dp"
-        app:trackColor="@color/blue"
-        app:indicatorColor="@color/blue_deep"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/Schedule_routine_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/butler_regular"
-        android:text="Night routine"
-        android:textColor="@color/blue_deep"
-        android:textSize="17dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Schedule_recyclerview_forRoutine"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
-    </LinearLayout>
-
-    <include layout="@layout/nav_bar"/>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
