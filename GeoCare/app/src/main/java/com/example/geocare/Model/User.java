@@ -151,6 +151,14 @@ public class User implements Serializable {
         UserSelf = userSelf;
     }
 
+    public void addToUserShelf(String data)
+    {
+        if(this.UserSelf==null)
+        {
+            this.UserSelf=new ArrayList<>();
+        }
+        this.UserSelf.add(data);
+    }
     public ArrayList<String> getUserFavorite() {
 
         if(this.UserFavorite==null)

@@ -22,8 +22,9 @@ public class WhislistApdater extends RecyclerView.Adapter<WhislistApdater.MyView
     ArrayList<Item> whislistItem;
     Context context;
 
-    public WhislistApdater(ArrayList<Item> whislistItem) {
+    public WhislistApdater(ArrayList<Item> whislistItem, Context context) {
         this.whislistItem = whislistItem;
+        this.context=context;
     }
 
     @NonNull
@@ -37,7 +38,7 @@ public class WhislistApdater extends RecyclerView.Adapter<WhislistApdater.MyView
 
     @Override
     public void onBindViewHolder(@NonNull WhislistApdater.MyViewHolder holder, int position) {
-        holder.img.setImageResource(whislistItem.get(position).getImageDetailResourceIdByInt(context));
+        holder.img.setImageResource(whislistItem.get(position).getImageResourceIdByInt(context));
         holder.text.setText(whislistItem.get(position).getNameDetail());
 
     }

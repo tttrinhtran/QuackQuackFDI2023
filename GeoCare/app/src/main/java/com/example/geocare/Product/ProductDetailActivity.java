@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
@@ -37,6 +38,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         buy_button = findViewById(R.id.ProductDetail_buy_button);
         back_button = findViewById(R.id.ProductDetail_back_button);
         favourite_button = findViewById(R.id.ProductDetail_favourite_button);
+        add_button.setClickable(true);
 
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
@@ -98,6 +100,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                 openProductLink(item);
             }
         });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user.addToUserShelf(item.getNameDetail());
+                saveUsertodb();
+                add_button.setClickable(false);
+            }
+        });
     }
 
     private void updateFavoriteIconForDetail(ImageView favoriteIcon, boolean isFavorite) {
@@ -126,5 +136,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     {
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
+    }
+    void saveUsertodb()
+    {
+        FirebaseDatabaseController firebaseDatabaseController=new FirebaseDatabaseController<>(Item.class);
+        firebaseDatabaseController.updateDocumentField(KEY_COLLECTION_USERS,user.getUserEmail(),"UserSelf",user.getUserSelf());
     }
 }

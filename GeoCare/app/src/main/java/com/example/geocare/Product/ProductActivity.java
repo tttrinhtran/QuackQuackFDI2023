@@ -164,12 +164,18 @@ User user;
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
     }
+    void saveUsertodb()
+    {
+        FirebaseDatabaseController firebaseDatabaseController=new FirebaseDatabaseController<>(Item.class);
+        firebaseDatabaseController.updateDocumentField(KEY_COLLECTION_USERS,user.getUserEmail(),"UserFavorite",user.getUserFavorite());
+    }
 
     private void navBar() {
         producIcon.setImageResource(R.drawable.product_icon_filled);
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveUsertodb();
                 Intent i = new Intent(ProductActivity.this, HomeActivity.class);
                 startActivity(i);
             }
@@ -178,6 +184,7 @@ User user;
         scanIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveUsertodb();
                 Intent i = new Intent(ProductActivity.this, ScanActivity.class);
                 startActivity(i);
             }
@@ -186,6 +193,7 @@ User user;
         scheduleIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveUsertodb();
                 Intent i = new Intent(ProductActivity.this, ScheduleActivity.class);
                 startActivity(i);
             }
@@ -194,6 +202,7 @@ User user;
         profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveUsertodb();
                 Intent i = new Intent(ProductActivity.this, ProfileActivity.class);
                 startActivity(i);
             }

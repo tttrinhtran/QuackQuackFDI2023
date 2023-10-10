@@ -14,6 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Sign in"
+        android:fontFamily="@font/butler_medium"
+        android:textColor="@color/blue_deep"
         android:textSize="30sp"
 
         android:layout_marginTop="180dp"
@@ -42,7 +44,7 @@
             android:paddingStart="10dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="Email"
-            android:textColor="@color/black"
+            android:textColor="@color/blue_deep"
             android:textSize="14sp"
             android:maxLines="1"
             android:lines="1"
@@ -78,7 +80,8 @@
             android:backgroundTint="@android:color/transparent"
             android:maxLines="1"
             android:lines="1"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -104,8 +107,10 @@
         android:layout_marginTop="16dp"
         android:paddingHorizontal="22dp"
         android:paddingVertical="10dp"
-
+android:fontFamily="@font/lato_medium"
+        android:textColor="@color/white"
         android:text="Sign in"
+        android:background="@color/blue_deep"
         android:textSize="20sp"
         android:gravity="center"/>
 
@@ -136,7 +141,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="5dp"
             android:text="Sign up now"
-
+            android:fontFamily="@font/lato_medium"
+android:textColor="@color/blue"
             android:textSize="16sp"
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
