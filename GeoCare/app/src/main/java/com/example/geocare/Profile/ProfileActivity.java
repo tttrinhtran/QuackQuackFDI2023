@@ -35,8 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getUser();
         fetch_UI();
-        navBar();
         load_UI();
+        navBar();
 
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
         userNametv.setText(user.getUserName());
         userAge.setText(user.getUserAge());
         userCondition.setText(user.conditionListToString());
-
-
 
     }
 
