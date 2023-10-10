@@ -45,12 +45,16 @@ import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.example.geocare.Schedule.ProductItem;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,7 +85,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     private int pick;
 
     private User user;
-    ArrayList<ProductItem> productList;
+    ArrayList<ProductItem> productList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         Locale.setDefault(new Locale("en"));
         getUser();
+        setUpproductList();
 
         if (ContextCompat.checkSelfPermission(SplashHome.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -458,6 +463,15 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
 
     private void setUpproductList() {
 
+        // Get the current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Convert LocalDate to a string using a specific format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString = currentDate.format(formatter);
+
+
+
         FirebaseDatabaseController<ProductItem> instance = new FirebaseDatabaseController<>(ProductItem.class);
 
         LocalTime currentTime = LocalTime.now();
@@ -466,6 +480,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
 
         if (currentHour <= 17 && currentHour >= 3) day = "Sun";
         else day = "Night";
+
 
         // Micellar
         String micellarID = "Micellar-";
@@ -573,6 +588,36 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         if( sunscreen != null ) sunscreen.setImageIDResource(getResources().getIdentifier(sunscreenImageString, "drawable", getPackageName()));
 
         if( sunscreen != null ) productList.add(sunscreen);
+
+        // Remove redundant
+        if(dateString.equals(user.getUserCurrentDay())) {
+            if( user.getUserDayOrNight() == 0 && currentHour <= 17 && currentHour >= 3 ) productList.subList(0, user.getUserNumberDone()).clear();
+            else if( user.getUserDayOrNight() == 1 && ( currentHour > 17 || currentHour < 3 ) ) productList.subList(0, user.getUserNumberDone()).clear();
+            else {
+                user.setUserNumberDone(0);
+                FirebaseFirestore database = FirebaseFirestore.getInstance();
+                DocumentReference documentReference = database.collection(KEY_COLLECTION_USERS).document(user.getUserEmail());
+                documentReference.update(
+                        "UserNumberDone", 0
+                );
+            }
+        }
+
+        // Refresh day and time
+
+        int DayOrNight = 0;
+        if( currentHour <= 17 && currentHour >= 3 )  DayOrNight = 0;
+        else DayOrNight = 1;
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = database.collection(KEY_COLLECTION_USERS).document(user.getUserEmail());
+        documentReference.update(
+                "UserCurrentDay", dateString,
+                "UserDayOrNight", DayOrNight
+        );
+
+        user.setUserDayOrNight(DayOrNight);
+        user.setUserCurrentDay(dateString);
 
         // Save local
         user.setUserProductList(productList);
