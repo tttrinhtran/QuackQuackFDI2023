@@ -73,7 +73,7 @@ public class LoginScreen extends AppCompatActivity {
         User tmp=userFirebaseDatabaseController.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS,email);
         tmp.getUserEmail();
         if(tmp!=null)
-        { if(password==tmp.getUserPassword()) {
+        { if(password.equals(tmp.getUserPassword())) {
             Toast.makeText(LoginScreen.this, "Login success", Toast.LENGTH_SHORT).show();
             user = tmp;
             return;

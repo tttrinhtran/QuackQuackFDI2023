@@ -24,14 +24,17 @@ public class surveyAdapter extends RecyclerView.Adapter<surveyAdapter.MyViewHold
     ArrayList<surveyItem> skinList;
     Context context;
     User user;
+    boolean check;
+
 
     ImageView nextBtn;
-    public surveyAdapter(ArrayList<surveyItem> hobbiesList, Context context, User user, ImageView nextBtn)
+    public surveyAdapter(ArrayList<surveyItem> hobbiesList, Context context, User user, ImageView nextBtn, boolean check)
     {
         this.skinList=hobbiesList;
         this.context=context;
         this.user=user;
         this.nextBtn=nextBtn;
+        this.check=check;
     }
     @NonNull
     @Override
@@ -50,32 +53,57 @@ public class surveyAdapter extends RecyclerView.Adapter<surveyAdapter.MyViewHold
         holder.background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (check == true) {
+                    if (user.getUserSkinType() == null) {
+                        holder.background.setCardBackgroundColor(Color.parseColor("#FF78C6FF"));
+                        user.setUserSkinType(skinList.get(position).getName());
+                        nextBtn.setClickable(true);
+                        nextBtn.setImageResource(R.drawable.next_button_active);
 
-                if(user.getUserSkinType()==null) {
+                    } else if (user.getUserSkinType().equals(skinList.get(position).getName())) {
+                        holder.background.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                        user.setUserSkinType(null);
+                        nextBtn.setClickable(false);
+                        nextBtn.setImageResource(R.drawable.next_button);
+
+
+                    } else if (!user.getUserSkinType().equals(skinList.get(position).getName())) {
+                        holder.background.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+                        nextBtn.setClickable(false);
+                        nextBtn.setImageResource(R.drawable.next_button);
+
+                    }
+                } else if(check == false) {
+
+
+                if (user.getUserSkinCondition() == null) {
+
                     holder.background.setCardBackgroundColor(Color.parseColor("#FF78C6FF"));
-                    user.setUserSkinType(skinList.get(position).getName());
-                    nextBtn.setClickable(true);
                     nextBtn.setImageResource(R.drawable.next_button_active);
+                    user.addToUserCondition(skinList.get(position).getName());
 
-                }
-                else if(user.getUserSkinType().equals(skinList.get(position).getName()))
-                {
+
+                } else if (user.getUserSkinCondition().contains(skinList.get(position).getName())) {
                     holder.background.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-                    user.setUserSkinType(null);
+                    user.removeToUserCondition(skinList.get(position).getName());
                     nextBtn.setClickable(false);
                     nextBtn.setImageResource(R.drawable.next_button);
 
 
-                } else if (!user.getUserSkinType().equals(skinList.get(position).getName())) {
-                    holder.background.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-                    nextBtn.setClickable(false);
-                    nextBtn.setImageResource(R.drawable.next_button);
+                } else if (!user.getUserSkinCondition().contains(skinList.get(position).getName())) {
+                    holder.background.setCardBackgroundColor(Color.parseColor("#FF78C6FF"));
+                    user.addToUserCondition(skinList.get(position).getName());
 
                 }
 
 
             }
+
+
+            }
         });
+
+
 
     }
 

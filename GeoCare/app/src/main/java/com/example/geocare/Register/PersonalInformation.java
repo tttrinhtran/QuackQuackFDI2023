@@ -74,6 +74,8 @@ FirebaseDatabaseController firebaseDatabaseController;
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
+
+
     
 
 }

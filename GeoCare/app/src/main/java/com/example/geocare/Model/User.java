@@ -160,6 +160,22 @@ public class User implements Serializable {
         this.ava = ava;
     }
 
+    public void addToUserCondition(String data)
+    {
+        if(this.UserFavorite==null)
+        {
+            this.UserFavorite=new ArrayList<>();
+        }
+        this.UserFavorite.add(data);
+    }
+    public void removeToUserCondition(String data)
+    {
+        if(this.UserFavorite==null)
+        {
+            this.UserFavorite=new ArrayList<>();
+        }
+        this.UserFavorite.remove(data);
+    }
 
 }
 

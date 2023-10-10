@@ -79,7 +79,7 @@ public class SurveySkinType extends AppCompatActivity {
     {
         recyclerView=findViewById(R.id.skinSurveyRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        surveyAdapter = new surveyAdapter( surveySkinType,SurveySkinType.this, user, nextBtn);
+        surveyAdapter = new surveyAdapter( surveySkinType,SurveySkinType.this, user, nextBtn, true);
         recyclerView.setAdapter(surveyAdapter);
 
     }
@@ -87,5 +87,7 @@ public class SurveySkinType extends AppCompatActivity {
     {
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_COLLECTION_USERS);
     }
+
+
 
 }

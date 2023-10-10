@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
@@ -21,11 +22,12 @@ import java.util.ArrayList;
 public class surveySkinCon extends AppCompatActivity {
     SharedPreferenceManager sharedPreferenceManager;
     User user;
-    ArrayList<surveyItem> surveySkinType;
+    ArrayList<surveyItem>  surveySkinCon;
     RecyclerView recyclerView;
     surveyAdapter surveyAdapter;
     ImageView nextBtn;
     ImageView backBtn;
+    FirebaseDatabaseController firebaseDatabaseController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class surveySkinCon extends AppCompatActivity {
                 nextBtn.setImageResource(R.drawable.next_button_active);
                 Toast.makeText(surveySkinCon.this, "Good", Toast.LENGTH_SHORT).show();
                 saveUser();
+                addUserToDb();
+
 
 
 
@@ -63,15 +67,15 @@ public class surveySkinCon extends AppCompatActivity {
     {
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
-        surveySkinType=new ArrayList<>();
-        surveySkinType.add(new surveyItem("Wrinkle","wrinkles"));
-        surveySkinType.add(new surveyItem("Acne","acne"));
-        surveySkinType.add(new surveyItem("Dryness","dryness"));
-        surveySkinType.add(new surveyItem("Redness","redness"));
-        surveySkinType.add(new surveyItem("Sun damage","sun_damage"));
-        surveySkinType.add(new surveyItem("Dark circle","dark_circles"));
-        surveySkinType.add(new surveyItem("Hormonal acne","hormonal_acne"));
-        surveySkinType.add(new surveyItem("Oiliness","oiliness"));
+        surveySkinCon=new ArrayList<>();
+        surveySkinCon.add(new surveyItem("Wrinkle","wrinkles"));
+        surveySkinCon.add(new surveyItem("Acne","acne"));
+        surveySkinCon.add(new surveyItem("Dryness","dryness"));
+        surveySkinCon.add(new surveyItem("Redness","redness"));
+        surveySkinCon.add(new surveyItem("Sun damage","sun_damage"));
+        surveySkinCon.add(new surveyItem("Dark circle","dark_circles"));
+        surveySkinCon.add(new surveyItem("Hormonal acne","hormonal_acne"));
+        surveySkinCon.add(new surveyItem("Oiliness","oiliness"));
 
     }
 
@@ -79,12 +83,18 @@ public class surveySkinCon extends AppCompatActivity {
     {
         recyclerView=findViewById(R.id.skinSurveyRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        surveyAdapter = new surveyAdapter( surveySkinType,surveySkinCon.this, user, nextBtn);
+        surveyAdapter = new surveyAdapter( surveySkinCon,surveySkinCon.this, user, nextBtn, false);
         recyclerView.setAdapter(surveyAdapter);
 
     }
     void saveUser()
     {
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(user, KEY_COLLECTION_USERS);
+    }
+    void addUserToDb()
+    {
+        firebaseDatabaseController=new FirebaseDatabaseController<>(User.class);
+        firebaseDatabaseController.addToFirestore(KEY_COLLECTION_USERS,user.getUserEmail(),user);
+
     }
 }
