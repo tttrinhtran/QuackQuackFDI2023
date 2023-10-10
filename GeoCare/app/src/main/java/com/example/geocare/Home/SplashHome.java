@@ -1,6 +1,7 @@
 package com.example.geocare.Home;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+import static com.example.geocare.Constants.KEY_COLLECTION_WEATHER;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -137,7 +138,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(SplashHome.this, HomeActivity.class);
-                i.putExtra("WEATHER_OBJECT", weatherInfo);
+                saveWeather();
                 i.putExtra("CITY", c);
                 i.putExtra("DISTRICT", d);
                 i.putExtra("PICK", pick);
@@ -433,5 +434,10 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     {
         SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+    }
+    void saveWeather()
+    {
+        SharedPreferenceManager sharedPreferenceManagerWeather=new SharedPreferenceManager(Weather.class,this);
+        sharedPreferenceManagerWeather.storeSerializableObjectToSharedPreference(weatherInfo,KEY_COLLECTION_WEATHER);
     }
 }
