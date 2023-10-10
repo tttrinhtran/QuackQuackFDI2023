@@ -132,12 +132,12 @@ public class ScheduleActivity extends AppCompatActivity {
         else day = "Night";
 
         // Micellar
-        String micellarID = "Cleanser-";
+        String micellarID = "Micellar-";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) micellarID += "Oil";
         else micellarID += currentUser.getUserSkinType();
         micellarID += "-" + day ;
 
-        String micellarImageString = "cleanser_";
+        String micellarImageString = "micellar_";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) micellarImageString += "oil";
         else micellarImageString += currentUser.getUserSkinType().toLowerCase();
 
@@ -147,7 +147,7 @@ public class ScheduleActivity extends AppCompatActivity {
         if( micellar != null ) productList.add(micellar);
 
         // Cleanser
-        String cleanserID = "Cleanser-";
+        String cleanserID = "Cleaner-";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) cleanserID += "Oil";
         else cleanserID += currentUser.getUserSkinType();
         cleanserID += "-" + day ;
@@ -207,12 +207,12 @@ public class ScheduleActivity extends AppCompatActivity {
         if( mask != null ) productList.add(mask);
 
         // Moisturizer
-        String moisturizerID = "Mask-";
+        String moisturizerID = "Moisturizer-";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) moisturizerID += "Oil";
         else moisturizerID += currentUser.getUserSkinType();
         moisturizerID += "-" + day ;
 
-        String moisturizerImageString = "mask_";
+        String moisturizerImageString = "moisturizer_";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) moisturizerImageString += "oil";
         else moisturizerImageString += currentUser.getUserSkinType().toLowerCase();
 
@@ -222,12 +222,12 @@ public class ScheduleActivity extends AppCompatActivity {
         if( moisturizer != null ) productList.add(moisturizer);
 
         // Sunscreen
-        String sunscreenID = "Mask-";
+        String sunscreenID = "Sunscreen-";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) sunscreenID += "Oil";
         else sunscreenID += currentUser.getUserSkinType();
         sunscreenID += "-" + day ;
 
-        String sunscreenImageString = "mask_";
+        String sunscreenImageString = "sunscreen_";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) sunscreenImageString += "oil";
         else sunscreenImageString += currentUser.getUserSkinType().toLowerCase();
 
