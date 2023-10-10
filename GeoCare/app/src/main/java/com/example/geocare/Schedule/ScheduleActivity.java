@@ -147,10 +147,12 @@ public class ScheduleActivity extends AppCompatActivity {
         if( micellar != null ) productList.add(micellar);
 
         // Cleanser
-        String cleanserID = "Cleaner-";
+        String cleanserID = "Cleaser-";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) cleanserID += "Oil";
         else cleanserID += currentUser.getUserSkinType();
         cleanserID += "-" + day ;
+
+        Log.d("Hoktro", "setUpproductList: " + cleanserID );
 
         String cleanserImageString = "cleanser_";
         if(Objects.equals(currentUser.getUserSkinType(), "Oily")) cleanserImageString += "oil";
