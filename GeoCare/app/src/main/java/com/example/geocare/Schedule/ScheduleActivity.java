@@ -1,5 +1,7 @@
 package com.example.geocare.Schedule;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +18,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.geocare.Constants;
+import com.example.geocare.Database.FirebaseDatabaseController;
+import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Model.User;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
@@ -32,23 +38,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ScheduleActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     TextView date, percent, routine_day;
     int numberSteps = 0;
-    RecyclerView recyclerView, recyclerViewRoutine;
+    RecyclerView recyclerViewRoutine;
 
     //for NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
     ItemAdapter adapter;
     private List<ProductItem> productList = new ArrayList<>();
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        getUserData();
         setUpScreen();
     }
 
@@ -79,6 +88,11 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     };
 
+    private void getUserData() {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
+        currentUser = (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+    }
+
     private void setUpScreen() {
 
         // Initialize
@@ -103,10 +117,127 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void setUpproductList() {
-        if (true){
-            productList.addAll(Type.productList_OilySunnyMorning);
-            numberSteps = productList.size();
-        }
+//        if (true){
+//            productList.addAll(Type.productList_OilySunnyMorning);
+//            numberSteps = productList.size();
+//        }
+
+        FirebaseDatabaseController<ProductItem> instance = new FirebaseDatabaseController<>(ProductItem.class);
+
+        LocalTime currentTime = LocalTime.now();
+        int currentHour = currentTime.getHour();
+        String day = "Sun";
+
+        if (currentHour <= 17 && currentHour >= 3) day = "Sun";
+        else day = "Night";
+
+        // Micellar
+        String micellarID = "Cleanser-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) micellarID += "Oil";
+        else micellarID += currentUser.getUserSkinType();
+        micellarID += "-" + day ;
+
+        String micellarImageString = "cleanser_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) micellarImageString += "oil";
+        else micellarImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem micellar = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, micellarID );
+        if( micellar != null ) micellar.setImageIDResource(getResources().getIdentifier(micellarImageString, "drawable", getPackageName()));
+
+        if( micellar != null ) productList.add(micellar);
+
+        // Cleanser
+        String cleanserID = "Cleanser-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) cleanserID += "Oil";
+        else cleanserID += currentUser.getUserSkinType();
+        cleanserID += "-" + day ;
+
+        String cleanserImageString = "cleanser_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) cleanserImageString += "oil";
+        else cleanserImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem cleanser = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, cleanserID );
+        if( cleanser != null ) cleanser.setImageIDResource(getResources().getIdentifier(cleanserImageString, "drawable", getPackageName()));
+
+        if( cleanser != null ) productList.add(cleanser);
+
+        // Toner
+        String tonerID = "Toner-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) tonerID += "Oil";
+        else tonerID += currentUser.getUserSkinType();
+        tonerID += "-" + day ;
+
+        String tonerImageString = "toner_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) tonerImageString += "oil";
+        else tonerImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem toner = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, tonerID );
+        if( toner != null ) toner.setImageIDResource(getResources().getIdentifier(tonerImageString, "drawable", getPackageName()));
+
+        if( toner != null ) productList.add(toner);
+
+        // Serum
+        String serumID = "Serum-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) serumID += "Oil";
+        else serumID += currentUser.getUserSkinType();
+        serumID += "-" + day ;
+
+        String serumImageString = "serum_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) serumImageString += "oil";
+        else serumImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem serum = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, serumID );
+        if( serum != null ) serum.setImageIDResource(getResources().getIdentifier(serumImageString, "drawable", getPackageName()));
+
+        if( serum != null ) productList.add(serum);
+
+        // Mask
+        String maskID = "Mask-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) maskID += "Oil";
+        else maskID += currentUser.getUserSkinType();
+        maskID += "-" + day ;
+
+        String maskImageString = "mask_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) maskImageString += "oil";
+        else maskImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem mask = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, maskID );
+        if( mask != null ) mask.setImageIDResource(getResources().getIdentifier(maskImageString, "drawable", getPackageName()));
+
+        if( mask != null ) productList.add(mask);
+
+        // Moisturizer
+        String moisturizerID = "Mask-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) moisturizerID += "Oil";
+        else moisturizerID += currentUser.getUserSkinType();
+        moisturizerID += "-" + day ;
+
+        String moisturizerImageString = "mask_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) moisturizerImageString += "oil";
+        else moisturizerImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem moisturizer = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, moisturizerID );
+        if( moisturizer != null ) moisturizer.setImageIDResource(getResources().getIdentifier(moisturizerImageString, "drawable", getPackageName()));
+
+        if( moisturizer != null ) productList.add(moisturizer);
+
+        // Sunscreen
+        String sunscreenID = "Mask-";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) sunscreenID += "Oil";
+        else sunscreenID += currentUser.getUserSkinType();
+        sunscreenID += "-" + day ;
+
+        String sunscreenImageString = "mask_";
+        if(Objects.equals(currentUser.getUserSkinType(), "Oily")) sunscreenImageString += "oil";
+        else sunscreenImageString += currentUser.getUserSkinType().toLowerCase();
+
+        ProductItem sunscreen = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, sunscreenID );
+        if( sunscreen != null ) sunscreen.setImageIDResource(getResources().getIdentifier(sunscreenImageString, "drawable", getPackageName()));
+
+        if( sunscreen != null ) productList.add(sunscreen);
+
+        // Number of step
+        numberSteps = productList.size();
     }
 
 
@@ -225,7 +356,6 @@ public class ScheduleActivity extends AppCompatActivity {
         scanIcon = findViewById(R.id.NaviBarScanIcon);
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
-        // recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Set horizontal orientation
         date = findViewById(R.id.Schedule_current_date);
         progressBar = findViewById(R.id.linearProgressIndicator);
         percent = findViewById(R.id.Schedule_percent);

@@ -1,43 +1,67 @@
 package com.example.geocare.Schedule;
 
 public class ProductItem {
-    private String name;
-    private String amount;
-    private String description;
-    private String category;
-    private String shortDescription;
+    private String routineProductucUse;
+    private String routineAmount;
+    private String routineDetailDes;
+    private String routineName;
+    private String routineSmallDes;
     private int imageIDResource;
 
-    public ProductItem(int imageIDResource, String name, String amount, String description, String category, String shortDescription) {
+    public ProductItem(int imageIDResource, String routineProductucUse, String routineAmount, String routineDetailDes, String routineName, String routineSmallDes) {
         this.imageIDResource = imageIDResource;
-        this.name = name;
-        this.amount = amount;
-        this.description = description;
-        this.category = category;
-        this.shortDescription = shortDescription;
+        this.routineProductucUse = routineProductucUse;
+        this.routineAmount = routineAmount;
+        this.routineDetailDes = routineDetailDes;
+        this.routineName = routineName;
+        this.routineSmallDes = routineSmallDes;
     }
 
-    public String getName() {
-        return name;
+    public String getRoutineProductucUse() {
+        return routineProductucUse;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getRoutineAmount() {
+        return routineAmount;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRoutineDetailDes() {
+        return routineDetailDes;
     }
 
-    public String getCategory() {
-        return category;
+    public String getRoutineName() {
+        return routineName;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
+    public String getRoutineSmallDes() {
+        return routineSmallDes;
     }
 
-    public int getImageIDResource(){
+    public int getImageIDResource() {
         return imageIDResource;
+    }
+
+    public void setRoutineProductucUse(String routineProductucUse) {
+        this.routineProductucUse = routineProductucUse;
+    }
+
+    public void setRoutineAmount(String routineAmount) {
+        this.routineAmount = routineAmount;
+    }
+
+    public void setRoutineDetailDes(String routineDetailDes) {
+        this.routineDetailDes = routineDetailDes;
+    }
+
+    public void setRoutineName(String routineName) {
+        this.routineName = routineName;
+    }
+
+    public void setRoutineSmallDes(String routineSmallDes) {
+        this.routineSmallDes = routineSmallDes;
+    }
+
+    public void setImageIDResource(int imageIDResource) {
+        this.imageIDResource = imageIDResource;
     }
 }

@@ -34,9 +34,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         // Bind data to views
         holder.productImage.setImageResource(product.getImageIDResource());
-        holder.productAmount.setText(product.getAmount());
-        holder.productCategory.setText(product.getCategory());
-        holder.productShortDescription.setText(product.getShortDescription());
+        holder.productAmount.setText(product.getRoutineAmount());
+        holder.productCategory.setText(product.getRoutineName());
+        holder.productShortDescription.setText(product.getRoutineSmallDes());
 
     }
 
