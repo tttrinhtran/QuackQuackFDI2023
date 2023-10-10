@@ -83,7 +83,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void setUpproductList() {
         if (true){
-            productList.addAll(Type.productList_OilySunny);
+            productList.addAll(Type.productList_OilySunnyMorning);
             numberSteps = productList.size();
         }
     }
