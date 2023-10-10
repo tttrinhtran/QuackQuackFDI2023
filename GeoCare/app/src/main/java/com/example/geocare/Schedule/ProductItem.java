@@ -1,12 +1,14 @@
 package com.example.geocare.Schedule;
 
 public class ProductItem {
-    private String routineProductucUse;
-    private String routineAmount;
-    private String routineDetailDes;
-    private String routineName;
-    private String routineSmallDes;
-    private int imageIDResource;
+    String routineProductucUse;
+    String routineAmount;
+    String routineDetailDes;
+    String routineName;
+    String routineSmallDes;
+    int imageIDResource;
+
+    public ProductItem() {}
 
     public ProductItem(int imageIDResource, String routineProductucUse, String routineAmount, String routineDetailDes, String routineName, String routineSmallDes) {
         this.imageIDResource = imageIDResource;
