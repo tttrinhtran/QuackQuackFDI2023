@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12885365-f008-433c-bab2-f10df7fb2845" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/Register/PersonalInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/GeoCare/app/src/main/java/com/example/geocare/Register/PersonalInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeoCare/app/src/main/res/layout/activity_personal_information.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GeoCare/app/src/main/res/layout/activity_personal_information.xml" afterDir="false" />
-    </list>
+    <list default="true" id="12885365-f008-433c-bab2-f10df7fb2845" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,5 +42,16 @@
       <updated>1696440138609</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

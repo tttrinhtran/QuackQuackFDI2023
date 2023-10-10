@@ -27,6 +27,7 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,39 +47,47 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        setUpScreen();
+    }
 
+    // Implement swipe-to-delete using ItemTouchHelper
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
+    ) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            // Handle item deletion here
+            ProgressBar(numberSteps);
+            int position = viewHolder.getAdapterPosition();
+            adapter.removeItem(position);
+        }
+    };
+
+    private void setUpScreen() {
+
+        // Initialize
         fetch_UI(); navBar();
         CurrentDaySet();
         DaySchedule();
 
+
+        // Set up recycle view for daily routine
+        setUpproductList();
+
         recyclerViewRoutine = findViewById(R.id.Schedule_recyclerview_forRoutine);
         recyclerViewRoutine.setLayoutManager(new LinearLayoutManager(this));
+
         adapter = new ItemAdapter(productList);
         recyclerViewRoutine.setAdapter(adapter);
 
 
-        setUpproductList();
-
-        // Implement swipe-to-delete using ItemTouchHelper
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
-                0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT
-        ) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                // Handle item deletion here
-                ProgressBar(numberSteps);
-                int position = viewHolder.getAdapterPosition();
-                adapter.removeItem(position);
-                // Log.d("Hoktro", "onSwiped: " + productList.size());
-            }
-        };
-
+        // Set up swipe for daily routine
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerViewRoutine);
     }
@@ -136,26 +145,22 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
     private void DaySchedule() {
-        LocalDate currentDate = LocalDate.now();
+//        LocalDate currentDate = LocalDate.now();
+//
+//        // Get the week number of the current date
+//        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+//        int currentWeekNumber = currentDate.get(weekFields.weekOfWeekBasedYear());
+//
+//        // Get the start date (Sunday) of the current week
+//        LocalDate startOfWeek = currentDate.with(weekFields.dayOfWeek(), 1);
+//
+//        // Get the end date (Saturday) of the current week
+//        LocalDate endOfWeek = currentDate.with(weekFields.dayOfWeek(), 7);
+//
+//        int startDayOfWeekValue = startOfWeek.getDayOfWeek().getValue();
+//        int endDatOfWeekValue = endOfWeek.getDayOfWeek().getValue();
 
-// Get the week number of the current date
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int currentWeekNumber = currentDate.get(weekFields.weekOfWeekBasedYear());
-
-// Get the start date (Sunday) of the current week
-        LocalDate startOfWeek = currentDate.with(weekFields.dayOfWeek(), 1);
-
-// Get the end date (Saturday) of the current week
-        LocalDate endOfWeek = currentDate.with(weekFields.dayOfWeek(), 7);
-
-        int startDayOfWeekValue = startOfWeek.getDayOfWeek().getValue();
-        int endDatOfWeekValue = endOfWeek.getDayOfWeek().getValue();
-
-        List<DayOfWeek> daysList = getCurrentWeek();
-        for(int i = 0; i < 7; i++){
-            daysList.add(startOfWeek.getDayOfWeek());
-            startOfWeek = startOfWeek.plusDays(1); 
-        }
+        List<DayOfWeek> daysList = new ArrayList<>(Arrays.asList(DayOfWeek.values()));
 
         DaysAdapter adapter = new DaysAdapter(daysList);
         recyclerView.setAdapter(adapter);
@@ -164,21 +169,8 @@ public class ScheduleActivity extends AppCompatActivity {
         LocalTime currentTime = LocalTime.now();
         int currentHour = currentTime.getHour();
 
-        if (currentHour <= 17 && currentHour >= 3){
-            routine_day.setText("Morning routine");
-        }
-        else
-            routine_day.setText("Night routine");
-    }
-
-    private List<DayOfWeek> getCurrentWeek() {
-        List<DayOfWeek> daysList = new ArrayList<>();
-
-        for (DayOfWeek day : DayOfWeek.values()) {
-            daysList.add(day);
-        }
-
-        return daysList;
+        if (currentHour <= 17 && currentHour >= 3) routine_day.setText("Morning routine");
+        else routine_day.setText("Night routine");
     }
 
     private void fetch_UI() {

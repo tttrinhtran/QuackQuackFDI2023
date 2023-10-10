@@ -33,24 +33,26 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DayOfWeek day = daysList.get(position);
-        String sourceString =day.toString();
+
+        String sourceString = day.toString();
         char characterToGet = sourceString.charAt(0);
         String newString = String.valueOf(characterToGet);
 
         LocalDate currentDate = LocalDate.now();
-
         int currentDayOfMonth = currentDate.getDayOfMonth();
 
-        if (currentDayOfMonth-2 == position){
+        // Get the week number of the current date
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+
+        // Get the start date (Sunday) of the current week
+        LocalDate currentFetchDay = currentDate.with(weekFields.dayOfWeek(), position + 2 );
+
+        if( currentDate == currentFetchDay ) {
             holder.dayName.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.blue_deep));
             holder.dayNumber.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.blue_deep));
-            holder.dayName.setText(newString);
-            holder.dayNumber.setText(String.valueOf(position +2));
         }
-        else{
-            holder.dayName.setText(newString);
-            holder.dayNumber.setText(String.valueOf(position +2));
-        }
+        holder.dayName.setText(newString);
+        holder.dayNumber.setText(String.valueOf(currentFetchDay.getDayOfMonth()));
     }
 
     @Override
