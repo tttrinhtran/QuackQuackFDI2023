@@ -70,12 +70,11 @@ public class surveySkinCon extends AppCompatActivity {
         surveySkinCon=new ArrayList<>();
         surveySkinCon.add(new surveyItem("Wrinkle","wrinkles"));
         surveySkinCon.add(new surveyItem("Acne","acne"));
-        surveySkinCon.add(new surveyItem("Dryness","dryness"));
         surveySkinCon.add(new surveyItem("Redness","redness"));
         surveySkinCon.add(new surveyItem("Sun damage","sun_damage"));
         surveySkinCon.add(new surveyItem("Dark circle","dark_circles"));
         surveySkinCon.add(new surveyItem("Hormonal acne","hormonal_acne"));
-        surveySkinCon.add(new surveyItem("Oiliness","oiliness"));
+
 
     }
 

@@ -55,12 +55,6 @@
             android:name=".Home.SplashHome"
             android:exported="false" />
         <activity
-            android:name=".Survey.SurveyActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".Survey.SurveyActivity"
-            android:exported="false" />
-        <activity
             android:name=".Profile.ProfileActivity"
             android:exported="false" />
         <activity

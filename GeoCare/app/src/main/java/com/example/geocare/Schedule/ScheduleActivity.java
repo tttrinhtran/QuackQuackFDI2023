@@ -150,6 +150,11 @@ public class ScheduleActivity extends AppCompatActivity {
         int endDatOfWeekValue = endOfWeek.getDayOfWeek().getValue();
 
         List<DayOfWeek> daysList = getCurrentWeek();
+        for(int i = 0; i < 7; i++){
+            daysList.add(startOfWeek.getDayOfWeek());
+            startOfWeek = startOfWeek.plusDays(1); 
+        }
+
         DaysAdapter adapter = new DaysAdapter(daysList);
         recyclerView.setAdapter(adapter);
 

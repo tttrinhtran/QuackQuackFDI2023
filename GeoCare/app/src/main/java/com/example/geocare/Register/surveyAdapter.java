@@ -69,8 +69,7 @@ public class surveyAdapter extends RecyclerView.Adapter<surveyAdapter.MyViewHold
 
                     } else if (!user.getUserSkinType().equals(skinList.get(position).getName())) {
                         holder.background.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-                        nextBtn.setClickable(false);
-                        nextBtn.setImageResource(R.drawable.next_button);
+
 
                     }
                 } else if(check == false) {
