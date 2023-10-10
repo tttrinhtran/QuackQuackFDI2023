@@ -252,6 +252,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         dateText.setAlpha(0);
         bottomSheet.setTranslationY(100);
         //setUpWeatherLayout();
+        title.setText("Hello "+user.getUserName());
     }
 
     private void fetch_UI() {

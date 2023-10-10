@@ -176,6 +176,20 @@ public class User implements Serializable {
         }
         this.UserFavorite.remove(data);
     }
+    public  String conditionListToString() {
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < this.UserSkinCondition.size(); i++) {
+            result.append(this.UserSkinCondition.get(i));
+
+
+            if (i < this.UserSkinCondition.size() - 1) {
+                result.append(",");
+            }
+        }
+
+        return result.toString();
+    }
 
 }
 

@@ -2,6 +2,7 @@ package com.example.geocare.Schedule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -74,6 +75,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 ProgressBar(numberSteps);
                 int position = viewHolder.getAdapterPosition();
                 adapter.removeItem(position);
+                // Log.d("Hoktro", "onSwiped: " + productList.size());
             }
         };
 
