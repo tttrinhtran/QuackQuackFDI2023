@@ -568,4 +568,5 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
 
+
 }

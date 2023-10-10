@@ -27,14 +27,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     User user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getUser();
-
-
         fetch_UI();
         navBar();
         load_UI();
@@ -113,4 +112,5 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
+
 }
