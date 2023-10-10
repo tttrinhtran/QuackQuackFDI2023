@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,10 +63,18 @@ public class ScheduleActivity extends AppCompatActivity {
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
             // Handle item deletion here
-            ProgressBar(numberSteps);
             int position = viewHolder.getAdapterPosition();
-            adapter.removeItem(position);
+            if( position != 0 ) {
+                Toast.makeText( getApplicationContext(), "Please do step by step", Toast.LENGTH_SHORT ).show();
+                adapter.notifyItemChanged(position);
+            }
+            else {
+                adapter.removeItem(position);
+                ProgressBar(numberSteps);
+            }
+
         }
     };
 
