@@ -2,6 +2,8 @@ package com.example.geocare.Model;
 
 import android.content.Context;
 
+import com.example.geocare.Schedule.ProductItem;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,12 +18,13 @@ public class User implements Serializable {
     ArrayList<String> UserSkinCondition;
     ArrayList<String> UserSelf;
     ArrayList<String>UserFavorite;
+    ArrayList<ProductItem> UserProductList;
     String ava;
 
     public User() {
     }
 
-    public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition, ArrayList<String> userSelf, ArrayList<String> userFavorite, String ava) {
+    public User(String userName, String userEmail, String userPassword, String userAge, String userSkinType, ArrayList<String> userSkinCondition, ArrayList<String> userSelf, ArrayList<String> userFavorite, ArrayList<ProductItem> userProductList, String ava) {
         UserName = userName;
         UserEmail = userEmail;
         UserPassword = userPassword;
@@ -30,6 +33,7 @@ public class User implements Serializable {
         UserSkinCondition = userSkinCondition;
         UserSelf = userSelf;
         UserFavorite = userFavorite;
+        UserProductList = userProductList;
         this.ava = ava;
     }
 
@@ -44,6 +48,7 @@ public class User implements Serializable {
                 ", UserSkinCondition=" + UserSkinCondition +
                 ", UserSelf=" + UserSelf +
                 ", UserFavorite=" + UserFavorite +
+                ", UserProductList=" + UserProductList +
                 ", ava='" + ava + '\'' +
                 '}';
     }
@@ -86,6 +91,14 @@ public class User implements Serializable {
 
     public void setUserSkinType(String userSkinType) {
         UserSkinType = userSkinType;
+    }
+
+    public ArrayList<ProductItem> getUserProductList() {
+        return UserProductList;
+    }
+
+    public void setUserProductList(ArrayList<ProductItem> userProductList) {
+        UserProductList = userProductList;
     }
 
     public ArrayList<String> getUserSkinCondition() {

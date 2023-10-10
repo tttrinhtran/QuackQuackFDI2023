@@ -20,6 +20,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -38,18 +39,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.geocare.Constants;
+import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
+import com.example.geocare.Schedule.ProductItem;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -75,6 +81,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     private int pick;
 
     private User user;
+    ArrayList<ProductItem> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +154,12 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         });
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveUser();
     }
 
     @SuppressLint("MissingPermission")
@@ -434,10 +447,142 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     {
         SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+
+        productList = user.getUserProductList();
     }
     void saveWeather()
     {
         SharedPreferenceManager sharedPreferenceManagerWeather=new SharedPreferenceManager(Weather.class,this);
         sharedPreferenceManagerWeather.storeSerializableObjectToSharedPreference(weatherInfo,KEY_COLLECTION_WEATHER);
+    }
+
+    private void setUpproductList() {
+
+        FirebaseDatabaseController<ProductItem> instance = new FirebaseDatabaseController<>(ProductItem.class);
+
+        LocalTime currentTime = LocalTime.now();
+        int currentHour = currentTime.getHour();
+        String day = "Sun";
+
+        if (currentHour <= 17 && currentHour >= 3) day = "Sun";
+        else day = "Night";
+
+        // Micellar
+        String micellarID = "Micellar-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) micellarID += "Oil";
+        else micellarID += user.getUserSkinType();
+        micellarID += "-" + day ;
+
+        String micellarImageString = "micellar_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) micellarImageString += "oil";
+        else micellarImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem micellar = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, micellarID );
+        if( micellar != null ) micellar.setImageIDResource(getResources().getIdentifier(micellarImageString, "drawable", getPackageName()));
+
+        if( micellar != null ) productList.add(micellar);
+
+        // Cleanser
+        String cleanserID = "Cleaser-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) cleanserID += "Oil";
+        else cleanserID += user.getUserSkinType();
+        cleanserID += "-" + day ;
+
+        Log.d("Hoktro", "setUpproductList: " + cleanserID );
+
+        String cleanserImageString = "cleanser_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) cleanserImageString += "oil";
+        else cleanserImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem cleanser = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, cleanserID );
+        if( cleanser != null ) cleanser.setImageIDResource(getResources().getIdentifier(cleanserImageString, "drawable", getPackageName()));
+
+        if( cleanser != null ) productList.add(cleanser);
+
+        // Toner
+        String tonerID = "Toner-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) tonerID += "Oil";
+        else tonerID += user.getUserSkinType();
+        tonerID += "-" + day ;
+
+        String tonerImageString = "toner_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) tonerImageString += "oil";
+        else tonerImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem toner = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, tonerID );
+        if( toner != null ) toner.setImageIDResource(getResources().getIdentifier(tonerImageString, "drawable", getPackageName()));
+
+        if( toner != null ) productList.add(toner);
+
+        // Serum
+        String serumID = "Serum-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) serumID += "Oil";
+        else serumID += user.getUserSkinType();
+        serumID += "-" + day ;
+
+        String serumImageString = "serum_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) serumImageString += "oil";
+        else serumImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem serum = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, serumID );
+        if( serum != null ) serum.setImageIDResource(getResources().getIdentifier(serumImageString, "drawable", getPackageName()));
+
+        if( serum != null ) productList.add(serum);
+
+        // Mask
+        String maskID = "Mask-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) maskID += "Oil";
+        else maskID += user.getUserSkinType();
+        maskID += "-" + day ;
+
+        String maskImageString = "mask_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) maskImageString += "oil";
+        else maskImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem mask = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, maskID );
+        if( mask != null ) mask.setImageIDResource(getResources().getIdentifier(maskImageString, "drawable", getPackageName()));
+
+        if( mask != null ) productList.add(mask);
+
+        // Moisturizer
+        String moisturizerID = "Moisturizer-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) moisturizerID += "Oil";
+        else moisturizerID += user.getUserSkinType();
+        moisturizerID += "-" + day ;
+
+        String moisturizerImageString = "moisturizer_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) moisturizerImageString += "oil";
+        else moisturizerImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem moisturizer = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, moisturizerID );
+        if( moisturizer != null ) moisturizer.setImageIDResource(getResources().getIdentifier(moisturizerImageString, "drawable", getPackageName()));
+
+        if( moisturizer != null ) productList.add(moisturizer);
+
+        // Sunscreen
+        String sunscreenID = "Sunscreen-";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) sunscreenID += "Oil";
+        else sunscreenID += user.getUserSkinType();
+        sunscreenID += "-" + day ;
+
+        String sunscreenImageString = "sunscreen_";
+        if(Objects.equals(user.getUserSkinType(), "Oily")) sunscreenImageString += "oil";
+        else sunscreenImageString += user.getUserSkinType().toLowerCase();
+
+        ProductItem sunscreen = instance.retrieveObjectsFirestoreByID( Constants.KEY_COLLECTION_ROUTINE, sunscreenID );
+        if( sunscreen != null ) sunscreen.setImageIDResource(getResources().getIdentifier(sunscreenImageString, "drawable", getPackageName()));
+
+        if( sunscreen != null ) productList.add(sunscreen);
+
+        // Save local
+        user.setUserProductList(productList);
+        saveUser();
+
+    }
+
+    private void saveUser()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
     }
 }
