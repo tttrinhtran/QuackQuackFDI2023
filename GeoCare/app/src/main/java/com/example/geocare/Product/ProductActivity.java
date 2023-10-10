@@ -66,11 +66,7 @@ User user;
         getData();
         fetch_UI(); navBar();
 
-        recyclerView = findViewById(R.id.Product_recyclerView);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-
-        adapter = new MyAdapter(ProductActivity.this, itemList, user);
-        recyclerView.setAdapter(adapter);
+       setRecyclerView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,8 +86,24 @@ User user;
     @Override
     protected void onPause() {
         super.onPause();
-   saveUser();
+        saveUser();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUser();
+        getData();
+        setRecyclerView();
+    }
+
+    void setRecyclerView()
+    {
+        recyclerView = findViewById(R.id.Product_recyclerView);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        adapter = new MyAdapter(ProductActivity.this, itemList, user);
+        recyclerView.setAdapter(adapter);
     }
 
     void getData()
@@ -103,8 +115,6 @@ User user;
         itemList.add(new Item("PINK CLOUD Rosewater + Tremella Creamy Jelly Cleanser", "Rosewater Tremella Creamy Jelly Cleanser", false, "cleanser", "Cleanser", "Herbivore", "Aqua/Water/Eau, Rosa Damascena Flower Water, Decyl Glucoside, Glycerin, Sodium Lauroyl Lactylate, Squalane, Glyceryl Caprylate, Xanthan Gum, Glyceryl Stearate, Tremella Fuciformis Sporocarp Extract, Caprylhydroxamic Acid, Camellia Sinensis Leaf Extract, Aloe Barbadensis Leaf Juice, Citric Acid, Eclipta Prostrata Extract, Sodium Hyaluronate, Melia Azadirachta Leaf Extract, Moringa Oleifera Seed Oil, Cocos Nucifera (Coconut) Fruit Juice, Tapioca Starch", "cleanser_detail","https://www.herbivorebotanicals.com/products/pink-cloud-rosewater-tremella-creamy-jelly-cleanser"));
         itemList.add(new Item("NOVA 15% Vitamin C + Turmeric Brightening Serum", "15% Vitamin C Turmeric Brightening Serum", false,"brightening", "Brightening Serum", "Herbivore", "Aqua/water/eau, Tetrahexyldecyl Ascorbate, Glycerin, C9-12 Alkane, Sodium Stearoyl Glutamate, Propanediol, Cetearyl Olivate, Sorbitan Olivate, Arctostaphylos Uva-Ursi Leaf Extract, Curcuma Longa (Turmeric) Root Extract, Terminalia Chebula Fruit Extract, Terminalia Ferdinandiana Fruit Extract, Hyaluronic Acid, Polyglyceryl-6 Stearate, Sclerotium Gum, Polyglyceryl-6 Polyricinoleate, Sodium Levulinate, Sodium Anisate, Melia Azadirachta Flower Extract, Coco-Caprylate/Caprate, Butylene Glycol, Melia Azadirachta Leaf Extract, Ocimum Sanctum Leaf Extract, Sodium Phytate, Averrhoa Carambola Fruit Extract, Polyglyceryl-6 Behenate, Ocimum Basilicum (Basil) Flower/Leaf Extract, Tocopheryl Acetate, Echinacea Purpurea Extract, Ananas Sativus (Pineapple) Fruit Juice, Corallina Officinalis Extract, Leuconostoc/Radish Root Ferment Filtrate, Citric Acid", "brightening_detail","https://www.herbivorebotanicals.com/collections/all/products/nova-15-vitamin-c-turmeric-brightening-serum"));
         itemList.add(new Item("MOON DEW 1% Bakuchiol + Peptides Retinol Alternative Firming Eye Cream", "1% Bakuchiol Peptides Retinol Alternative Firming Eye Cream", false, "eyecream", "Eye Cream", "Herbivore", "Water/aqua/eau, caprylic/capric triglyceride, octyldodecanol, glycerin, cetearyl alcohol, squalane, butyrospermum parkii (shea) butter, glyceryl stearate, vaccinium myrtillus seed oil, cetearyl olivate, melia azadirachta flower extract, glyceryl caprylate, sorbitan olivate, bakuchiol, pullulan, aloe barbadensis flower extract, chenopodium quinoa seed extract, coccinia indica fruit extract, corallina officinalis extract, melia azadirachta leaf extract, rosa damascena extract, tremella fuciformis sporocarp extract, vaccinium angustifolium (blueberry) fruit extract, vanilla planifolia fruit extract, citrus aurantium amara (bitter orange) leaf/twig extract, citrus aurantium dulcis (orange) peel extract, musa sapientum (banana) fruit extract, pyrus malus (apple) fruit extract, rubus idaeus (raspberry) fruit extract, lavandula angustifolia (lavender) flower/leaf/stem extract, gleditsia triacanthos seedextract, ocimum basilicum (basil) flower/leaf extract, curcuma longa (turmeric) root extract, ocimum sanctum leaf extract, solanum melongena (eggplant) fruit extract, decyl glucoside, lauryl glucoside, sodium stearoyl glutamate, cetyl hydroxyethylcellulose, citric acid, caprylhydroxamic acid, alcohol, hydrated silica, sodium nitrate, disodium phosphate, silica dimethyl silicate, sodium phosphate, caprylyl glycol, sodium benzoate", "eyecream_detail","https://www.herbivorebotanicals.com/products/moon-dew-1-bakuchiol-peptides-retinol-alternative-eye-cream"));
-        FirebaseDatabaseController userFirebase=new FirebaseDatabaseController<>(User.class);
-        user= (User) userFirebase.retrieveObjectsFirestoreByID(KEY_COLLECTION_USERS,"tran@gmail.com");
         checkFavorite();
     }
     void checkFavorite()

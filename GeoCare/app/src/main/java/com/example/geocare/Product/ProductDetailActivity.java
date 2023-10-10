@@ -1,5 +1,7 @@
 package com.example.geocare.Product;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -19,6 +22,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView product_type, product_name, product_brandname, product_ingrdients;
     User user;
     ImageView add_button, buy_button, back_button, favourite_button;
+    SharedPreferenceManager sharedPreferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Finish the current activity and return to the previous one
+                saveUser();
+                finish();
+
             }
         });
 
@@ -109,5 +115,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         // Create an Intent to open a web browser
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(productUrl));
         startActivity(browserIntent);
+    }
+
+    void getUser()
+    {
+        sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
+        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+    }
+    void saveUser()
+    {
+        sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
     }
 }
