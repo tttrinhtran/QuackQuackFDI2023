@@ -144,7 +144,8 @@ public class ScheduleActivity extends AppCompatActivity {
         productList = currentUser.getUserProductList();
 
         // Number of step
-        numberSteps = productList.size();
+        numberSteps = productList.size() + currentUser.getUserNumberDone();
+        ProgressBar(numberSteps, currentUser.getUserNumberDone());
 
     }
 
