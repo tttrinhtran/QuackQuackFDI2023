@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Database.SharedPreferenceManager;
+import com.example.geocare.Login.LoginScreen;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
 
@@ -33,6 +35,8 @@ public class surveySkinCon extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_skin_con);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         getData();
 
         nextBtn=findViewById(R.id.Survey2_next_button);
@@ -49,9 +53,8 @@ public class surveySkinCon extends AppCompatActivity {
                 saveUser();
                 addUserToDb();
 
-
-
-
+                Intent i = new Intent(com.example.geocare.Register.surveySkinCon.this, LoginScreen.class);
+                startActivity(i);
             }
         });
 

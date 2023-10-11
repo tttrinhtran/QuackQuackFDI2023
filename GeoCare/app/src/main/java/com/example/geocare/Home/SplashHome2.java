@@ -1,6 +1,7 @@
 package com.example.geocare.Home;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+import static com.example.geocare.Constants.KEY_COLLECTION_WEATHER;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -9,7 +10,9 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
 import com.example.geocare.Schedule.ProductItem;
+import com.example.geocare.Schedule.ScheduleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,8 @@ public class SplashHome2 extends AppCompatActivity {
     Intent intent;
     String district , city;
     int pick;
+
+    Weather weatherInfo;
     private TextView title; private TextView gotoSchedule;
     private ConstraintLayout splashHome2;
     private ConstraintLayout layoutItem1; private TextView title1, des1; private ImageView imageItem1;
@@ -41,6 +47,7 @@ public class SplashHome2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_home2);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         getUserData();
         getData();
@@ -52,6 +59,27 @@ public class SplashHome2 extends AppCompatActivity {
         setUpLayout();
 
         setUpAnimation();
+
+        onClickListener();
+    }
+
+    private void onClickListener() {
+        gotoSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SplashHome2.this, ScheduleActivity.class);
+                saveWeather();
+                i.putExtra("DISTRICT", district);
+                i.putExtra("CITY", city);
+                i.putExtra("PICK", pick);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void saveWeather() {
+        SharedPreferenceManager sharedPreferenceManagerWeather=new SharedPreferenceManager(Weather.class,this);
+        sharedPreferenceManagerWeather.storeSerializableObjectToSharedPreference(weatherInfo,KEY_COLLECTION_WEATHER);
     }
 
     private void setUpAnimation() {
@@ -141,6 +169,11 @@ public class SplashHome2 extends AppCompatActivity {
         des3.setTextColor(ContextCompat.getColor(this, colorText.get(pick-1)));
 
         gotoSchedule.setBackgroundColor(ContextCompat.getColor(this, colorText.get(pick-1)));
+        if(pick == 1|| pick == 4){
+            gotoSchedule.setTextColor(ContextCompat.getColor(this, colorText.get(1)));
+        } else if (pick == 2 || pick == 3) {
+            gotoSchedule.setTextColor(ContextCompat.getColor(this, colorText.get(0)));
+        }
     }
 
     private void init_UI() {
@@ -201,8 +234,14 @@ public class SplashHome2 extends AppCompatActivity {
 
     private void getData() {
         intent = getIntent();
+        getWeather();
         district = (String) intent.getStringExtra("DISTRICT");
         city = (String) intent.getStringExtra("CITY");
         pick = (int) intent.getIntExtra("PICK", 0);
+    }
+
+    private void getWeather() {
+        SharedPreferenceManager sharedPreferenceManagerWeather=new SharedPreferenceManager(Weather.class,this);
+        weatherInfo= (Weather) sharedPreferenceManagerWeather.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_WEATHER);
     }
 }

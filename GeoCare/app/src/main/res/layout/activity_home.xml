@@ -41,7 +41,7 @@
                 android:layout_marginStart="22dp"
                 android:background="@color/light_yellow"
                 app:shapeAppearance="@style/Circular"
-                app:srcCompat="@drawable/blue_heart"
+                app:srcCompat="@drawable/avatar_profile"
                 android:alpha="0"/>
 
             <TextView
@@ -348,7 +348,8 @@
             android:id="@+id/HomeScreenCurrentScheduleItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="25dp"
+            android:paddingVertical="13dp"
+            android:paddingHorizontal="20dp"
             android:background="@drawable/home_current_schedule_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -356,8 +357,8 @@
             android:layout_marginTop="13dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 app:cardCornerRadius="100dp"
                 android:id="@+id/ItemStatus"
                 app:layout_constraintTop_toTopOf="parent"
@@ -367,8 +368,8 @@
                 android:layout_marginStart="6dp"/>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="78dp"
-                android:layout_height="78dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:cardCornerRadius="100dp"
                 android:id="@+id/ItemImgHolder"
                 app:layout_constraintTop_toTopOf="@+id/ItemStatus"
@@ -391,13 +392,12 @@
                 android:text="Remover"
                 android:textColor="@color/blue_deep"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ItemStatus"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.265" />
+                app:layout_constraintTop_toTopOf="@id/ItemImgHolder" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/itemStepDes"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/itemStepName"
                 app:layout_constraintStart_toEndOf="@id/ItemStatus"
@@ -405,7 +405,7 @@
                 android:layout_marginTop="3dp"
                 android:text="Remove dust and makeup"
                 android:fontFamily="@font/lato_regular"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/blue_deep"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

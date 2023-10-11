@@ -118,12 +118,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-<<<<<<< Updated upstream
-        RecyclerView recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
-        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-        ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
-        recyclerViewShelf.setAdapter(shelfAdapter);
-=======
+//        RecyclerView recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
+//        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+//        ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
+//        recyclerViewShelf.setAdapter(shelfAdapter);
     void setRecyclerview2(){
 
         recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this));
@@ -137,10 +135,6 @@ public class ProfileActivity extends AppCompatActivity {
         recyclerViewWish.setLayoutManager(new LinearLayoutManager(this));
         WhislistApdater whislistApdater = new WhislistApdater(whistlistList,this);
         recyclerViewWish.setAdapter(whislistApdater);
-
-
->>>>>>> Stashed changes
-
 
     }
 

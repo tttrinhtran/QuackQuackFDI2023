@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,6 +51,9 @@ public class ScheduleActivity extends AppCompatActivity {
     int numberSteps = 0;
     RecyclerView recyclerViewRoutine;
 
+    Intent intent;
+    String d; String c; int pick;
+
     //for NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
     ItemAdapter adapter;
@@ -60,9 +64,17 @@ public class ScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getUserData();
+        getData();
         setUpScreen();
+    }
+
+    private void getData() {
+        intent = getIntent();
+        d = (String) intent.getStringExtra("DISTRICT");
+        c = (String) intent.getStringExtra("CITY");
+        pick = (int) intent.getIntExtra("PICK", 0);
     }
 
     @Override
@@ -265,6 +277,9 @@ public class ScheduleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 passFirstProductList();
                 Intent i = new Intent(ScheduleActivity.this, HomeActivity.class);
+                i.putExtra("DISTRICT", d);
+                i.putExtra("CITY", c);
+                i.putExtra("PICK", pick);
                 startActivity(i);
             }
         });

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,6 +36,9 @@ public class SurveySkinType extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_skin_type);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         nextBtn=findViewById(R.id.Survey1_next_button);
         backBtn=findViewById(R.id.Survey1_back_button);
 
@@ -68,10 +72,10 @@ public class SurveySkinType extends AppCompatActivity {
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
         user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
         surveySkinType=new ArrayList<>();
-        surveySkinType.add(new surveyItem("Dry skin","dry_skin"));
-        surveySkinType.add(new surveyItem("Oil skin","oily_skin"));
-        surveySkinType.add(new surveyItem("Normal skin","normal_skin"));
-        surveySkinType.add(new surveyItem("Conbinaion skin","sensitive_skin"));
+        surveySkinType.add(new surveyItem("Dry","dry_skin"));
+        surveySkinType.add(new surveyItem("Oil","oily_skin"));
+        surveySkinType.add(new surveyItem("Normal","normal_skin"));
+        surveySkinType.add(new surveyItem("Conbinaion","sensitive_skin"));
 
     }
 

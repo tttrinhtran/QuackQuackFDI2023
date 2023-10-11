@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Home.SplashHome;
 import com.example.geocare.Model.User;
 import com.example.geocare.R;
+import com.example.geocare.Register.SignUpScreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +34,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText userEmailEditText;
     EditText userPasswordEditText;
     TextView signInBtn;
+    TextView signUpBtn;
 
     FirebaseAuth mAuth;
 
@@ -39,10 +42,24 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         setUpUI();
         mAuth=FirebaseAuth.getInstance();
         userFirebaseDatabaseController=new FirebaseDatabaseController<>(User.class);
         checkSignIn();
+
+        onClickListener();
+    }
+
+    private void onClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginScreen.this, SignUpScreen.class);
+                startActivity(i);
+            }
+        });
     }
 
 
@@ -51,6 +68,7 @@ public class LoginScreen extends AppCompatActivity {
        userEmailEditText=findViewById(R.id.LoginScreenUsernameEditText);
        userPasswordEditText=findViewById(R.id.LoginScreenPasswordEditText);
        signInBtn=findViewById(R.id.LoginScreenButton);
+       signUpBtn = findViewById(R.id.SignUpButton);
 
     }
     void getInput()
@@ -108,7 +126,6 @@ public class LoginScreen extends AppCompatActivity {
 
             }
         });
-
 
 
 

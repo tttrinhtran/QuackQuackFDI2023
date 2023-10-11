@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -50,6 +51,8 @@ User user;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         itemFirebaseDatabaseController=new FirebaseDatabaseController<>(Item.class);
        userFirebase=new FirebaseDatabaseController<>(User.class);
         searchView = (SearchView) findViewById(R.id.Product_search);

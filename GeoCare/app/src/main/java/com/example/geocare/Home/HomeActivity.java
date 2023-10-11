@@ -84,6 +84,11 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     JSONObject weatherObject;
     JSONObject airQualityObject;
 
+    // current schedule
+    ImageView cursScheItem;
+    TextView curScheTitle;
+    TextView curScheDes;
+
     // For NavBar
     private ImageView homeIcon, producIcon, scanIcon, scheduleIcon, profileIcon;
 
@@ -155,9 +160,6 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
                     }
                 }, 1000);
 
-
-
-
             }
         }, 2000);
     }
@@ -165,6 +167,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     private void getData() {
         i = getIntent();
         getWeather();
+        getRoutineItem();
         districtIntent = (String) i.getStringExtra("DISTRICT");
         cityIntent = (String) i.getStringExtra("CITY");
         pick = (int) i.getIntExtra("PICK", 0);
@@ -201,6 +204,9 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
             city.setText(cityIntent);
         }
 
+        curScheTitle.setText(routineItem.getRoutineName());
+        curScheDes.setText(routineItem.getRoutineSmallDes());
+        cursScheItem.setBackgroundResource(routineItem.getImageIDResource()); cursScheItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     private boolean getCurrentTime() {
@@ -288,6 +294,11 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
         // layout Weather
         homeScreenLayout = findViewById(R.id.HomeScreen);
+
+        // current schedule
+        cursScheItem = findViewById(R.id.ItemImage);
+        curScheTitle = findViewById(R.id.itemStepName);
+        curScheDes = findViewById(R.id.itemStepDes);
     }
 
     @SuppressLint("MissingPermission")

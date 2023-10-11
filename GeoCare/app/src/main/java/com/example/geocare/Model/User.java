@@ -215,11 +215,11 @@ public class User implements Serializable {
 
     public void addToUserCondition(String data)
     {
-        if(this.UserFavorite==null)
+        if(this.UserSkinCondition==null)
         {
-            this.UserFavorite=new ArrayList<>();
+            this.UserSkinCondition=new ArrayList<>();
         }
-        this.UserFavorite.add(data);
+        this.UserSkinCondition.add(data);
     }
     public void removeToUserCondition(String data)
     {
