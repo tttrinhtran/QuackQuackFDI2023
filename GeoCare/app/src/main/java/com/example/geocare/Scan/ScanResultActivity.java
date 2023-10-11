@@ -26,7 +26,7 @@ public class ScanResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_result);
 
         product_image = findViewById(R.id.ScanResultScreen_product_image);
-        bottomSheet = findViewById(R.id.homeActivitySheet);
+        bottomSheet = findViewById(R.id.homeactivitysheet);
         product_name = findViewById(R.id.ScanResultScreen_product_name);
         product_ingrdients = findViewById(R.id.ScanResultScreen_product_ingrdients);
         product_irritants = findViewById(R.id.ScanResultScreen_product_irritant);
@@ -36,7 +36,7 @@ public class ScanResultActivity extends AppCompatActivity {
         product_type = findViewById(R.id.ScanResultScreen_product_type);
         add_button = findViewById(R.id.ScanResultScreen_add_button);
 
-        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeActivitySheet));
+        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeactivitysheet));
         //initialize height
         bottomSheetBehavior.setPeekHeight(550);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -46,7 +46,6 @@ public class ScanResultActivity extends AppCompatActivity {
 
         process(receivedString);
 
-        finish();
     }
 
     private void process(String receivedString) {
