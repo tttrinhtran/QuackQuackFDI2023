@@ -1,6 +1,7 @@
 package com.example.geocare.Schedule;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
+import static com.example.geocare.Constants.KEY_PRODUCT_ITEM;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.example.geocare.Constants;
 import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Database.SharedPreferenceManager;
 import com.example.geocare.Home.HomeActivity;
+import com.example.geocare.Model.RoutineModel;
 import com.example.geocare.Model.User;
 import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
@@ -261,6 +263,7 @@ public class ScheduleActivity extends AppCompatActivity {
         homeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                passFirstProductList();
                 Intent i = new Intent(ScheduleActivity.this, HomeActivity.class);
                 startActivity(i);
             }
@@ -295,11 +298,16 @@ public class ScheduleActivity extends AppCompatActivity {
     {
         SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager<>(User.class, this);
         sharedPreferenceManager.storeSerializableObjectToSharedPreference(currentUser,KEY_COLLECTION_USERS);
-
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         DocumentReference documentReference = database.collection(KEY_COLLECTION_USERS).document(currentUser.getUserEmail());
         documentReference.update(
                 "UserNumberDone", currentUser.getUserNumberDone()
         );
+    }
+    void passFirstProductList()
+    {
+        SharedPreferenceManager sharedPreferenceManagerItem=new SharedPreferenceManager<>(ProductItem.class, this);
+        sharedPreferenceManagerItem.storeSerializableObjectToSharedPreference(productList.get(0),KEY_PRODUCT_ITEM);
+
     }
 }

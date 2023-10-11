@@ -2,6 +2,7 @@ package com.example.geocare.Home;
 
 import static com.example.geocare.Constants.KEY_COLLECTION_USERS;
 import static com.example.geocare.Constants.KEY_COLLECTION_WEATHER;
+import static com.example.geocare.Constants.KEY_PRODUCT_ITEM;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -41,6 +42,7 @@ import com.example.geocare.Product.ProductActivity;
 import com.example.geocare.Profile.ProfileActivity;
 import com.example.geocare.R;
 import com.example.geocare.Scan.ScanActivity;
+import com.example.geocare.Schedule.ProductItem;
 import com.example.geocare.Schedule.ScheduleActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -92,6 +94,8 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     private int pick;
 
     private User user;
+
+    ProductItem routineItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -572,6 +576,12 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     {
         SharedPreferenceManager sharedPreferenceManagerWeather=new SharedPreferenceManager(Weather.class,this);
         weatherInfo= (Weather) sharedPreferenceManagerWeather.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_WEATHER);
+    }
+
+    void getRoutineItem()
+    {
+        SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(ProductItem.class,this);
+        routineItem= (ProductItem) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_PRODUCT_ITEM);
     }
 
 
