@@ -33,7 +33,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<ShelfAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ShelfAdapter.MyViewHolder holder, int position) {
-        holder.img.setImageResource(shelfItems.get(position).getImageDetailResourceIdByInt(context));
+        holder.img.setImageResource(shelfItems.get(position).getImageResourceIdByInt(context));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ShelfAdapter extends RecyclerView.Adapter<ShelfAdapter.MyViewHolder
         ImageView img;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            img=itemView.findViewById(R.id.shelf_item_image);
+            img=itemView.findViewById(R.id.shelf_item_img);
         }
     }
 }

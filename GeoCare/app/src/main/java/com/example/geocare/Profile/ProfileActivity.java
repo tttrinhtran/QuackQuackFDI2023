@@ -119,10 +119,10 @@ public class ProfileActivity extends AppCompatActivity {
         WhislistApdater whislistApdater = new WhislistApdater(whistlistList,this);
         recyclerView.setAdapter(whislistApdater);
 
-//        RecyclerView recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
-//        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-//        ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
-//        recyclerViewShelf.setAdapter(shelfAdapter);
+        RecyclerView recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
+        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
+        recyclerViewShelf.setAdapter(shelfAdapter);
 
 
     }

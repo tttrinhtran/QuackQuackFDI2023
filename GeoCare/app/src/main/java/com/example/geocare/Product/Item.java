@@ -92,7 +92,7 @@ public class Item implements Serializable {
         int id = context.getResources().getIdentifier(this.imageResourceId, "drawable", context.getPackageName());
         return id;
     }
-    public int getImageDetailResourceIdByInt(Context context)
+    public   int getImageDetailResourceIdByInt(Context context)
     {
         int id = context.getResources().getIdentifier(this.imageDetail, "drawable", context.getPackageName());
         return id;

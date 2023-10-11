@@ -29,6 +29,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        getUser();
+
         image = findViewById(R.id.ProductDetail_product_image);
         product_type = findViewById(R.id.ProductDetail_product_type);
         product_name = findViewById(R.id.ProductDetail_product_name);
@@ -44,7 +46,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ProductDetail_homeActivitySheet));
 
         Item item = (Item) getIntent().getSerializableExtra("item_data");
-        user= (User) getIntent().getSerializableExtra("user_data");
+//        user= (User) getIntent().getSerializableExtra("user_data");
 
         String temp = item.getNameDetail();
         if (temp.length() >= 50){

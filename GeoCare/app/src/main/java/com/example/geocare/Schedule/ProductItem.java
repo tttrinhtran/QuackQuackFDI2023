@@ -1,6 +1,8 @@
 package com.example.geocare.Schedule;
 
-public class ProductItem {
+import java.io.Serializable;
+
+public class ProductItem implements Serializable {
     String routineProductucUse;
     String routineAmount;
     String routineDetailDes;
