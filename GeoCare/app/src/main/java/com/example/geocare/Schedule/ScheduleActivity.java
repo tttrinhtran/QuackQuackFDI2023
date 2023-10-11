@@ -38,6 +38,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.TextStyle;
+import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -197,13 +198,15 @@ public class ScheduleActivity extends AppCompatActivity {
     private void DaySchedule() {
 
         LocalDate currentDate = LocalDate.now();
-        int currentDayOfMonth = currentDate.getDayOfMonth();
+        TemporalField fieldISO = WeekFields.of(Locale.CHINESE).dayOfWeek();
 
         // Get the week number of the current date
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
         // Monday
-        LocalDate currentFetchDay = currentDate.with(weekFields.dayOfWeek(), 2 );
+        // LocalDate currentFetchDay = currentDate.with(weekFields.dayOfWeek(), 2 );
+        LocalDate currentFetchDay = currentDate.with(fieldISO, 1);
+
         ((TextView)findViewById(R.id.NumberDate1)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
         if( currentFetchDay.isEqual(currentDate) ) {
             ((TextView)findViewById(R.id.NumberDate1)).setTextColor(ContextCompat.getColor(this, R.color.blue_deep));
