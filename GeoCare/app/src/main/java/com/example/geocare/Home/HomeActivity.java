@@ -314,7 +314,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
         try {
             Locale englishLocale = new Locale("en", "US");
             Geocoder geocoder = new Geocoder(HomeActivity.this, englishLocale);
@@ -581,7 +581,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
     void getUser()
     {
         SharedPreferenceManager sharedPreferenceManager=new SharedPreferenceManager(User.class,this);
-        user= (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
+        user = (User) sharedPreferenceManager.retrieveSerializableObjectFromSharedPreference(KEY_COLLECTION_USERS);
     }
     void getWeather()
     {

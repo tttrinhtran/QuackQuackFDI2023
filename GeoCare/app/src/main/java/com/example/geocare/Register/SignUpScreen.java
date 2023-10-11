@@ -27,6 +27,7 @@ public class SignUpScreen extends AppCompatActivity {
 
     TextInputEditText comfirmPasswordEditText;
     TextView signUpButton;
+    TextView signInText;
 
     SharedPreferenceManager sharedPreferenceManager;
 
@@ -46,6 +47,14 @@ public class SignUpScreen extends AppCompatActivity {
                 checkInput();
             }
         });
+
+        signInText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SignUpScreen.this, LoginScreen.class);
+                startActivity(i);
+            }
+        });
     }
     void loadUI()
     {
@@ -53,9 +62,7 @@ public class SignUpScreen extends AppCompatActivity {
         passwordEditText=findViewById(R.id.RegisterScreenPasswordEditText);
         comfirmPasswordEditText=findViewById(R.id.RegisterScreenConfirmPasswordEditText);
         signUpButton=findViewById(R.id.RegisterScreenButton);
-
-
-
+        signInText = findViewById(R.id.RegisterScreenSignin);
     }
     void checkInput()
     {
@@ -98,9 +105,9 @@ public class SignUpScreen extends AppCompatActivity {
     void nextPage()
     {
         sharedPreferenceManager=new SharedPreferenceManager<>(User.class,this);
-                sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
-                Intent i=new Intent(SignUpScreen.this,PersonalInformation.class);
-                startActivity(i);
+        sharedPreferenceManager.storeSerializableObjectToSharedPreference(user,KEY_COLLECTION_USERS);
+        Intent i=new Intent(SignUpScreen.this,PersonalInformation.class);
+        startActivity(i);
 
     }
 }

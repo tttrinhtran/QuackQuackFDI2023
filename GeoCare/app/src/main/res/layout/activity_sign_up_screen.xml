@@ -167,7 +167,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="5dp"
             android:text="Sign in"
-            android:textColor="@color/blue_deep"
+            android:textColor="@color/blue"
             android:textSize="16sp"
             android:fontFamily="@font/lato_medium"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

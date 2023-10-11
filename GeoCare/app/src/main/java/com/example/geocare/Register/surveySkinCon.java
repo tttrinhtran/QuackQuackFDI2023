@@ -49,7 +49,7 @@ public class surveySkinCon extends AppCompatActivity {
             public void onClick(View v) {
 
                 nextBtn.setImageResource(R.drawable.next_button_active);
-                Toast.makeText(surveySkinCon.this, "Good", Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(surveySkinCon.this, "Good", Toast.LENGTH_SHORT).show();
                 saveUser();
                 addUserToDb();
 

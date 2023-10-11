@@ -421,22 +421,202 @@
             android:textSize="16sp"
             android:textColor="@color/blue_deep"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/HomeScreenTipRecycler"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TipsTitle"
-            android:layout_marginTop="8dp"/>
+            android:layout_height="220dp"
+            app:layout_constraintTop_toBottomOf="@id/TipsTitle">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <TextView
+                            android:id="@+id/TitleTip1"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Drink More Water &amp; Fruit Juices"
+                            android:fontFamily="@font/lato_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="Staying hydrated by drinking water"
+                            android:fontFamily="@font/lato_semibold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="8dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/tip1"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/tip2"/>
+
+                        <TextView
+                            android:id="@+id/TitleTip2"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="-20dp"
+                            android:text="Wear Sunscreen to protect from hamrful UV Rays"
+                            android:fontFamily="@font/lato_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="-20dp"
+                            android:text="Maintain the foundation for          your beauty"
+                            android:fontFamily="@font/lato_semibold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="8dp"/>
 
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Content here-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <TextView
+                            android:id="@+id/TitleTip3"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:text="Gentle Towel Patting"
+                            android:fontFamily="@font/lato_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="Gentle towel patting prevents irritation and maintains healthy skin"
+                            android:fontFamily="@font/lato_semibold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="8dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/tip3"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTip4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/babyblue_line_decor"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="15dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginStart="25dp"
+                            android:src="@drawable/tip4"/>
+
+                        <TextView
+                            android:id="@+id/TitleTip4"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="20dp"
+                            android:text="Moisturize daily"
+                            android:fontFamily="@font/lato_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/TitleTip4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="20dp"
+                            android:text="Use suitable moisturizer to keep skin hydrated and prevent dryness"
+                            android:fontFamily="@font/lato_semibold"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="8dp"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-
     <include layout="@layout/nav_bar"/>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

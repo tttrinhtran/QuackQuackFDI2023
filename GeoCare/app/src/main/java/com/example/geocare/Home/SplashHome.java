@@ -179,7 +179,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
     }
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "" + location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
         try {
             Locale englishLocale = new Locale("en", "US");
             Geocoder geocoder = new Geocoder(SplashHome.this, englishLocale);

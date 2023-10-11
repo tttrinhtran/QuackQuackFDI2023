@@ -97,7 +97,8 @@
                         android:textColor="@color/blue_deep"
                         android:textSize="12sp"
                         app:layout_constraintStart_toEndOf="@id/Profile_address_icon"
-                        app:layout_constraintTop_toTopOf="@id/Profile_address_icon" />
+                        app:layout_constraintTop_toTopOf="@id/Profile_address_icon"
+                        app:layout_constraintBottom_toBottomOf="@id/Profile_address_icon"/>
 
                     <TextView
                         android:id="@+id/Profile_user_age"

@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         userSkinType.setText(user.getUserSkinType());
         userNametv.setText(user.getUserName());
-        userAge.setText(user.getUserAge());
+        userAge.setText(user.getUserAge() + " years old");
         userCondition.setText(user.conditionListToString());
 
     }
@@ -124,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
 //        recyclerViewShelf.setAdapter(shelfAdapter);
     void setRecyclerview2(){
 
-        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
         recyclerViewShelf.setAdapter(shelfAdapter);
     }

@@ -23,6 +23,7 @@
             android:id="@+id/shelf_item_img"
             android:src="@drawable/cleanser"
             android:scaleType="centerCrop"
+            android:padding="10dp"
             >
         </ImageView>
 
