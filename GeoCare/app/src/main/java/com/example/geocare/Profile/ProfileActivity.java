@@ -38,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
     User user;
     ArrayList<Item> whistlistList;
     ArrayList<Item> shelfList;
+    private RecyclerView recyclerViewWish;
+    private RecyclerView recyclerViewShelf;
     FirebaseDatabaseController firebaseDatabaseController;
 
 
@@ -48,10 +50,12 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         firebaseDatabaseController=new FirebaseDatabaseController<>(Item.class);
         getUser();
+        loadData();
         fetch_UI();
         load_UI();
-        loadData();
-        setRecyclerview();
+
+        setRecyclerview2();
+        setRecyclerview1();
 
         navBar();
 
@@ -71,7 +75,8 @@ public class ProfileActivity extends AppCompatActivity {
         scheduleIcon = findViewById(R.id.NaviBarScheduleIcon);
         profileIcon = findViewById(R.id.NaviBarProfileIcon);
         setting = findViewById(R.id.Profile_setting_icon);
-
+        recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
+        recyclerViewWish=findViewById(R.id.Profile_wishlisted_recyclerview);
     }
     private void load_UI()
     {
@@ -112,17 +117,29 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
     }
-    void setRecyclerview()
-    {
-        RecyclerView recyclerView=findViewById(R.id.Profile_wishlisted_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WhislistApdater whislistApdater = new WhislistApdater(whistlistList,this);
-        recyclerView.setAdapter(whislistApdater);
 
+<<<<<<< Updated upstream
         RecyclerView recyclerViewShelf=findViewById(R.id.Profile_shelf_recyclerview);
         recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
         ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
         recyclerViewShelf.setAdapter(shelfAdapter);
+=======
+    void setRecyclerview2(){
+
+        recyclerViewShelf.setLayoutManager(new LinearLayoutManager(this));
+        ShelfAdapter shelfAdapter = new ShelfAdapter(shelfList,this);
+        recyclerViewShelf.setAdapter(shelfAdapter);
+    }
+
+    void setRecyclerview1()
+    {
+
+        recyclerViewWish.setLayoutManager(new LinearLayoutManager(this));
+        WhislistApdater whislistApdater = new WhislistApdater(whistlistList,this);
+        recyclerViewWish.setAdapter(whislistApdater);
+
+
+>>>>>>> Stashed changes
 
 
     }

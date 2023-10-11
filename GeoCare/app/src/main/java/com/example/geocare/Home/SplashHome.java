@@ -149,7 +149,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         supportView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SplashHome.this, HomeActivity.class);
+                Intent i = new Intent(SplashHome.this, SplashHome2.class);
                 saveWeather();
                 i.putExtra("CITY", c);
                 i.putExtra("DISTRICT", d);
@@ -325,7 +325,6 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         temperature.setTranslationX(-100); temperature.setAlpha(0);
         temperature1.setTranslationX(-100); temperature1.setAlpha(0);
         title.setText("Hello "+user.getUserName());
-
     }
 
     private void fetch_UI() {
@@ -622,7 +621,6 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         // Save local
         user.setUserProductList(productList);
         saveUser();
-
     }
 
     private void saveUser()
