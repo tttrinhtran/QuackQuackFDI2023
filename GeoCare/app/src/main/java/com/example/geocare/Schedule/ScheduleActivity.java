@@ -198,14 +198,14 @@ public class ScheduleActivity extends AppCompatActivity {
     private void DaySchedule() {
 
         LocalDate currentDate = LocalDate.now();
-        TemporalField fieldISO = WeekFields.of(Locale.CHINESE).dayOfWeek();
+        TemporalField fieldISO = WeekFields.of(Locale.US).dayOfWeek();
 
         // Get the week number of the current date
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
 
         // Monday
         // LocalDate currentFetchDay = currentDate.with(weekFields.dayOfWeek(), 2 );
-        LocalDate currentFetchDay = currentDate.with(fieldISO, 1);
+        LocalDate currentFetchDay = currentDate.with(fieldISO, 2);
 
         ((TextView)findViewById(R.id.NumberDate1)).setText(String.valueOf(currentFetchDay.getDayOfMonth()));
         if( currentFetchDay.isEqual(currentDate) ) {
