@@ -5,15 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/SupportView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blue_baby"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ScheduleLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SupportView"
         android:background="@drawable/schedule_decor"
-        android:paddingBottom="5dp">
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/Schedule_current_date"
@@ -22,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:text="Sunday 27, Dec"
             android:fontFamily="@font/butler_regular"
             android:textSize="20sp"
