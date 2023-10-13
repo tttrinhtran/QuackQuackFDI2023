@@ -27,8 +27,12 @@ public class NotFoundActivity extends AppCompatActivity {
         receivedString = getIntent().getStringExtra("Irritant");
 
         if (receivedString != null && receivedString != ""){
-            if (receivedString != "None")
+            if (receivedString != "None") {
                 irritant.setTextColor(this.getResources().getColor(R.color.red_irritant));
+            }
+            else{
+                irritant.setTextColor(this.getResources().getColor(R.color.blue_description));
+            }
             irritant.setText(receivedString);
 
         }
