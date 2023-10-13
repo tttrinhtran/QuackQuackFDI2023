@@ -371,7 +371,6 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         int res = 0, checkWeather = 0;
         boolean checkDay = getCurrentTime();
         String des = weatherInfo.getDescription();
-
         if (des.contains("rain")) {
             checkWeather = 1;
         } else if (des.contains("cloud")) {
