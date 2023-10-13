@@ -26,8 +26,12 @@ public class NotFoundActivity extends AppCompatActivity {
 
         receivedString = getIntent().getStringExtra("Irritant");
 
-        if (receivedString != null && receivedString != "")
+        if (receivedString != null && receivedString != ""){
+            if (receivedString != "None")
+                irritant.setTextColor(this.getResources().getColor(R.color.red_irritant));
             irritant.setText(receivedString);
+
+        }
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
