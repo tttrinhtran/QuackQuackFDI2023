@@ -1,5 +1,6 @@
 package com.example.geocare.Scan;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,10 +17,12 @@ public class ScanResultActivity extends AppCompatActivity {
     private ImageView product_image, product_rating;
     private TextView product_name, product_ingrdients, product_irritants,
             product_brandname, product_advise, product_type;
+    private View supportView;
     private View bottomSheet;
     Button add_button;
     String receivedString;
     int lab;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class ScanResultActivity extends AppCompatActivity {
         product_rating = findViewById(R.id.ScanResultScreen_product_rating);
         product_type = findViewById(R.id.ScanResultScreen_product_type);
         add_button = findViewById(R.id.ScanResultScreen_add_button);
+        supportView = (View) findViewById(R.id.SupportViewScan);
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeactivitysheet));
         //initialize height
@@ -43,9 +47,21 @@ public class ScanResultActivity extends AppCompatActivity {
 
         receivedString = getIntent().getStringExtra("data");
 
+        onListenerClick();
+
 
         process(receivedString);
 
+    }
+
+    private void onListenerClick() {
+        supportView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScanResultActivity.this, ScanActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void process(String receivedString) {
