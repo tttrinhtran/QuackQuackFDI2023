@@ -141,7 +141,7 @@ public class ScanActivity extends AppCompatActivity {
                                 // [END_EXCLUDE]
                                 resultText = extractedText.toString();
                                 //resultTextView.setText(resultText);
-                                startScanResultActivity(resultText);
+                                startScanResultActivity(resultText);//start
                             }
                         })
                         .addOnFailureListener(

@@ -22,6 +22,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -349,8 +350,9 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
 
     private void getWeatherData(double latitude, double longitude) {
         String tempUrl1 = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=current" + "&appid=cda3653189073bccea02deb614b1b762";
+        Log.d("SHIBA", tempUrl1);
         String tempUrl2 = "https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=dcfabdd5c7fc896819d09133733b7eea";
-
+        Log.d("SHIBAINU", tempUrl2);
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
 
