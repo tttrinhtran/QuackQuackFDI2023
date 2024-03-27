@@ -12,12 +12,14 @@ public class Weather implements Serializable {
     private double uvi;
     private String description;
     private double pm25;
+    private double cloud;
 
     public Weather(JSONObject weatherJsonObject, JSONObject airQualityJsonObject) throws JSONException {
         // Parse weather data
         JSONArray jsonArray = weatherJsonObject.getJSONArray("hourly");
         JSONObject jsonObject = jsonArray.getJSONObject(0);
         this.uvi = jsonObject.getDouble("uvi");
+        this.cloud = jsonObject.getDouble("clouds");
         this.humidity = jsonObject.getDouble("humidity");
         this.temperature = (int)(jsonObject.getDouble("temp") - 273.15);
 
@@ -26,17 +28,6 @@ public class Weather implements Serializable {
         this.description = jsonObject1.getString("description");
 
 
-//        JSONArray weatherArray = weatherJsonObject.getJSONArray("weather");
-//        JSONObject weather = weatherArray.getJSONObject(0);
-//        this.description = weather.getString("description");
-//
-//        JSONObject main = weatherJsonObject.getJSONObject("main");
-//        this.temperature = (int) (main.getDouble("temp") - 273.15);
-//        this.humidity = main.getDouble("humidity");
-//
-//        JSONObject hourly = weatherJsonObject.getJSONArray("hourly").getJSONObject(0);
-//        this.uvi = hourly.getDouble("uvi");
-
         // Parse air quality data
 
         JSONArray jsonArray2 = airQualityJsonObject.getJSONArray("list");
@@ -44,8 +35,6 @@ public class Weather implements Serializable {
         JSONObject jsonObject3 = jsonObject2.getJSONObject("components");
         this.pm25 = jsonObject3.getDouble("pm2_5");
 
-//        JSONObject components = airQualityJsonObject.getJSONArray("list").getJSONObject(0).getJSONObject("components");
-//        this.pm25 = components.getDouble("pm2_5");
     }
 
     public double getHumidity() {
@@ -59,6 +48,7 @@ public class Weather implements Serializable {
     public double getUvi() {
         return uvi;
     }
+    public double getCloud(){return cloud; }
 
     public String getDescription() {
         return description;
