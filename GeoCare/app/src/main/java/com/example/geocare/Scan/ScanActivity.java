@@ -2,6 +2,8 @@ package com.example.geocare.Scan;
 
 import static android.Manifest.permission.CAMERA;
 
+import static com.example.geocare.Constants.KEY_COLLECTION_PRODUCT;
+
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -19,6 +21,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.example.geocare.Database.FirebaseDatabaseController;
+import com.example.geocare.Product.Item;
 import com.example.geocare.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +44,11 @@ public class ScanActivity extends AppCompatActivity {
     public String resultText;
     TextView resultTextView;
     ImageView imageView;
+    FirebaseDatabaseController<Item> list;
+
+
+   //ProductDatabase temp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +56,9 @@ public class ScanActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         resultTextView = findViewById(R.id.textview);
+
+
+
 
         if (checkCameraPermission()) {
             String fileName = "photo";
