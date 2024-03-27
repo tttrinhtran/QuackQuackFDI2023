@@ -16,8 +16,12 @@ import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Product.Item;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import org.apache.commons.text.similarity.LevenshteinDistance;
+
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ScanResultActivity extends AppCompatActivity {
     private ImageView product_image, product_rating;
@@ -57,8 +61,8 @@ public class ScanResultActivity extends AppCompatActivity {
 
         onListenerClick();
 
-
-        //process(receivedString);
+        getData();
+        process(receivedString);
 
     }
     private void getData()
@@ -79,37 +83,112 @@ public class ScanResultActivity extends AppCompatActivity {
         });
     }
 
-//    private void process(String receivedString) {
-//
-//
-//        // check lại
-//        boolean found = false;
-//        receivedString = receivedString.toLowerCase();
-//        for (ProductInformation product : ProductDatabase.products) {
-//            if (receivedString.toLowerCase().contains(product.getBrandName().toLowerCase())){
+
+
+
+
+    private static double calculateTokenSimilarity(String s1, String s2) {
+        // Tokenize strings into words
+        String[] tokens1 = s1.split("\\s+");
+        String[] tokens2 = s2.split("\\s+");
+
+        // Create sets of tokens for each string
+        Set<String> set1 = new HashSet<>();
+        Set<String> set2 = new HashSet<>();
+        for (String token : tokens1) {
+            set1.add(token.toLowerCase()); // Normalize to lowercase
+        }
+        for (String token : tokens2) {
+            set2.add(token.toLowerCase()); // Normalize to lowercase
+        }
+
+        // Calculate Jaccard Similarity of token sets
+        Set<String> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+        Set<String> union = new HashSet<>(set1);
+        union.addAll(set2);
+        double jaccardSimilarity = (double) intersection.size() / union.size();
+
+        return jaccardSimilarity;
+    }
+
+    private static double calculateModifiedJaccardSimilarity(String s1, String s2) {
+        // Tokenize strings into words
+        String[] tokens1 = s1.split("\\s+");
+        String[] tokens2 = s2.split("\\s+");
+
+        // Calculate Jaccard Similarity with length consideration
+        double intersectionCount = 0;
+        double unionCount = Math.max(tokens1.length, tokens2.length);
+
+        for (String token : tokens1) {
+            if (s2.contains(token)) {
+                intersectionCount++;
+            }
+        }
+
+        return intersectionCount / unionCount;
+    }
+
+    boolean found = false;
+    private String checkText(String inputText, ArrayList<String> stringsToMatch) {
+        inputText = inputText.replace("\n", " ").toLowerCase(); // Normalize input text
+        double maxSimilarity = 0.0;
+        String bestMatch = inputText; // Default to input text if no match found
+
+        for (String matchString : stringsToMatch) {
+            matchString = matchString.toLowerCase(); // Normalize match string
+
+            // Calculate modified Jaccard Similarity
+            double similarity = calculateModifiedJaccardSimilarity(inputText, matchString);
+
+            // Update best match if similarity is higher
+            if (similarity > maxSimilarity) {
+                maxSimilarity = similarity;
+                bestMatch = matchString;
+            }
+        }
+
+        // Define a threshold for similarity (adjust as needed)
+        double threshold = 0.08;
+        if (maxSimilarity >= threshold) {
+            found=true;
+            return bestMatch;
+        }
+        return inputText;
+    }
+
+    private void process(String receivedString) {
+        // check lại
+        receivedString = receivedString.toLowerCase();
+        String product=checkText(receivedString,productList);
+
+//        for (String product : productList) {
+//            if (receivedString.toLowerCase().contains(product.toLowerCase())){
 //                //product_name.setText("Tim thay");
-//                String[] wordsArray = product.getProductName().split(" ");
+//                String[] wordsArray = product.split(" ");
 //                int count = 0;
 //
 //                for (String word : wordsArray){
 //                    if (receivedString.toLowerCase().contains(word.toLowerCase()))
 //                        count++;
 //                }
-//                //product_type.setText(""+count);
 //
 //                if (count >= wordsArray.length/2){
-//                    product_type.setText(product.getProductType());
-//                    product_name.setText(product.getProductName());
-//                    product_brandname.setText(product.getBrandName());
-//                    product_ingrdients.setText(product.getIngredients());
-//                    irritantCheck(product.getIngredients());
-//                    found = true;
-//                    break;
+//                      productData.retrieveObjectsFirestoreByID(KEY_COLLECTION_PRODUCT,product);
+//
+////                    product_type.setText(product.getProductType());
+////                    product_name.setText(product.getProductName());
+////                    product_brandname.setText(product.getBrandName());
+////                    product_ingrdients.setText(product.getIngredients());
+////                    irritantCheck(product.getIngredients());
+////                    found = true;
+////                    break;
 //                }
 //            }
 //    };
-//
-//        String ListIrritant = null;
+
+        String ListIrritant = null;
 //        if (!found){
 //            for (String irritant: IrritantList.irritant){
 //                if (receivedString.toLowerCase().contains(irritant.toLowerCase())){
@@ -130,7 +209,7 @@ public class ScanResultActivity extends AppCompatActivity {
 //
 //            finish();
 //        }
-//    }
+    }
 
 
     private void irritantCheck(String ingredients) {
