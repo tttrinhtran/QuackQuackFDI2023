@@ -40,7 +40,7 @@
             android:elevation="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Today is"
+            android:text="We got"
             android:fontFamily="@font/butler_medium"
             android:textSize="36sp"
             android:textColor="@color/blue_deep"/>

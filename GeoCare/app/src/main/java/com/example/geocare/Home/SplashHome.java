@@ -189,11 +189,11 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
             String address = addresses.get(0).getAddressLine(0);
             d = addresses.get(0).getSubAdminArea();
             if ("Quận 1".equals(d)) {
-                district.setText("District 1");
+                district.setText("in District 1");
             } else if ("Quận 5".equals(d)) {
-                district.setText("District 5");
+                district.setText("in District 5");
             } else if("Quận 10".equals(d)){
-                district.setText("District 10");
+                district.setText("in District 10");
             }
             else{
                 district.setText(d);
@@ -299,7 +299,6 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
             }
         });
         requestQueue.add(stringRequest2);
-        // ... Rest of your code
     }
 
     @Override
@@ -368,27 +367,54 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
 
 
     private int chooseLayout() {
-        int res = 0, checkWeather = 0;
-        boolean checkDay = getCurrentTime();
+        int res = 0;
         String des = weatherInfo.getDescription();
-        if (des.contains("rain")) {
-            checkWeather = 1;
-        } else if (des.contains("cloud")) {
-            checkWeather = 2;
-        } else {
-            checkWeather = 3;
+        if(des.contains("rain")){
+            res = 1;
+            return res;
         }
 
-        if(checkWeather != 3){
-            res = checkWeather + 2;
-        } else{
-            if(checkDay == true){ // day
-                res = 1;
-            } else{
-                res = 2;
-            }
+        boolean checkDay = getCurrentTime();
+        if(checkDay == false){
+            res = 2;
+            return res;
+        }
+
+        double cloud = weatherInfo.getCloud();
+        double uv = weatherInfo.getUvi();
+        int temp = weatherInfo.getTemperature();
+
+        double cnt = (temp*2 + uv + 100-cloud)/4;
+        if(cnt >= 32){
+            res = 3;
+        }
+        else{
+            res = 4;
         }
         return res;
+
+
+//        int res = 0, checkWeather = 0;
+//        boolean checkDay = getCurrentTime();
+//        String des = weatherInfo.getDescription();
+//        if (des.contains("rain")) {
+//            checkWeather = 1;
+//        } else if (des.contains("cloud")) {
+//            checkWeather = 2;
+//        } else {
+//            checkWeather = 3;
+//        }
+//
+//        if(checkWeather != 3){
+//            res = checkWeather + 2;
+//        } else{
+//            if(checkDay == true){ // day
+//                res = 1;
+//            } else{
+//                res = 2;
+//            }
+//        }
+//        return res;
     }
 
     private void setUpWeatherLayout(){
@@ -398,17 +424,17 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         List<Integer> colors = new ArrayList<>();
 
         // Add elements to the list
-        colors.add(R.color.light_yellow);
-        colors.add(R.color.blue_deep);
         colors.add(R.color.blue_rain);
+        colors.add(R.color.blue_deep);
+        colors.add(R.color.light_yellow);
         colors.add(R.color.blue_snow);
 
         List<Integer> colorText = new ArrayList<>();
 
         // Add elements to the list
-        colorText.add(R.color.blue_deep);
-        colorText.add(R.color.blue_baby);
         colorText.add(R.color.white);
+        colorText.add(R.color.blue_baby);
+        colorText.add(R.color.blue_deep);
         colorText.add(R.color.blue_deep);
 
         splashScreenLayout.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));
@@ -425,7 +451,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) lottieAnimationView.getLayoutParams();
 
-        if (pick == 1) {
+        if (pick == 3) {
             lottieAnimationView.setAnimation(R.raw.sunny_json);
             params.setMarginStart(850);
             params.topMargin = 300;
@@ -433,7 +459,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
             lottieAnimationView.setAnimation(R.raw.night_json);
             params.setMarginStart(600);
             params.topMargin = 350;
-        } else if (pick == 3) {
+        } else if (pick == 1) {
             lottieAnimationView.setAnimation(R.raw.rain_json);
             params.setMarginStart(450);
             params.topMargin = 500;
