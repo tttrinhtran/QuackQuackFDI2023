@@ -128,7 +128,7 @@ public class ScanResultActivity extends AppCompatActivity {
         }
 
         // Define a threshold for similarity (adjust as needed)
-        double threshold = 0.08;
+        double threshold = 0.1;
         if (maxSimilarity >= threshold) {
             found=true;
             return bestMatch;

@@ -10,6 +10,7 @@ public class IrritantList {
             "Azelaic acid",
             "Bimatoprost",
             "Paraben",
+            "Retinol",
             "Benzen",
             "Silver Nitrate",
             "N-5-Chlorobenzoxazol-2-ylacetamide",
