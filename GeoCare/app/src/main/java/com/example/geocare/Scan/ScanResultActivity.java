@@ -128,7 +128,7 @@ public class ScanResultActivity extends AppCompatActivity {
         }
 
         // Define a threshold for similarity (adjust as needed)
-        double threshold = 0.08;
+        double threshold = 0.09;
         if (maxSimilarity >= threshold) {
             found=true;
             return bestMatch;
@@ -146,16 +146,16 @@ public class ScanResultActivity extends AppCompatActivity {
 
             product_type.setText(scanProduct.getType());
             product_image.setImageResource(scanProduct.getImageDetailResourceIdByInt(this));
-                    product_name.setText(scanProduct.getNameDetail());
-                    product_brandname.setText(scanProduct.getBrandname());
-                    product_ingrdients.setText(scanProduct.getIngredients());
-                    irritantCheck(scanProduct.getIngredients());
+            product_name.setText(scanProduct.getNameDetail());
+            product_brandname.setText(scanProduct.getBrandname());
+            product_ingrdients.setText(scanProduct.getIngredients());
+            irritantCheck(scanProduct.getIngredients());
 
         }
 
 
         String ListIrritant = null;
-        if (!found || receivedString.contains("obagi")){
+        if (!found || (receivedString.contains("obagi"))){
             for (String irritant: IrritantList.irritant){
                 if (receivedString.toLowerCase().contains(irritant.toLowerCase())){
                     if (ListIrritant == null)
