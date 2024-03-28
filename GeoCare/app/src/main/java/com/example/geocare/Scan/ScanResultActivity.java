@@ -16,7 +16,6 @@ import com.example.geocare.Database.FirebaseDatabaseController;
 import com.example.geocare.Product.Item;
 import com.example.geocare.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import org.apache.commons.text.similarity.LevenshteinDistance;
 
 
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class ScanResultActivity extends AppCompatActivity {
     private View bottomSheet;
     Button add_button;
     String receivedString;
+    private ImageView backButton;
 
     FirebaseDatabaseController<Item> productData;
     ArrayList<String> productList;
@@ -51,6 +51,7 @@ public class ScanResultActivity extends AppCompatActivity {
         product_type = findViewById(R.id.ScanResultScreen_product_type);
         add_button = findViewById(R.id.ScanResultScreen_add_button);
         supportView = (View) findViewById(R.id.SupportViewScan);
+        backButton = findViewById(R.id.ScanResultScreen_back_button);
 
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeactivitysheet));
@@ -75,7 +76,7 @@ public class ScanResultActivity extends AppCompatActivity {
     }
 
     private void onListenerClick() {
-        supportView.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ScanResultActivity.this, ScanActivity.class);
@@ -83,7 +84,6 @@ public class ScanResultActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 
