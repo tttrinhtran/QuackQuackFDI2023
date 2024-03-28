@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ScanResultActivity extends AppCompatActivity {
-    private ImageView product_image, product_rating;
+   ImageView product_image, product_rating;
     private TextView product_name, product_ingrdients, product_irritants,
             product_brandname, product_advise, product_type;
     private View supportView;
@@ -51,6 +51,7 @@ public class ScanResultActivity extends AppCompatActivity {
         product_type = findViewById(R.id.ScanResultScreen_product_type);
         add_button = findViewById(R.id.ScanResultScreen_add_button);
         supportView = (View) findViewById(R.id.SupportViewScan);
+
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.homeactivitysheet));
         //initialize height
@@ -87,30 +88,7 @@ public class ScanResultActivity extends AppCompatActivity {
 
 
 
-    private static double calculateTokenSimilarity(String s1, String s2) {
-        // Tokenize strings into words
-        String[] tokens1 = s1.split("\\s+");
-        String[] tokens2 = s2.split("\\s+");
 
-        // Create sets of tokens for each string
-        Set<String> set1 = new HashSet<>();
-        Set<String> set2 = new HashSet<>();
-        for (String token : tokens1) {
-            set1.add(token.toLowerCase()); // Normalize to lowercase
-        }
-        for (String token : tokens2) {
-            set2.add(token.toLowerCase()); // Normalize to lowercase
-        }
-
-        // Calculate Jaccard Similarity of token sets
-        Set<String> intersection = new HashSet<>(set1);
-        intersection.retainAll(set2);
-        Set<String> union = new HashSet<>(set1);
-        union.addAll(set2);
-        double jaccardSimilarity = (double) intersection.size() / union.size();
-
-        return jaccardSimilarity;
-    }
 
     private static double calculateModifiedJaccardSimilarity(String s1, String s2) {
         // Tokenize strings into words
@@ -137,10 +115,10 @@ public class ScanResultActivity extends AppCompatActivity {
         String bestMatch = inputText; // Default to input text if no match found
 
         for (String matchString : stringsToMatch) {
-            matchString = matchString.toLowerCase(); // Normalize match string
+           String tmpmatchString = matchString.toLowerCase(); // Normalize match string
 
             // Calculate modified Jaccard Similarity
-            double similarity = calculateModifiedJaccardSimilarity(inputText, matchString);
+            double similarity = calculateModifiedJaccardSimilarity(inputText, tmpmatchString);
 
             // Update best match if similarity is higher
             if (similarity > maxSimilarity) {
@@ -162,53 +140,41 @@ public class ScanResultActivity extends AppCompatActivity {
         // check lại
         receivedString = receivedString.toLowerCase();
         String product=checkText(receivedString,productList);
+        if(found)
+        {
+            Item scanProduct=productData.retrieveObjectsFirestoreByID(KEY_COLLECTION_PRODUCT,product);
 
-//        for (String product : productList) {
-//            if (receivedString.toLowerCase().contains(product.toLowerCase())){
-//                //product_name.setText("Tim thay");
-//                String[] wordsArray = product.split(" ");
-//                int count = 0;
-//
-//                for (String word : wordsArray){
-//                    if (receivedString.toLowerCase().contains(word.toLowerCase()))
-//                        count++;
-//                }
-//
-//                if (count >= wordsArray.length/2){
-//                      productData.retrieveObjectsFirestoreByID(KEY_COLLECTION_PRODUCT,product);
-//
-////                    product_type.setText(product.getProductType());
-////                    product_name.setText(product.getProductName());
-////                    product_brandname.setText(product.getBrandName());
-////                    product_ingrdients.setText(product.getIngredients());
-////                    irritantCheck(product.getIngredients());
-////                    found = true;
-////                    break;
-//                }
-//            }
-//    };
+            product_type.setText(scanProduct.getType());
+            product_image.setImageResource(scanProduct.getImageDetailResourceIdByInt(this));
+                    product_name.setText(scanProduct.getNameDetail());
+                    product_brandname.setText(scanProduct.getBrandname());
+                    product_ingrdients.setText(scanProduct.getIngredients());
+                    irritantCheck(scanProduct.getIngredients());
+
+        }
+
 
         String ListIrritant = null;
-//        if (!found){
-//            for (String irritant: IrritantList.irritant){
-//                if (receivedString.toLowerCase().contains(irritant.toLowerCase())){
-//                    if (ListIrritant == null)
-//                        ListIrritant = irritant;
-//                    else
-//                        ListIrritant += ", " + irritant;
-//                }
-//            }
-//
-//            if (ListIrritant == null) {
-//                ListIrritant = "None";
-//            }
-//
-//            Intent intent = new Intent(ScanResultActivity.this, NotFoundActivity.class);
-//            intent.putExtra("Irritant", ListIrritant);
-//            startActivity(intent);
-//
-//            finish();
-//        }
+        if (!found){
+            for (String irritant: IrritantList.irritant){
+                if (receivedString.toLowerCase().contains(irritant.toLowerCase())){
+                    if (ListIrritant == null)
+                        ListIrritant = irritant;
+                    else
+                        ListIrritant += ", " + irritant;
+                }
+            }
+
+            if (ListIrritant == null) {
+                ListIrritant = "None";
+            }
+
+            Intent intent = new Intent(ScanResultActivity.this, NotFoundActivity.class);
+            intent.putExtra("Irritant", ListIrritant);
+            startActivity(intent);
+
+            finish();
+        }
     }
 
 
