@@ -132,23 +132,25 @@ public class SplashHome2 extends AppCompatActivity {
         List<Integer> colors = new ArrayList<>();
 
         // Add elements to the list
-        colors.add(R.color.light_yellow);
-        colors.add(R.color.blue_deep);
         colors.add(R.color.blue_rain);
+        colors.add(R.color.blue_deep);
+        colors.add(R.color.light_yellow);
+
         colors.add(R.color.blue_snow);
 
         List<Integer> colorText = new ArrayList<>();
 
         // Add elements to the list
-        colorText.add(R.color.blue_deep);
         colorText.add(R.color.white);
         colorText.add(R.color.white);
         colorText.add(R.color.blue_deep);
 
+        colorText.add(R.color.blue_deep);
+
         List<Integer> borderDecor = new ArrayList<>();
+        borderDecor.add(R.drawable.border_adapter_white);
+        borderDecor.add(R.drawable.border_adapter_white);
         borderDecor.add(R.drawable.border_adapter_blue);
-        borderDecor.add(R.drawable.border_adapter_white);
-        borderDecor.add(R.drawable.border_adapter_white);
         borderDecor.add(R.drawable.border_adapter_blue);
 
         splashHome2.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));

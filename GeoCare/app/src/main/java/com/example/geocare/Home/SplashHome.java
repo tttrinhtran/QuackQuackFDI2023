@@ -375,7 +375,7 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         }
 
         boolean checkDay = getCurrentTime();
-        if(checkDay == false){
+        if(checkDay == false){ // night
             res = 2;
             return res;
         }
@@ -384,37 +384,14 @@ public class SplashHome extends AppCompatActivity implements LocationListener {
         double uv = weatherInfo.getUvi();
         int temp = weatherInfo.getTemperature();
 
-        double cnt = (temp*2 + uv + 100-cloud)/4;
-        if(cnt >= 32){
+        double weight = (temp*2 + uv + 100-cloud)/4;
+        if(weight >= 32){
             res = 3;
         }
         else{
             res = 4;
         }
         return res;
-
-
-//        int res = 0, checkWeather = 0;
-//        boolean checkDay = getCurrentTime();
-//        String des = weatherInfo.getDescription();
-//        if (des.contains("rain")) {
-//            checkWeather = 1;
-//        } else if (des.contains("cloud")) {
-//            checkWeather = 2;
-//        } else {
-//            checkWeather = 3;
-//        }
-//
-//        if(checkWeather != 3){
-//            res = checkWeather + 2;
-//        } else{
-//            if(checkDay == true){ // day
-//                res = 1;
-//            } else{
-//                res = 2;
-//            }
-//        }
-//        return res;
     }
 
     private void setUpWeatherLayout(){

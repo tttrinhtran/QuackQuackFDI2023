@@ -521,17 +521,18 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         List<Integer> colors = new ArrayList<>();
 
         // Add elements to the list
-        colors.add(R.color.light_yellow);
-        colors.add(R.color.blue_deep);
         colors.add(R.color.blue_rain);
+        colors.add(R.color.blue_deep);
+        colors.add(R.color.light_yellow);
         colors.add(R.color.blue_snow);
 
         List<Integer> colorText = new ArrayList<>();
 
         // Add elements to the list
-        colorText.add(R.color.blue_deep);
-        colorText.add(R.color.blue_baby);
         colorText.add(R.color.white);
+        colorText.add(R.color.blue_baby);
+        colorText.add(R.color.blue_deep);
+
         colorText.add(R.color.white);
 
         homeScreenLayout.setBackgroundColor(ContextCompat.getColor(this, colors.get(pick - 1)));
@@ -553,7 +554,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
         params.setMarginStart(300);
         params.topMargin = 0;
 
-        if (pick == 1) {
+        if (pick == 3) {
             lottieAnimationView.setAnimation(R.raw.sunny_json);
             params.setMarginStart(850);
             params.topMargin = 0;
@@ -561,7 +562,7 @@ public class HomeActivity extends AppCompatActivity implements LocationListener 
             lottieAnimationView.setAnimation(R.raw.night_json);
             params.setMarginStart(600);
             params.topMargin = 50;
-        } else if (pick == 3) {
+        } else if (pick == 1) {
             lottieAnimationView.setAnimation(R.raw.rain_json);
             params.setMarginStart(450);
             params.topMargin = 170;
