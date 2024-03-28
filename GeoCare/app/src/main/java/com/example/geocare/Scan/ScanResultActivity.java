@@ -128,7 +128,7 @@ public class ScanResultActivity extends AppCompatActivity {
         }
 
         // Define a threshold for similarity (adjust as needed)
-        double threshold = 0.1;
+        double threshold = 0.08;
         if (maxSimilarity >= threshold) {
             found=true;
             return bestMatch;
@@ -155,7 +155,7 @@ public class ScanResultActivity extends AppCompatActivity {
 
 
         String ListIrritant = null;
-        if (!found){
+        if (!found || receivedString.contains("obagi")){
             for (String irritant: IrritantList.irritant){
                 if (receivedString.toLowerCase().contains(irritant.toLowerCase())){
                     if (ListIrritant == null)
